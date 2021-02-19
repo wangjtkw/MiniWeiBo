@@ -1,0 +1,10 @@
+<resources>
+    <string name="project_name">MiNi</string>
+    <string name="splash_logo_img_description">闪屏页LOGO</string>
+    <string name="hello_blank_fragment">hello</string>
+    <string name="login_bt_tx">登 录</string>
+    <string name="main_tab_item_home">首页</string>
+    <string name="main_tab_item_message">消息</string>
+    <string name="main_tab_item_video">视频</string>
+    <string name="main_tab_item_mine">我的</string>
+</resources>
