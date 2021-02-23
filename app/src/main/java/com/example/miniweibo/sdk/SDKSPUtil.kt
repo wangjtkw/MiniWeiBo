@@ -1,7 +1,7 @@
 package com.example.miniweibo.sdk
 
 import android.content.Context
-import com.example.miniweibo.bean.AccessTokenBean
+import com.example.miniweibo.data.bean.AccessTokenBean
 import com.example.miniweibo.util.SharedPreferencesUtil
 
 class SDKSPUtil(context: Context) {

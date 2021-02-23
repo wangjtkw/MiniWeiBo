@@ -10,7 +10,51 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/animated-base" />
+            <option value="$PROJECT_DIR$/animated-base-test" />
+            <option value="$PROJECT_DIR$/animated-drawable" />
+            <option value="$PROJECT_DIR$/animated-gif" />
+            <option value="$PROJECT_DIR$/animated-gif-lite" />
+            <option value="$PROJECT_DIR$/animated-webp" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/drawee" />
+            <option value="$PROJECT_DIR$/drawee-backends" />
+            <option value="$PROJECT_DIR$/drawee-backends/drawee-pipeline" />
+            <option value="$PROJECT_DIR$/drawee-span" />
+            <option value="$PROJECT_DIR$/fbcore" />
+            <option value="$PROJECT_DIR$/imagepipeline" />
+            <option value="$PROJECT_DIR$/imagepipeline-backends" />
+            <option value="$PROJECT_DIR$/imagepipeline-backends/imagepipeline-okhttp3" />
+            <option value="$PROJECT_DIR$/imagepipeline-backends/imagepipeline-volley" />
+            <option value="$PROJECT_DIR$/imagepipeline-base" />
+            <option value="$PROJECT_DIR$/imagepipeline-base-test" />
+            <option value="$PROJECT_DIR$/imagepipeline-native" />
+            <option value="$PROJECT_DIR$/imagepipeline-test" />
+            <option value="$PROJECT_DIR$/memory-types" />
+            <option value="$PROJECT_DIR$/memory-types/ashmem" />
+            <option value="$PROJECT_DIR$/memory-types/nativememory" />
+            <option value="$PROJECT_DIR$/memory-types/simple" />
+            <option value="$PROJECT_DIR$/middleware" />
+            <option value="$PROJECT_DIR$/mockito-config" />
+            <option value="$PROJECT_DIR$/native-filters" />
+            <option value="$PROJECT_DIR$/native-imagetranscoder" />
+            <option value="$PROJECT_DIR$/soloader" />
+            <option value="$PROJECT_DIR$/static-webp" />
+            <option value="$PROJECT_DIR$/tools" />
+            <option value="$PROJECT_DIR$/tools/flipper" />
+            <option value="$PROJECT_DIR$/tools/stetho" />
+            <option value="$PROJECT_DIR$/ui-common" />
+            <option value="$PROJECT_DIR$/vito" />
+            <option value="$PROJECT_DIR$/vito/core" />
+            <option value="$PROJECT_DIR$/vito/drawee-support" />
+            <option value="$PROJECT_DIR$/vito/ktx" />
+            <option value="$PROJECT_DIR$/vito/litho" />
+            <option value="$PROJECT_DIR$/vito/litho-slideshow" />
+            <option value="$PROJECT_DIR$/vito/options" />
+            <option value="$PROJECT_DIR$/vito/provider" />
+            <option value="$PROJECT_DIR$/vito/source" />
+            <option value="$PROJECT_DIR$/vito/view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

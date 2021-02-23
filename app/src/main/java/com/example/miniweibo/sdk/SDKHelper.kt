@@ -2,11 +2,10 @@ package com.example.miniweibo.sdk
 
 import android.content.Context
 import android.util.Log
-import com.example.miniweibo.bean.AccessTokenBean
+import com.example.miniweibo.data.bean.AccessTokenBean
 import com.sina.weibo.sdk.auth.Oauth2AccessToken
 import com.sina.weibo.sdk.auth.WbAuthListener
 import com.sina.weibo.sdk.common.UiError
-import javax.inject.Inject
 
 
 class SDKHelper constructor(context: Context) {

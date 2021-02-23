@@ -5,10 +5,10 @@ import android.util.Log
 import androidx.room.Room
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.constants.PlatformParameters
-import com.example.miniweibo.db.AccessTokenDao
-import com.example.miniweibo.db.MiniWeiBoDb
-import com.example.miniweibo.db.UserInfoDao
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.example.miniweibo.data.db.AccessTokenDao
+import com.example.miniweibo.data.db.MiniWeiBoDb
+import com.example.miniweibo.data.db.UserInfoDao
+import com.example.miniweibo.util.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -18,7 +18,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.UnsupportedEncodingException
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [ViewModelModel::class])
 class AppModel {
 
     @Singleton
@@ -50,7 +50,7 @@ class AppModel {
             .client(okHttpClient)
             .baseUrl(PlatformParameters.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
             .create(WeiBoService::class.java)
     }

@@ -2,18 +2,12 @@ package com.example.miniweibo.sdk
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import com.example.miniweibo.bean.AccessTokenBean
+import com.example.miniweibo.data.bean.AccessTokenBean
 import com.example.miniweibo.constants.PlatformParameters
-import com.example.miniweibo.util.ToastUtil
 import com.sina.weibo.sdk.auth.AuthInfo
-import com.sina.weibo.sdk.auth.Oauth2AccessToken
-import com.sina.weibo.sdk.auth.WbAuthListener
-import com.sina.weibo.sdk.common.UiError
 import com.sina.weibo.sdk.openapi.IWBAPI
 import com.sina.weibo.sdk.openapi.WBAPIFactory
 import java.lang.Exception
-import javax.inject.Inject
 
 class SDKUtil private constructor(context: Context) {
     private val TAG = "SDKUtil"

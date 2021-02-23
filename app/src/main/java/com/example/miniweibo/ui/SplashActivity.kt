@@ -3,6 +3,7 @@ package com.example.miniweibo.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -10,6 +11,8 @@ import com.example.miniweibo.R
 import com.example.miniweibo.sdk.SDKUtil
 
 class SplashActivity : AppCompatActivity() {
+    private val TAG = "SplashActivity"
+
     private lateinit var splashCL: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,7 @@ class SplashActivity : AppCompatActivity() {
         val intent: Intent = if (SDKUtil.getSDKUtil().needLogin()) {
             Intent(this, LoginActivity::class.java)
         } else {
+            Log.d(TAG,SDKUtil.getSDKUtil().getAccessTokenBean().toString())
             Intent(this, MainActivity::class.java)
         }
         startActivity(intent)
