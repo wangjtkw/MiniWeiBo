@@ -1,13 +1,24 @@
 package com.example.miniweibo.util
 
+import android.util.Log
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 object TimeUtil {
+    //一分钟内
     const val MINUTE_DIFFER = 60
+
+    //一小时内
     const val HOUR_DIFFER = 3600
-    const val DAY_DIFFER = 86_400
+
+    //一天内
+    const val DAY_DIFFER = 86400
+
+    //两天内
     const val TWO_DAY_DIFFER = 172_800
+
+    private val TAG = "TimeUtil"
 
     /**
      * 将请求来的时间转为yyyy-MM-dd hh:mm:ss的形式
@@ -56,9 +67,10 @@ object TimeUtil {
      */
     fun getTimestamp(parsedTime: String): Long {
         val locale = Locale("zh", "CN")
-        val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, locale)
-            .parse(parsedTime)
-        return (date?.time ?: 0) / 1000
+        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
+        val date = sdf.parse(parsedTime)
+
+        return (date?.time ?: 0) / 1000L
     }
 
     /**
@@ -67,15 +79,18 @@ object TimeUtil {
      * @return 差距代表
      */
     fun getTimeDifference(oldTimestamp: Long): String {
-        val newTimestamp = Date().time / 1000
+        val locale = Locale("zh", "CN")
+        val calendar = Calendar.getInstance(locale)
+        val newTimestamp = calendar.timeInMillis / 1000
         val differ = newTimestamp - oldTimestamp
+        Log.d(TAG, differ.toString())
         return when {
             differ > TWO_DAY_DIFFER -> {
                 val month = getDateByTimestamp(oldTimestamp).get(Calendar.MONTH)
                 val day = getDateByTimestamp(oldTimestamp).get(Calendar.DAY_OF_MONTH)
                 "$month-$day"
             }
-            differ < TWO_DAY_DIFFER -> {
+            differ in (DAY_DIFFER + 1) until TWO_DAY_DIFFER -> {
                 val hour = getDateByTimestamp(oldTimestamp).get(Calendar.HOUR_OF_DAY)
                 val minute = getDateByTimestamp(oldTimestamp).get(Calendar.MINUTE)
                 val hourStr = if (hour < 10) {
@@ -83,10 +98,15 @@ object TimeUtil {
                 } else {
                     "$hour"
                 }
-                "昨天$hourStr:$minute"
+                val minuteStr = if (minute < 10) {
+                    "0$minute"
+                } else {
+                    "$minute"
+                }
+                "昨天$hourStr:$minuteStr"
             }
-            differ < DAY_DIFFER -> "${differ / DAY_DIFFER}小时前"
-            differ < HOUR_DIFFER -> "${differ / MINUTE_DIFFER}分钟前"
+            differ in (HOUR_DIFFER + 1) until DAY_DIFFER -> "${differ / HOUR_DIFFER}小时前"
+            differ in (MINUTE_DIFFER + 1) until HOUR_DIFFER -> "${differ / MINUTE_DIFFER}分钟前"
             differ < MINUTE_DIFFER -> "刚刚"
             else -> ""
         }

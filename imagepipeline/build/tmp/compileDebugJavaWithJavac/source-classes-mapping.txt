@@ -1,0 +1,515 @@
+com/facebook/imagepipeline/memory/MemoryChunkUtil.java
+ com.facebook.imagepipeline.memory.MemoryChunkUtil
+com/facebook/imagepipeline/producers/Consumer.java
+ com.facebook.imagepipeline.producers.Consumer
+ com.facebook.imagepipeline.producers.Consumer$Status
+com/facebook/imagepipeline/memory/DummyBitmapPool.java
+ com.facebook.imagepipeline.memory.DummyBitmapPool
+com/facebook/imagepipeline/cache/EncodedMemoryCacheFactory.java
+ com.facebook.imagepipeline.cache.EncodedMemoryCacheFactory
+ com.facebook.imagepipeline.cache.EncodedMemoryCacheFactory$1
+com/facebook/imagepipeline/producers/BitmapPrepareProducer.java
+ com.facebook.imagepipeline.producers.BitmapPrepareProducer
+ com.facebook.imagepipeline.producers.BitmapPrepareProducer$BitmapPrepareConsumer
+com/facebook/imagepipeline/producers/ThrottlingProducer.java
+ com.facebook.imagepipeline.producers.ThrottlingProducer
+ com.facebook.imagepipeline.producers.ThrottlingProducer$1
+ com.facebook.imagepipeline.producers.ThrottlingProducer$ThrottlerConsumer
+ com.facebook.imagepipeline.producers.ThrottlingProducer$ThrottlerConsumer$1
+com/facebook/imagepipeline/listener/RequestListener.java
+ com.facebook.imagepipeline.listener.RequestListener
+com/facebook/imagepipeline/producers/ThumbnailProducer.java
+ com.facebook.imagepipeline.producers.ThumbnailProducer
+com/facebook/imagepipeline/multiuri/MultiUri.java
+ com.facebook.imagepipeline.multiuri.MultiUri
+ com.facebook.imagepipeline.multiuri.MultiUri$1
+ com.facebook.imagepipeline.multiuri.MultiUri$Builder
+com/facebook/imagepipeline/producers/EncodedProbeProducer.java
+ com.facebook.imagepipeline.producers.EncodedProbeProducer
+ com.facebook.imagepipeline.producers.EncodedProbeProducer$ProbeConsumer
+com/facebook/imagepipeline/producers/FetchState.java
+ com.facebook.imagepipeline.producers.FetchState
+com/facebook/imagepipeline/memory/PoolParams.java
+ com.facebook.imagepipeline.memory.PoolParams
+com/facebook/imagepipeline/memory/SharedByteArray.java
+ com.facebook.imagepipeline.memory.SharedByteArray
+ com.facebook.imagepipeline.memory.SharedByteArray$1
+com/facebook/imagepipeline/memory/PoolConfig.java
+ com.facebook.imagepipeline.memory.PoolConfig
+ com.facebook.imagepipeline.memory.PoolConfig$1
+ com.facebook.imagepipeline.memory.PoolConfig$Builder
+com/facebook/imagepipeline/producers/BitmapMemoryCacheGetProducer.java
+ com.facebook.imagepipeline.producers.BitmapMemoryCacheGetProducer
+com/facebook/imagepipeline/memory/MemoryPooledByteBufferFactory.java
+ com.facebook.imagepipeline.memory.MemoryPooledByteBufferFactory
+com/facebook/imagepipeline/core/ImagePipelineExperiments.java
+ com.facebook.imagepipeline.core.ImagePipelineExperiments
+ com.facebook.imagepipeline.core.ImagePipelineExperiments$1
+ com.facebook.imagepipeline.core.ImagePipelineExperiments$Builder
+ com.facebook.imagepipeline.core.ImagePipelineExperiments$DefaultProducerFactoryMethod
+ com.facebook.imagepipeline.core.ImagePipelineExperiments$ProducerFactoryMethod
+com/facebook/imagepipeline/memory/Bucket.java
+ com.facebook.imagepipeline.memory.Bucket
+com/facebook/imagepipeline/producers/ThreadHandoffProducerQueue.java
+ com.facebook.imagepipeline.producers.ThreadHandoffProducerQueue
+com/facebook/imagepipeline/listener/BaseRequestListener.java
+ com.facebook.imagepipeline.listener.BaseRequestListener
+com/facebook/imagepipeline/memory/package-info.java
+ com.facebook.imagepipeline.memory.package-info
+com/facebook/imagepipeline/core/ImagePipeline.java
+ com.facebook.imagepipeline.core.ImagePipeline
+ com.facebook.imagepipeline.core.ImagePipeline$1
+ com.facebook.imagepipeline.core.ImagePipeline$2
+ com.facebook.imagepipeline.core.ImagePipeline$3
+ com.facebook.imagepipeline.core.ImagePipeline$4
+ com.facebook.imagepipeline.core.ImagePipeline$5
+ com.facebook.imagepipeline.core.ImagePipeline$6
+ com.facebook.imagepipeline.core.ImagePipeline$7
+ com.facebook.imagepipeline.core.ImagePipeline$8
+ com.facebook.imagepipeline.core.ImagePipeline$9
+com/facebook/imagepipeline/memory/BucketMap.java
+ com.facebook.imagepipeline.memory.BucketMap
+ com.facebook.imagepipeline.memory.BucketMap$1
+ com.facebook.imagepipeline.memory.BucketMap$LinkedEntry
+com/facebook/imagepipeline/decoder/ImageDecoderConfig.java
+ com.facebook.imagepipeline.decoder.ImageDecoderConfig
+ com.facebook.imagepipeline.decoder.ImageDecoderConfig$1
+ com.facebook.imagepipeline.decoder.ImageDecoderConfig$Builder
+com/facebook/imagepipeline/producers/ThumbnailSizeChecker.java
+ com.facebook.imagepipeline.producers.ThumbnailSizeChecker
+com/facebook/imagepipeline/producers/JobScheduler.java
+ com.facebook.imagepipeline.producers.JobScheduler
+ com.facebook.imagepipeline.producers.JobScheduler$1
+ com.facebook.imagepipeline.producers.JobScheduler$2
+ com.facebook.imagepipeline.producers.JobScheduler$3
+ com.facebook.imagepipeline.producers.JobScheduler$JobRunnable
+ com.facebook.imagepipeline.producers.JobScheduler$JobStartExecutorSupplier
+ com.facebook.imagepipeline.producers.JobScheduler$JobState
+com/facebook/imagepipeline/producers/DataFetchProducer.java
+ com.facebook.imagepipeline.producers.DataFetchProducer
+com/facebook/imagepipeline/producers/AddImageTransformMetaDataProducer.java
+ com.facebook.imagepipeline.producers.AddImageTransformMetaDataProducer
+ com.facebook.imagepipeline.producers.AddImageTransformMetaDataProducer$1
+ com.facebook.imagepipeline.producers.AddImageTransformMetaDataProducer$AddImageTransformMetaDataConsumer
+com/facebook/imagepipeline/producers/BitmapMemoryCacheKeyMultiplexProducer.java
+ com.facebook.imagepipeline.producers.BitmapMemoryCacheKeyMultiplexProducer
+com/facebook/imagepipeline/decoder/ProgressiveJpegParser.java
+ com.facebook.imagepipeline.decoder.ProgressiveJpegParser
+com/facebook/imagepipeline/listener/ForwardingRequestListener.java
+ com.facebook.imagepipeline.listener.ForwardingRequestListener
+com/facebook/imagepipeline/request/HasImageRequest.java
+ com.facebook.imagepipeline.request.HasImageRequest
+com/facebook/imagepipeline/filter/IterativeBoxBlurFilter.java
+ com.facebook.imagepipeline.filter.IterativeBoxBlurFilter
+com/facebook/imagepipeline/producers/LocalResourceFetchProducer.java
+ com.facebook.imagepipeline.producers.LocalResourceFetchProducer
+com/facebook/imagepipeline/request/RepeatedPostprocessorRunner.java
+ com.facebook.imagepipeline.request.RepeatedPostprocessorRunner
+com/facebook/imagepipeline/datasource/ListDataSource.java
+ com.facebook.imagepipeline.datasource.ListDataSource
+ com.facebook.imagepipeline.datasource.ListDataSource$1
+ com.facebook.imagepipeline.datasource.ListDataSource$InternalDataSubscriber
+com/facebook/imagepipeline/cache/EncodedCountingMemoryCacheFactory.java
+ com.facebook.imagepipeline.cache.EncodedCountingMemoryCacheFactory
+ com.facebook.imagepipeline.cache.EncodedCountingMemoryCacheFactory$1
+com/facebook/imagepipeline/core/ImagePipelineFactory.java
+ com.facebook.imagepipeline.core.ImagePipelineFactory
+com/facebook/imagepipeline/producers/StatefulProducerRunnable.java
+ com.facebook.imagepipeline.producers.StatefulProducerRunnable
+com/facebook/imagepipeline/filter/RenderScriptBlurFilter.java
+ com.facebook.imagepipeline.filter.RenderScriptBlurFilter
+com/facebook/imagepipeline/core/DiskStorageCacheFactory.java
+ com.facebook.imagepipeline.core.DiskStorageCacheFactory
+com/facebook/imagepipeline/bitmaps/ArtBitmapFactory.java
+ com.facebook.imagepipeline.bitmaps.ArtBitmapFactory
+com/facebook/imagepipeline/core/ImagePipelineConfig.java
+ com.facebook.imagepipeline.core.ImagePipelineConfig
+ com.facebook.imagepipeline.core.ImagePipelineConfig$1
+ com.facebook.imagepipeline.core.ImagePipelineConfig$Builder
+ com.facebook.imagepipeline.core.ImagePipelineConfig$DefaultImageRequestConfig
+com/facebook/imagepipeline/decoder/DefaultImageDecoder.java
+ com.facebook.imagepipeline.decoder.DefaultImageDecoder
+ com.facebook.imagepipeline.decoder.DefaultImageDecoder$1
+com/facebook/imagepipeline/datasource/BaseListBitmapDataSubscriber.java
+ com.facebook.imagepipeline.datasource.BaseListBitmapDataSubscriber
+com/facebook/imagepipeline/core/ImageTranscoderType.java
+ com.facebook.imagepipeline.core.ImageTranscoderType
+com/facebook/imagepipeline/listener/package-info.java
+ com.facebook.imagepipeline.listener.package-info
+com/facebook/imagepipeline/memory/BitmapPool.java
+ com.facebook.imagepipeline.memory.BitmapPool
+com/facebook/imagepipeline/producers/BaseProducerContext.java
+ com.facebook.imagepipeline.producers.BaseProducerContext
+com/facebook/imagepipeline/transcoder/SimpleImageTranscoderFactory.java
+ com.facebook.imagepipeline.transcoder.SimpleImageTranscoderFactory
+com/facebook/imagepipeline/core/package-info.java
+ com.facebook.imagepipeline.core.package-info
+com/facebook/imagepipeline/producers/BranchOnSeparateImagesProducer.java
+ com.facebook.imagepipeline.producers.BranchOnSeparateImagesProducer
+ com.facebook.imagepipeline.producers.BranchOnSeparateImagesProducer$1
+ com.facebook.imagepipeline.producers.BranchOnSeparateImagesProducer$OnFirstImageConsumer
+com/facebook/imagepipeline/postprocessors/BlurPostProcessor.java
+ com.facebook.imagepipeline.postprocessors.BlurPostProcessor
+com/facebook/imagepipeline/producers/PriorityNetworkFetcher.java
+ com.facebook.imagepipeline.producers.PriorityNetworkFetcher
+ com.facebook.imagepipeline.producers.PriorityNetworkFetcher$1
+ com.facebook.imagepipeline.producers.PriorityNetworkFetcher$2
+ com.facebook.imagepipeline.producers.PriorityNetworkFetcher$NonrecoverableException
+ com.facebook.imagepipeline.producers.PriorityNetworkFetcher$PriorityFetchState
+com/facebook/imagepipeline/decoder/ProgressiveJpegConfig.java
+ com.facebook.imagepipeline.decoder.ProgressiveJpegConfig
+com/facebook/imagepipeline/memory/MemoryPooledByteBuffer.java
+ com.facebook.imagepipeline.memory.MemoryPooledByteBuffer
+com/facebook/imagepipeline/producers/PartialDiskCacheProducer.java
+ com.facebook.imagepipeline.producers.PartialDiskCacheProducer
+ com.facebook.imagepipeline.producers.PartialDiskCacheProducer$1
+ com.facebook.imagepipeline.producers.PartialDiskCacheProducer$2
+ com.facebook.imagepipeline.producers.PartialDiskCacheProducer$PartialDiskCacheConsumer
+com/facebook/imagepipeline/listener/RequestListener2.java
+ com.facebook.imagepipeline.listener.RequestListener2
+com/facebook/imagepipeline/memory/LruBitmapPool.java
+ com.facebook.imagepipeline.memory.LruBitmapPool
+com/facebook/imagepipeline/debug/CloseableReferenceLeakTracker.java
+ com.facebook.imagepipeline.debug.CloseableReferenceLeakTracker
+ com.facebook.imagepipeline.debug.CloseableReferenceLeakTracker$Listener
+com/facebook/imagepipeline/cache/NativeMemoryCacheTrimStrategy.java
+ com.facebook.imagepipeline.cache.NativeMemoryCacheTrimStrategy
+ com.facebook.imagepipeline.cache.NativeMemoryCacheTrimStrategy$1
+com/facebook/imagepipeline/bitmaps/EmptyJpegGenerator.java
+ com.facebook.imagepipeline.bitmaps.EmptyJpegGenerator
+com/facebook/imagepipeline/cache/InstrumentedMemoryCache.java
+ com.facebook.imagepipeline.cache.InstrumentedMemoryCache
+com/facebook/imagepipeline/core/DiskStorageFactory.java
+ com.facebook.imagepipeline.core.DiskStorageFactory
+com/facebook/imagepipeline/producers/ResizeAndRotateProducer.java
+ com.facebook.imagepipeline.producers.ResizeAndRotateProducer
+ com.facebook.imagepipeline.producers.ResizeAndRotateProducer$TransformingConsumer
+ com.facebook.imagepipeline.producers.ResizeAndRotateProducer$TransformingConsumer$1
+ com.facebook.imagepipeline.producers.ResizeAndRotateProducer$TransformingConsumer$2
+com/facebook/imagepipeline/core/DynamicDefaultDiskStorageFactory.java
+ com.facebook.imagepipeline.core.DynamicDefaultDiskStorageFactory
+com/facebook/imagepipeline/producers/LocalContentUriFetchProducer.java
+ com.facebook.imagepipeline.producers.LocalContentUriFetchProducer
+com/facebook/imagepipeline/producers/QualifiedResourceFetchProducer.java
+ com.facebook.imagepipeline.producers.QualifiedResourceFetchProducer
+com/facebook/imagepipeline/platform/DefaultDecoder.java
+ com.facebook.imagepipeline.platform.DefaultDecoder
+com/facebook/imagepipeline/producers/InternalProducerListener.java
+ com.facebook.imagepipeline.producers.InternalProducerListener
+com/facebook/imagepipeline/producers/DiskCacheWriteProducer.java
+ com.facebook.imagepipeline.producers.DiskCacheWriteProducer
+ com.facebook.imagepipeline.producers.DiskCacheWriteProducer$1
+ com.facebook.imagepipeline.producers.DiskCacheWriteProducer$DiskCacheWriteConsumer
+com/facebook/imagepipeline/producers/ProducerContextCallbacks.java
+ com.facebook.imagepipeline.producers.ProducerContextCallbacks
+com/facebook/imagepipeline/memory/DefaultFlexByteArrayPoolParams.java
+ com.facebook.imagepipeline.memory.DefaultFlexByteArrayPoolParams
+com/facebook/imagepipeline/memory/MemoryChunk.java
+ com.facebook.imagepipeline.memory.MemoryChunk
+com/facebook/imagepipeline/cache/BitmapMemoryCacheKey.java
+ com.facebook.imagepipeline.cache.BitmapMemoryCacheKey
+com/facebook/imagepipeline/cache/MemoryCacheTracker.java
+ com.facebook.imagepipeline.cache.MemoryCacheTracker
+com/facebook/imagepipeline/producers/SettableProducerContext.java
+ com.facebook.imagepipeline.producers.SettableProducerContext
+com/facebook/imagepipeline/core/ProducerFactory.java
+ com.facebook.imagepipeline.core.ProducerFactory
+com/facebook/imagepipeline/memory/LruBucketsPoolBackend.java
+ com.facebook.imagepipeline.memory.LruBucketsPoolBackend
+com/facebook/imagepipeline/bitmaps/GingerbreadBitmapFactory.java
+ com.facebook.imagepipeline.bitmaps.GingerbreadBitmapFactory
+com/facebook/imagepipeline/producers/ProducerListener.java
+ com.facebook.imagepipeline.producers.ProducerListener
+com/facebook/imagepipeline/producers/BaseNetworkFetcher.java
+ com.facebook.imagepipeline.producers.BaseNetworkFetcher
+com/facebook/imagepipeline/datasource/BaseBitmapDataSubscriber.java
+ com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
+com/facebook/imagepipeline/producers/RemoveImageTransformMetaDataProducer.java
+ com.facebook.imagepipeline.producers.RemoveImageTransformMetaDataProducer
+ com.facebook.imagepipeline.producers.RemoveImageTransformMetaDataProducer$1
+ com.facebook.imagepipeline.producers.RemoveImageTransformMetaDataProducer$RemoveImageTransformMetaDataConsumer
+com/facebook/imagepipeline/memory/BasePool.java
+ com.facebook.imagepipeline.memory.BasePool
+ com.facebook.imagepipeline.memory.BasePool$Counter
+ com.facebook.imagepipeline.memory.BasePool$InvalidSizeException
+ com.facebook.imagepipeline.memory.BasePool$InvalidValueException
+ com.facebook.imagepipeline.memory.BasePool$PoolSizeViolationException
+ com.facebook.imagepipeline.memory.BasePool$SizeTooLargeException
+com/facebook/imagepipeline/memory/BitmapPoolType.java
+ com.facebook.imagepipeline.memory.BitmapPoolType
+com/facebook/imagepipeline/cache/DefaultEncodedMemoryCacheParamsSupplier.java
+ com.facebook.imagepipeline.cache.DefaultEncodedMemoryCacheParamsSupplier
+com/facebook/imagepipeline/platform/PreverificationHelper.java
+ com.facebook.imagepipeline.platform.PreverificationHelper
+com/facebook/imagepipeline/memory/PoolStatsTracker.java
+ com.facebook.imagepipeline.memory.PoolStatsTracker
+com/facebook/imagepipeline/producers/DiskCacheReadProducer.java
+ com.facebook.imagepipeline.producers.DiskCacheReadProducer
+ com.facebook.imagepipeline.producers.DiskCacheReadProducer$1
+ com.facebook.imagepipeline.producers.DiskCacheReadProducer$2
+com/facebook/imagepipeline/platform/OreoDecoder.java
+ com.facebook.imagepipeline.platform.OreoDecoder
+com/facebook/imagepipeline/bitmaps/HoneycombBitmapCreator.java
+ com.facebook.imagepipeline.bitmaps.HoneycombBitmapCreator
+com/facebook/imagepipeline/cache/BufferedDiskCache.java
+ com.facebook.imagepipeline.cache.BufferedDiskCache
+ com.facebook.imagepipeline.cache.BufferedDiskCache$1
+ com.facebook.imagepipeline.cache.BufferedDiskCache$2
+ com.facebook.imagepipeline.cache.BufferedDiskCache$3
+ com.facebook.imagepipeline.cache.BufferedDiskCache$4
+ com.facebook.imagepipeline.cache.BufferedDiskCache$5
+ com.facebook.imagepipeline.cache.BufferedDiskCache$6
+ com.facebook.imagepipeline.cache.BufferedDiskCache$7
+com/facebook/imagepipeline/core/NativeCodeSetup.java
+ com.facebook.imagepipeline.core.NativeCodeSetup
+com/facebook/imagepipeline/producers/DelegatingConsumer.java
+ com.facebook.imagepipeline.producers.DelegatingConsumer
+com/facebook/imagepipeline/listener/RequestLoggingListener.java
+ com.facebook.imagepipeline.listener.RequestLoggingListener
+com/facebook/imagepipeline/request/package-info.java
+ com.facebook.imagepipeline.request.package-info
+com/facebook/imagepipeline/memory/DefaultNativeMemoryChunkPoolParams.java
+ com.facebook.imagepipeline.memory.DefaultNativeMemoryChunkPoolParams
+com/facebook/imagepipeline/memory/DummyTrackingInUseBitmapPool.java
+ com.facebook.imagepipeline.memory.DummyTrackingInUseBitmapPool
+com/facebook/imagepipeline/memory/NoOpPoolStatsTracker.java
+ com.facebook.imagepipeline.memory.NoOpPoolStatsTracker
+com/facebook/imagepipeline/memory/BitmapPoolBackend.java
+ com.facebook.imagepipeline.memory.BitmapPoolBackend
+com/facebook/imagepipeline/producers/BitmapMemoryCacheProducer.java
+ com.facebook.imagepipeline.producers.BitmapMemoryCacheProducer
+ com.facebook.imagepipeline.producers.BitmapMemoryCacheProducer$1
+com/facebook/imagepipeline/producers/MultiplexProducer.java
+ com.facebook.imagepipeline.producers.MultiplexProducer
+ com.facebook.imagepipeline.producers.MultiplexProducer$1
+ com.facebook.imagepipeline.producers.MultiplexProducer$Multiplexer
+ com.facebook.imagepipeline.producers.MultiplexProducer$Multiplexer$1
+ com.facebook.imagepipeline.producers.MultiplexProducer$Multiplexer$ForwardingConsumer
+com/facebook/imagepipeline/memory/DefaultByteArrayPoolParams.java
+ com.facebook.imagepipeline.memory.DefaultByteArrayPoolParams
+com/facebook/imagepipeline/request/Postprocessor.java
+ com.facebook.imagepipeline.request.Postprocessor
+com/facebook/imagepipeline/producers/PostprocessedBitmapMemoryCacheProducer.java
+ com.facebook.imagepipeline.producers.PostprocessedBitmapMemoryCacheProducer
+ com.facebook.imagepipeline.producers.PostprocessedBitmapMemoryCacheProducer$CachedPostprocessorConsumer
+com/facebook/imagepipeline/producers/WebpTranscodeProducer.java
+ com.facebook.imagepipeline.producers.WebpTranscodeProducer
+ com.facebook.imagepipeline.producers.WebpTranscodeProducer$1
+ com.facebook.imagepipeline.producers.WebpTranscodeProducer$WebpTranscodeConsumer
+com/facebook/imagepipeline/cache/CacheKeyFactory.java
+ com.facebook.imagepipeline.cache.CacheKeyFactory
+com/facebook/imagepipeline/request/ImageRequestBuilder.java
+ com.facebook.imagepipeline.request.ImageRequestBuilder
+ com.facebook.imagepipeline.request.ImageRequestBuilder$BuilderException
+com/facebook/imagepipeline/memory/MemoryChunkPool.java
+ com.facebook.imagepipeline.memory.MemoryChunkPool
+com/facebook/imagepipeline/datasource/BaseBitmapReferenceDataSubscriber.java
+ com.facebook.imagepipeline.datasource.BaseBitmapReferenceDataSubscriber
+com/facebook/imagepipeline/producers/InternalRequestListener.java
+ com.facebook.imagepipeline.producers.InternalRequestListener
+com/facebook/imagepipeline/producers/ThumbnailBranchProducer.java
+ com.facebook.imagepipeline.producers.ThumbnailBranchProducer
+ com.facebook.imagepipeline.producers.ThumbnailBranchProducer$ThumbnailConsumer
+com/facebook/imagepipeline/core/FileCacheFactory.java
+ com.facebook.imagepipeline.core.FileCacheFactory
+com/facebook/imagepipeline/producers/LocalExifThumbnailProducer.java
+ com.facebook.imagepipeline.producers.LocalExifThumbnailProducer
+ com.facebook.imagepipeline.producers.LocalExifThumbnailProducer$1
+ com.facebook.imagepipeline.producers.LocalExifThumbnailProducer$2
+ com.facebook.imagepipeline.producers.LocalExifThumbnailProducer$Api24Utils
+com/facebook/imagepipeline/producers/LocalContentUriThumbnailFetchProducer.java
+ com.facebook.imagepipeline.producers.LocalContentUriThumbnailFetchProducer
+com/facebook/imagepipeline/memory/PoolBackend.java
+ com.facebook.imagepipeline.memory.PoolBackend
+com/facebook/imagepipeline/request/BasePostprocessor.java
+ com.facebook.imagepipeline.request.BasePostprocessor
+com/facebook/imagepipeline/datasource/package-info.java
+ com.facebook.imagepipeline.datasource.package-info
+com/facebook/imagepipeline/memory/PoolFactory.java
+ com.facebook.imagepipeline.memory.PoolFactory
+com/facebook/imagepipeline/producers/LocalAssetFetchProducer.java
+ com.facebook.imagepipeline.producers.LocalAssetFetchProducer
+com/facebook/imagepipeline/producers/EncodedMemoryCacheProducer.java
+ com.facebook.imagepipeline.producers.EncodedMemoryCacheProducer
+ com.facebook.imagepipeline.producers.EncodedMemoryCacheProducer$EncodedMemoryCacheConsumer
+com/facebook/imagepipeline/platform/ArtDecoder.java
+ com.facebook.imagepipeline.platform.ArtDecoder
+com/facebook/imagepipeline/BuildConfig.java
+ com.facebook.imagepipeline.BuildConfig
+com/facebook/imagepipeline/request/RepeatedPostprocessor.java
+ com.facebook.imagepipeline.request.RepeatedPostprocessor
+com/facebook/imagepipeline/bitmaps/HoneycombBitmapFactory.java
+ com.facebook.imagepipeline.bitmaps.HoneycombBitmapFactory
+com/facebook/imagepipeline/producers/DelayProducer.java
+ com.facebook.imagepipeline.producers.DelayProducer
+ com.facebook.imagepipeline.producers.DelayProducer$1
+com/facebook/imagepipeline/transcoder/MultiImageTranscoderFactory.java
+ com.facebook.imagepipeline.transcoder.MultiImageTranscoderFactory
+com/facebook/imagepipeline/producers/LocalFetchProducer.java
+ com.facebook.imagepipeline.producers.LocalFetchProducer
+ com.facebook.imagepipeline.producers.LocalFetchProducer$1
+ com.facebook.imagepipeline.producers.LocalFetchProducer$2
+com/facebook/imagepipeline/filter/InPlaceRoundFilter.java
+ com.facebook.imagepipeline.filter.InPlaceRoundFilter
+com/facebook/imagepipeline/memory/MemoryPooledByteBufferOutputStream.java
+ com.facebook.imagepipeline.memory.MemoryPooledByteBufferOutputStream
+ com.facebook.imagepipeline.memory.MemoryPooledByteBufferOutputStream$InvalidStreamException
+com/facebook/imagepipeline/datasource/AbstractProducerToDataSourceAdapter.java
+ com.facebook.imagepipeline.datasource.AbstractProducerToDataSourceAdapter
+ com.facebook.imagepipeline.datasource.AbstractProducerToDataSourceAdapter$1
+com/facebook/imagepipeline/producers/BitmapProbeProducer.java
+ com.facebook.imagepipeline.producers.BitmapProbeProducer
+ com.facebook.imagepipeline.producers.BitmapProbeProducer$ProbeConsumer
+com/facebook/imagepipeline/platform/PlatformDecoderFactory.java
+ com.facebook.imagepipeline.platform.PlatformDecoderFactory
+com/facebook/imagepipeline/memory/BitmapCounterProvider.java
+ com.facebook.imagepipeline.memory.BitmapCounterProvider
+com/facebook/imagepipeline/cache/ImageCacheStatsTracker.java
+ com.facebook.imagepipeline.cache.ImageCacheStatsTracker
+com/facebook/imagepipeline/memory/DefaultBitmapPoolParams.java
+ com.facebook.imagepipeline.memory.DefaultBitmapPoolParams
+com/facebook/imagepipeline/producers/package-info.java
+ com.facebook.imagepipeline.producers.package-info
+com/facebook/imagepipeline/request/ImageRequest.java
+ com.facebook.imagepipeline.request.ImageRequest
+ com.facebook.imagepipeline.request.ImageRequest$1
+ com.facebook.imagepipeline.request.ImageRequest$CacheChoice
+ com.facebook.imagepipeline.request.ImageRequest$RequestLevel
+com/facebook/imagepipeline/core/CloseableReferenceFactory.java
+ com.facebook.imagepipeline.core.CloseableReferenceFactory
+ com.facebook.imagepipeline.core.CloseableReferenceFactory$1
+com/facebook/imagepipeline/cache/NoOpImageCacheStatsTracker.java
+ com.facebook.imagepipeline.cache.NoOpImageCacheStatsTracker
+com/facebook/imagepipeline/producers/SwallowResultProducer.java
+ com.facebook.imagepipeline.producers.SwallowResultProducer
+ com.facebook.imagepipeline.producers.SwallowResultProducer$1
+com/facebook/imagepipeline/decoder/package-info.java
+ com.facebook.imagepipeline.decoder.package-info
+com/facebook/imagepipeline/datasource/CloseableProducerToDataSourceAdapter.java
+ com.facebook.imagepipeline.datasource.CloseableProducerToDataSourceAdapter
+com/facebook/imagepipeline/producers/ProducerContext.java
+ com.facebook.imagepipeline.producers.ProducerContext
+ com.facebook.imagepipeline.producers.ProducerContext$ExtraKeys
+com/facebook/imagepipeline/core/MemoryChunkType.java
+ com.facebook.imagepipeline.core.MemoryChunkType
+com/facebook/imagepipeline/memory/BitmapCounterConfig.java
+ com.facebook.imagepipeline.memory.BitmapCounterConfig
+ com.facebook.imagepipeline.memory.BitmapCounterConfig$1
+ com.facebook.imagepipeline.memory.BitmapCounterConfig$Builder
+com/facebook/imagepipeline/decoder/SimpleProgressiveJpegConfig.java
+ com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig
+ com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig$1
+ com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig$DefaultDynamicValueConfig
+ com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig$DynamicValueConfig
+com/facebook/imagepipeline/producers/NullProducer.java
+ com.facebook.imagepipeline.producers.NullProducer
+com/facebook/imagepipeline/producers/ExperimentalThreadHandoffProducerQueueImpl.java
+ com.facebook.imagepipeline.producers.ExperimentalThreadHandoffProducerQueueImpl
+com/facebook/imagepipeline/cache/DefaultBitmapMemoryCacheParamsSupplier.java
+ com.facebook.imagepipeline.cache.DefaultBitmapMemoryCacheParamsSupplier
+com/facebook/imagepipeline/producers/LocalVideoThumbnailProducer.java
+ com.facebook.imagepipeline.producers.LocalVideoThumbnailProducer
+ com.facebook.imagepipeline.producers.LocalVideoThumbnailProducer$1
+ com.facebook.imagepipeline.producers.LocalVideoThumbnailProducer$2
+com/facebook/imagepipeline/producers/BaseConsumer.java
+ com.facebook.imagepipeline.producers.BaseConsumer
+com/facebook/imagepipeline/producers/ProducerConstants.java
+ com.facebook.imagepipeline.producers.ProducerConstants
+com/facebook/imagepipeline/request/BaseRepeatedPostProcessor.java
+ com.facebook.imagepipeline.request.BaseRepeatedPostProcessor
+com/facebook/imagepipeline/memory/GenericByteArrayPool.java
+ com.facebook.imagepipeline.memory.GenericByteArrayPool
+com/facebook/imagepipeline/cache/InstrumentedMemoryCacheBitmapMemoryCacheFactory.java
+ com.facebook.imagepipeline.cache.InstrumentedMemoryCacheBitmapMemoryCacheFactory
+ com.facebook.imagepipeline.cache.InstrumentedMemoryCacheBitmapMemoryCacheFactory$1
+com/facebook/imagepipeline/memory/BitmapCounter.java
+ com.facebook.imagepipeline.memory.BitmapCounter
+ com.facebook.imagepipeline.memory.BitmapCounter$1
+com/facebook/imagepipeline/producers/NetworkFetchProducer.java
+ com.facebook.imagepipeline.producers.NetworkFetchProducer
+ com.facebook.imagepipeline.producers.NetworkFetchProducer$1
+com/facebook/imagepipeline/producers/PostprocessorProducer.java
+ com.facebook.imagepipeline.producers.PostprocessorProducer
+ com.facebook.imagepipeline.producers.PostprocessorProducer$1
+ com.facebook.imagepipeline.producers.PostprocessorProducer$PostprocessorConsumer
+ com.facebook.imagepipeline.producers.PostprocessorProducer$PostprocessorConsumer$1
+ com.facebook.imagepipeline.producers.PostprocessorProducer$PostprocessorConsumer$2
+ com.facebook.imagepipeline.producers.PostprocessorProducer$RepeatedPostprocessorConsumer
+ com.facebook.imagepipeline.producers.PostprocessorProducer$RepeatedPostprocessorConsumer$1
+ com.facebook.imagepipeline.producers.PostprocessorProducer$SingleUsePostprocessorConsumer
+com/facebook/imagepipeline/memory/BucketsBitmapPool.java
+ com.facebook.imagepipeline.memory.BucketsBitmapPool
+com/facebook/imagepipeline/memory/OOMSoftReferenceBucket.java
+ com.facebook.imagepipeline.memory.OOMSoftReferenceBucket
+com/facebook/imagepipeline/producers/ProducerListener2.java
+ com.facebook.imagepipeline.producers.ProducerListener2
+com/facebook/imagepipeline/producers/PriorityStarvingThrottlingProducer.java
+ com.facebook.imagepipeline.producers.PriorityStarvingThrottlingProducer
+ com.facebook.imagepipeline.producers.PriorityStarvingThrottlingProducer$1
+ com.facebook.imagepipeline.producers.PriorityStarvingThrottlingProducer$Item
+ com.facebook.imagepipeline.producers.PriorityStarvingThrottlingProducer$PriorityComparator
+ com.facebook.imagepipeline.producers.PriorityStarvingThrottlingProducer$ThrottlerConsumer
+ com.facebook.imagepipeline.producers.PriorityStarvingThrottlingProducer$ThrottlerConsumer$1
+com/facebook/imagepipeline/producers/EncodedCacheKeyMultiplexProducer.java
+ com.facebook.imagepipeline.producers.EncodedCacheKeyMultiplexProducer
+com/facebook/imagepipeline/producers/ThreadHandoffProducer.java
+ com.facebook.imagepipeline.producers.ThreadHandoffProducer
+ com.facebook.imagepipeline.producers.ThreadHandoffProducer$1
+ com.facebook.imagepipeline.producers.ThreadHandoffProducer$2
+com/facebook/imagepipeline/producers/NetworkFetcher.java
+ com.facebook.imagepipeline.producers.NetworkFetcher
+ com.facebook.imagepipeline.producers.NetworkFetcher$Callback
+com/facebook/imagepipeline/filter/XferRoundFilter.java
+ com.facebook.imagepipeline.filter.XferRoundFilter
+com/facebook/imagepipeline/producers/ThreadHandoffProducerQueueImpl.java
+ com.facebook.imagepipeline.producers.ThreadHandoffProducerQueueImpl
+com/facebook/imagepipeline/postprocessors/RoundPostprocessor.java
+ com.facebook.imagepipeline.postprocessors.RoundPostprocessor
+com/facebook/imagepipeline/producers/Producer.java
+ com.facebook.imagepipeline.producers.Producer
+com/facebook/imagepipeline/debug/NoOpCloseableReferenceLeakTracker.java
+ com.facebook.imagepipeline.debug.NoOpCloseableReferenceLeakTracker
+com/facebook/imagepipeline/cache/StagingArea.java
+ com.facebook.imagepipeline.cache.StagingArea
+com/facebook/imagepipeline/listener/ForwardingRequestListener2.java
+ com.facebook.imagepipeline.listener.ForwardingRequestListener2
+com/facebook/imagepipeline/decoder/DecodeException.java
+ com.facebook.imagepipeline.decoder.DecodeException
+com/facebook/imagepipeline/cache/package-info.java
+ com.facebook.imagepipeline.cache.package-info
+com/facebook/imagepipeline/producers/BaseProducerContextCallbacks.java
+ com.facebook.imagepipeline.producers.BaseProducerContextCallbacks
+com/facebook/imagepipeline/listener/BaseRequestListener2.java
+ com.facebook.imagepipeline.listener.BaseRequestListener2
+com/facebook/imagepipeline/bitmaps/PlatformBitmapFactoryProvider.java
+ com.facebook.imagepipeline.bitmaps.PlatformBitmapFactoryProvider
+com/facebook/imagepipeline/core/ProducerSequenceFactory.java
+ com.facebook.imagepipeline.core.ProducerSequenceFactory
+com/facebook/imagepipeline/producers/LocalFileFetchProducer.java
+ com.facebook.imagepipeline.producers.LocalFileFetchProducer
+com/facebook/imagepipeline/producers/DecodeProducer.java
+ com.facebook.imagepipeline.producers.DecodeProducer
+ com.facebook.imagepipeline.producers.DecodeProducer$LocalImagesProgressiveDecoder
+ com.facebook.imagepipeline.producers.DecodeProducer$NetworkImagesProgressiveDecoder
+ com.facebook.imagepipeline.producers.DecodeProducer$ProgressiveDecoder
+ com.facebook.imagepipeline.producers.DecodeProducer$ProgressiveDecoder$1
+ com.facebook.imagepipeline.producers.DecodeProducer$ProgressiveDecoder$2
+com/facebook/imagepipeline/datasource/SettableDataSource.java
+ com.facebook.imagepipeline.datasource.SettableDataSource
+com/facebook/imagepipeline/transcoder/SimpleImageTranscoder.java
+ com.facebook.imagepipeline.transcoder.SimpleImageTranscoder
+com/facebook/imagepipeline/datasource/ProducerToDataSourceAdapter.java
+ com.facebook.imagepipeline.datasource.ProducerToDataSourceAdapter
+com/facebook/imagepipeline/platform/PlatformDecoder.java
+ com.facebook.imagepipeline.platform.PlatformDecoder
+com/facebook/imagepipeline/producers/HttpUrlConnectionNetworkFetcher.java
+ com.facebook.imagepipeline.producers.HttpUrlConnectionNetworkFetcher
+ com.facebook.imagepipeline.producers.HttpUrlConnectionNetworkFetcher$1
+ com.facebook.imagepipeline.producers.HttpUrlConnectionNetworkFetcher$2
+ com.facebook.imagepipeline.producers.HttpUrlConnectionNetworkFetcher$HttpUrlConnectionNetworkFetchState
+com/facebook/imagepipeline/memory/FlexByteArrayPool.java
+ com.facebook.imagepipeline.memory.FlexByteArrayPool
+ com.facebook.imagepipeline.memory.FlexByteArrayPool$1
+ com.facebook.imagepipeline.memory.FlexByteArrayPool$SoftRefByteArrayPool
+com/facebook/imagepipeline/cache/DefaultCacheKeyFactory.java
+ com.facebook.imagepipeline.cache.DefaultCacheKeyFactory

@@ -1,0 +1,15 @@
+isInitialTapToLoad
+imageSource
+callerContext
+imageAspectRatio
+imageClickHandler
+imageLongClickHandler
+imageTouchHandler
+imageListener
+imageOptions
+maxTapCount
+onFadeListener
+prefetch
+prefetchRequestListener
+retryImage
+retryImageScaleType

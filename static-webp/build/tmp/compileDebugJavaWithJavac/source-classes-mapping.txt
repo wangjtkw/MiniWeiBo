@@ -1,0 +1,8 @@
+com/facebook/webpsupport/WebpBitmapFactoryImpl.java
+ com.facebook.webpsupport.WebpBitmapFactoryImpl
+com/facebook/webpsupport/BuildConfig.java
+ com.facebook.webpsupport.BuildConfig
+com/facebook/imagepipeline/nativecode/WebpTranscoderImpl.java
+ com.facebook.imagepipeline.nativecode.WebpTranscoderImpl
+com/facebook/imagepipeline/nativecode/StaticWebpNativeLoader.java
+ com.facebook.imagepipeline.nativecode.StaticWebpNativeLoader

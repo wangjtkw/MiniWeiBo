@@ -1,16 +1,17 @@
 package com.example.miniweibo.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.paging.ExperimentalPagingApi
 import androidx.viewpager2.widget.ViewPager2
 import com.example.miniweibo.R
 import com.example.miniweibo.common.ViewPagerAdapter
 import com.example.miniweibo.databinding.ActivityMainBinding
 import com.example.miniweibo.ui.home.HomeFragment
 import com.example.miniweibo.ui.mine.MineFragment
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -18,6 +19,7 @@ import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 
+@ExperimentalPagingApi
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
     val TAG = "MainActivity"
 
@@ -50,12 +52,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     private fun init() {
         initViewPager()
-        binding?.apply { bind(mainTabLayout, mainVp) }
+        binding?.apply { bind(mainNavigationView, mainVp) }
     }
 
     private fun initViewPager() {
         val fragmentList = listOf(
-            HomeFragment.newInstance("1", "2"),
+            HomeFragment(),
             MessageFragment.newInstance("1", "2"),
             VideoFragment.newInstance("1", "2"),
             MineFragment.newInstance()
@@ -67,27 +69,22 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-    private fun bind(tabLayout: TabLayout, viewPager2: ViewPager2) {
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewPager2.currentItem = tab?.position ?: 0
-                tab?.apply {
-                    icon = ContextCompat.getDrawable(this@MainActivity, tabSelectIc[position])
-                }
+    private fun bind(navigationView: BottomNavigationView, viewPager2: ViewPager2) {
+        navigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_home -> viewPager2.currentItem = 0
+                R.id.action_message -> viewPager2.currentItem = 1
+                R.id.action_video -> viewPager2.currentItem = 2
+                R.id.action_mine -> viewPager2.currentItem = 3
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                tab?.apply {
-                    icon = ContextCompat.getDrawable(this@MainActivity, tabUnSelectIc[position])
-                }
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
+            true
+        }
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                tabLayout.getTabAt(position)?.select()
+                val item: MenuItem = navigationView.menu.getItem(position)
+                item.isChecked = true
             }
         })
     }

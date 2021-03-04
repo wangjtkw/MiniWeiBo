@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.miniweibo.R
-import com.example.miniweibo.binding.FragmentDataBindingComponent
 import com.example.miniweibo.databinding.FragmentMineBinding
 import com.facebook.drawee.view.SimpleDraweeView
 import dagger.android.support.AndroidSupportInjection
@@ -25,7 +24,7 @@ class MineFragment : Fragment() {
 
     private var binding: FragmentMineBinding? = null
 
-    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
+//    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     private val userViewModel: MineViewModel by viewModels { viewModelFactory }
 
@@ -43,7 +42,7 @@ class MineFragment : Fragment() {
             R.layout.fragment_mine,
             container,
             false,
-            dataBindingComponent
+//            dataBindingComponent
         )
         return binding?.root
     }

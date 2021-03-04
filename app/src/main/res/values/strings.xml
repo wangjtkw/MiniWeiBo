@@ -7,4 +7,7 @@
     <string name="main_tab_item_message">消息</string>
     <string name="main_tab_item_video">视频</string>
     <string name="main_tab_item_mine">我的</string>
+    <string name="home_tab_concern">关注</string>
+    <string name="home_tab_mine">我的</string>
+    <string name="concern_from">来自</string>
 </resources>

@@ -1,0 +1,6 @@
+com/facebook/fresco/vito/draweesupport/BuildConfig.java
+ com.facebook.fresco.vito.draweesupport.BuildConfig
+com/facebook/fresco/vito/draweesupport/ControllerListenerWrapper.java
+ com.facebook.fresco.vito.draweesupport.ControllerListenerWrapper
+com/facebook/fresco/vito/draweesupport/DrawableFactoryWrapper.java
+ com.facebook.fresco.vito.draweesupport.DrawableFactoryWrapper

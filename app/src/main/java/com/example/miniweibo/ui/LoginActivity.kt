@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.annotation.Nullable
+import androidx.paging.ExperimentalPagingApi
 import com.example.miniweibo.R
 import com.example.miniweibo.sdk.SDKUtil
 import com.example.miniweibo.util.ToastUtil
 
+@ExperimentalPagingApi
 class LoginActivity : AppCompatActivity() {
     private val TAG = "LoginActivity"
 

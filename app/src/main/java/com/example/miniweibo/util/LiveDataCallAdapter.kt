@@ -17,9 +17,12 @@
 package com.example.miniweibo.util
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.miniweibo.R
 
 import com.example.miniweibo.api.ApiResponse
+import com.squareup.moshi.rawType
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
@@ -27,18 +30,15 @@ import retrofit2.Response
 import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
 
-/**
- * A Retrofit adapter that converts the Call into a LiveData of ApiResponse.
- * @param <R>
-</R> */
 class LiveDataCallAdapter<R>(private val responseType: Type) :
     CallAdapter<R, LiveData<ApiResponse<R>>> {
+    private val TAG = "LiveDataCallAdapter"
 
-    override fun responseType() = responseType
 
     override fun adapt(call: Call<R>): LiveData<ApiResponse<R>> {
         return object : LiveData<ApiResponse<R>>() {
             private var started = AtomicBoolean(false)
+
             override fun onActive() {
                 super.onActive()
                 if (started.compareAndSet(false, true)) {
@@ -54,5 +54,10 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
                 }
             }
         }
+    }
+
+    override fun responseType(): Type {
+        Log.d(TAG, "${responseType.rawType}")
+        return responseType
     }
 }

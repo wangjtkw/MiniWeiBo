@@ -1,9 +1,13 @@
 package com.example.miniweibo.api
 
+import com.squareup.moshi.JsonClass
 import retrofit2.Response
+import java.io.Serializable
 
 //利用密封类来对网络请求结果进行分类，供后续使用
-sealed class ApiResponse<T> {
+
+@JvmSuppressWildcards
+sealed class ApiResponse<T>{
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
@@ -28,10 +32,10 @@ sealed class ApiResponse<T> {
             }
         }
     }
+
 }
 
 data class ApiSuccessResponse<T>(val body: T) : ApiResponse<T>()
-
 class ApiEmptyResponse<T> : ApiResponse<T>()
 
 data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()

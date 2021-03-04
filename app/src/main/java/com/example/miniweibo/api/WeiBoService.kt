@@ -3,6 +3,8 @@ package com.example.miniweibo.api
 import androidx.lifecycle.LiveData
 import com.example.miniweibo.data.bean.UserInfoBean
 import com.example.miniweibo.data.bean.WebInfoBean
+import com.example.miniweibo.util.MyCall
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -22,7 +24,9 @@ interface WeiBoService {
     suspend fun getHomeTimelineList(
         @Query("access_token") accessToken: String,
         @Query("page") page: Int
-    ): ApiResponse<WebInfoBean>
+    ): WebInfoBean
+//            ApiResponse<>
+//            LiveData<ApiResponse<WebInfoBean>>
 
 
 }

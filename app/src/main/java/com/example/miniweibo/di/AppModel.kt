@@ -9,6 +9,10 @@ import com.example.miniweibo.data.db.AccessTokenDao
 import com.example.miniweibo.data.db.MiniWeiBoDb
 import com.example.miniweibo.data.db.UserInfoDao
 import com.example.miniweibo.util.LiveDataCallAdapterFactory
+import com.example.miniweibo.util.MyConverterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -45,12 +49,23 @@ class AppModel {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): WeiBoService {
+    fun provideMoShi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): WeiBoService {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(PlatformParameters.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
+//            .addCallAdapterFactory(ApiResponseCallAdapterFactory())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
+
+//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
             .create(WeiBoService::class.java)
     }

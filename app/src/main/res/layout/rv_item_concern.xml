@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.example.miniweibo.data.bean.WebInfoEntity" />
+
+        <variable
+            name="webInfo"
+            type="WebInfoEntity" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_circle_corner_white"
+        app:elevation="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/concern_source_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{webInfo.sourceTitle == null || webInfo.sourceTitle.empty ?View.GONE:View.VISIBLE}"
+            app:constraint_referenced_ids="concern_source_from,concern_source_tv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/concern_head_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            app:imageUrl="@{webInfo.avatarHd}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            fresco:roundAsCircle="true"
+            fresco:roundedCornerRadius="25dp" />
+
+        <TextView
+            android:id="@+id/concern_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@{webInfo.name}"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/concern_head_img"
+            app:layout_constraintTop_toTopOf="@id/concern_head_img" />
+
+        <TextView
+            android:id="@+id/concern_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/concern_head_img"
+            app:layout_constraintLeft_toRightOf="@id/concern_head_img" />
+
+        <TextView
+            android:id="@+id/concern_source_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/concern_from"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
+            app:layout_constraintLeft_toRightOf="@id/concern_time_tv" />
+
+        <TextView
+            android:id="@+id/concern_source_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@{webInfo.sourceTitle}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
+            app:layout_constraintLeft_toRightOf="@id/concern_source_from" />
+
+        <TextView
+            android:id="@+id/concern_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{webInfo.text}"
+            android:padding="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/concern_head_img" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

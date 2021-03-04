@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.paging.ExperimentalPagingApi
 import com.example.miniweibo.R
 import com.example.miniweibo.sdk.SDKUtil
 
+@ExperimentalPagingApi
 class SplashActivity : AppCompatActivity() {
     private val TAG = "SplashActivity"
 

@@ -1,8 +1,11 @@
 package com.example.miniweibo.data.bean
 
+import android.util.Log
+import androidx.recyclerview.widget.DiffUtil
 import androidx.room.*
 import com.example.miniweibo.ext.getEmptyOrDefault
 import com.example.miniweibo.util.RegExUtil
+import com.example.miniweibo.util.RichTextUtil
 import com.example.miniweibo.util.TimeUtil
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -53,14 +56,17 @@ data class WebInfoEntity(
     //来源
     @ColumnInfo(name = "source_title")
     val sourceTitle: String?,
+    //内容链接
     @ColumnInfo(name = "source_url")
     val sourceUrl: String?,
     //文本内容
     @ColumnInfo(name = "text")
     val text: String?,
     //文本长度
-    @ColumnInfo(name = "textLength")
+    @ColumnInfo(name = "text_length")
     val textLength: Int?,
+    @ColumnInfo(name = "content_url")
+    val contentUrl: String,
     //缩略图
     @ColumnInfo(name = "thumbnail_pic")
     val thumbnailPic: String?,
@@ -74,7 +80,11 @@ data class WebInfoEntity(
     val name: String?,
     val page: Int
 ) {
+
+
     companion object {
+        private val TAG = "WebInfoEntity"
+
         fun convert2WebInfoEntity(statuse: Statuse, page: Int): WebInfoEntity {
             return statuse.run {
                 val picList = mutableListOf<String>()
@@ -82,17 +92,33 @@ data class WebInfoEntity(
                 picUrls?.forEach {
                     picList.add(it.thumbnailPic)
                 }
-                val entityCreatedAt = createdAt?.let {
-                    TimeUtil.run {
-                        getTimestamp(parseTime(it))
-                    }
-                }
+                val entityCreatedAt = TimeUtil.getTimestamp(TimeUtil.parseTime(createdAt))
                 val sourceTitle = source?.let {
                     RegExUtil.parseSourceTitle(it)
                 }
                 val sourceUrl = source?.let {
                     RegExUtil.parseSourceUrl(it)
                 }
+                var contentUrl = ""
+                var content = text ?: ""
+                if (text != null) {
+                    val richTextUtil = RichTextUtil()
+                    val addressIndexList = richTextUtil.findStr(text, "http")
+                    if (addressIndexList.size == 1) {
+                        val end = richTextUtil.findAddressEndIndex(text, addressIndexList[0])
+                        contentUrl =
+                            text.substring(startIndex = addressIndexList[0], endIndex = end)
+                        content = text.substring(startIndex = 0, endIndex = addressIndexList[0] - 1)
+                    }
+                }
+                if (content.endsWith("全文：")) {
+                    content = content.substring(startIndex = 0, endIndex = content.length - 1)
+                }
+
+
+                Log.d(TAG, "contentUrl:$contentUrl")
+
+
 
                 WebInfoEntity(
                     idstr = idstr,
@@ -110,15 +136,34 @@ data class WebInfoEntity(
                     repostsCount = repostsCount,
                     sourceTitle = sourceTitle,
                     sourceUrl = sourceUrl,
-                    text = text?.getEmptyOrDefault { "" },
+                    text = content,
                     textLength = textLength,
                     thumbnailPic = thumbnailPic,
                     userIdStr = user?.idstr ?: "",
                     avatarHd = user?.avatarHd ?: "",
                     name = user?.name ?: "",
-                    page = page
+                    page = page,
+                    contentUrl = contentUrl
                 )
             }
         }
+
+        val diffCallback = object : DiffUtil.ItemCallback<WebInfoEntity>() {
+            override fun areItemsTheSame(
+                oldItem: WebInfoEntity,
+                newItem: WebInfoEntity
+            ): Boolean =
+                oldItem.idstr == newItem.idstr
+
+            override fun areContentsTheSame(
+                oldItem: WebInfoEntity,
+                newItem: WebInfoEntity
+            ): Boolean =
+                oldItem == newItem
+        }
+    }
+
+    override fun toString(): String {
+        return "WebInfoEntity(idstr='$idstr', attitudesCount=$attitudesCount, bmiddlePic=$bmiddlePic, commentsCount=$commentsCount, createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, picUrls=$picUrls, repostsCount=$repostsCount, sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page)"
     }
 }

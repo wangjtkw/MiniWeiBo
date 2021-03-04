@@ -1,0 +1,7 @@
+com/facebook/fresco/vito/source/ImageSource.java
+ com.facebook.fresco.vito.source.ImageSource
+com/facebook/fresco/vito/source/ImageSourceProvider.java
+ com.facebook.fresco.vito.source.ImageSourceProvider
+ com.facebook.fresco.vito.source.ImageSourceProvider$Implementation
+com/facebook/fresco/vito/source/BuildConfig.java
+ com.facebook.fresco.vito.source.BuildConfig

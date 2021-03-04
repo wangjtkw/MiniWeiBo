@@ -1,0 +1,4 @@
+com/facebook/imagepipeline/nativecode/NativeCodeInitializer.java
+ com.facebook.imagepipeline.nativecode.NativeCodeInitializer
+com/facebook/fresco/soloader/BuildConfig.java
+ com.facebook.fresco.soloader.BuildConfig

@@ -1,28 +1,28 @@
 package com.example.miniweibo.data.bean
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-
+@JsonClass(generateAdapter = true)
 data class WebInfoBean(
-    //是否有未读
-    @Json(name = "has_unread")
-    val hasUnread: Int?,
     //未知
-    @Json(name = "hasvisible")
-    val hasvisible: Boolean?,
+    val hasvisible: Boolean,
     //未知
-    @Json(name = "interval")
-    val interval: Int?,
-    //请求时返回小于等于
-    @Json(name = "max_id_str")
-    val maxIdStr: String?,
-    @Json(name = "statuses")
-    val statuses: List<Statuse>?,
+    val interval: Int,
     //总数
     @Json(name = "total_number")
-    val totalNumber: Int?,
-)
+    val totalNumber: Int,
+    //请求时返回小于等于
+    @Json(name = "max_id_str")
+    val maxIdStr: String,
+    @Json(name = "statuses")
+    val statuses: List<Statuse>?,
 
+    //是否有未读
+    @Json(name = "has_unread")
+    val hasUnread: Int,
+)
+@JsonClass(generateAdapter = true)
 data class Statuse(
     //微博id
     @Json(name = "idstr")
@@ -77,15 +77,13 @@ data class Statuse(
     @Json(name = "user")
     val user: User?,
 )
-
+@JsonClass(generateAdapter = true)
 data class PicUrl(
     @Json(name = "thumbnail_pic")
     val thumbnailPic: String
 )
-
+@JsonClass(generateAdapter = true)
 data class User(
-    @Json(name = "id")
-    val id: Int?,
     @Json(name = "idstr")
     val idstr: String?,
     //头像

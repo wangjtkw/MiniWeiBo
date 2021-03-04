@@ -22,8 +22,11 @@ class UserInfoDataSource @Inject constructor(
     ): LiveData<Resource<UserInfoBean>> {
 
         val result = object : ScopeDataSource<UserInfoBean, UserInfoBean>(scope) {
-            override fun loadData(): LiveData<ApiResponse<UserInfoBean>> =
-                api.getUserInfo(access_token, uid)
+            override suspend fun loadData(): LiveData<ApiResponse<UserInfoBean>> {
+//                api.getHomeTimelineList(access_token, 1)
+                return api.getUserInfo(access_token, uid)
+            }
+
 
             override fun loadFromDb() = dao.selectById(uid)
 

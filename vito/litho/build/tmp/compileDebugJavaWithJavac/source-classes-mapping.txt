@@ -1,0 +1,9 @@
+com/facebook/fresco/vito/litho/FrescoVitoTapToRetryImageSpec.java
+ com.facebook.fresco.vito.litho.FrescoVitoTapToRetryImageSpec
+ com.facebook.fresco.vito.litho.FrescoVitoTapToRetryImageSpec$1
+com/facebook/fresco/vito/litho/FrescoVitoImage2Spec.java
+ com.facebook.fresco.vito.litho.FrescoVitoImage2Spec
+ com.facebook.fresco.vito.litho.FrescoVitoImage2Spec$1
+ com.facebook.fresco.vito.litho.FrescoVitoImage2Spec$Prefetch
+com/facebook/fresco/vito/litho/BuildConfig.java
+ com.facebook.fresco.vito.litho.BuildConfig

@@ -93,7 +93,7 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
     /**
      * 从网络加载数据
      */
-    protected abstract fun loadData(): LiveData<ApiResponse<RequestType>>
+    protected abstract suspend fun loadData(): LiveData<ApiResponse<RequestType>>
 
     /**
      * 从数据库加载数据
