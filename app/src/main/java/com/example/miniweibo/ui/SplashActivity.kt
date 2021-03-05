@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.paging.ExperimentalPagingApi
 import com.example.miniweibo.R
 import com.example.miniweibo.sdk.SDKUtil
+import com.example.miniweibo.ui.login.LoginActivity
 
 @ExperimentalPagingApi
 class SplashActivity : AppCompatActivity() {

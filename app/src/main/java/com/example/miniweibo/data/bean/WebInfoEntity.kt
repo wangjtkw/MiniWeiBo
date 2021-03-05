@@ -20,13 +20,13 @@ data class WebInfoEntity(
     val idstr: String,
     //点赞数
     @ColumnInfo(name = "attitudes_count")
-    val attitudesCount: Int?,
+    val attitudesCount: String,
     //中等尺寸图片显示图片
     @ColumnInfo(name = "bmiddle_pic")
     val bmiddlePic: String?,
     //评论数
     @ColumnInfo(name = "comments_count")
-    val commentsCount: Int?,
+    val commentsCount: String,
     //创建时间(时间戳)
     @ColumnInfo(name = "created_at")
     val createdAt: Long,
@@ -52,7 +52,7 @@ data class WebInfoEntity(
     val picUrls: List<String>?,
     //转发数
     @ColumnInfo(name = "reposts_count")
-    val repostsCount: Int?,
+    val repostsCount: String,
     //来源
     @ColumnInfo(name = "source_title")
     val sourceTitle: String?,
@@ -105,7 +105,7 @@ data class WebInfoEntity(
                     val richTextUtil = RichTextUtil()
                     val addressIndexList = richTextUtil.findStr(text, "http")
                     if (addressIndexList.size == 1) {
-                        val end = richTextUtil.findAddressEndIndex(text, addressIndexList[0])
+                        val end = richTextUtil.findAddressEndIndex(text, addressIndexList[0], ' ')
                         contentUrl =
                             text.substring(startIndex = addressIndexList[0], endIndex = end)
                         content = text.substring(startIndex = 0, endIndex = addressIndexList[0] - 1)
@@ -122,9 +122,9 @@ data class WebInfoEntity(
 
                 WebInfoEntity(
                     idstr = idstr,
-                    attitudesCount = attitudesCount,
+                    attitudesCount = "$attitudesCount",
                     bmiddlePic = bmiddlePic?.getEmptyOrDefault { "" },
-                    commentsCount = commentsCount,
+                    commentsCount = "$commentsCount",
                     createdAt = entityCreatedAt,
                     favorited = favorited,
                     isLongText = isLongText,
@@ -133,7 +133,7 @@ data class WebInfoEntity(
                     originalPic = originalPic?.getEmptyOrDefault { "" },
                     picNum = picNum,
                     picUrls = picList,
-                    repostsCount = repostsCount,
+                    repostsCount = "$repostsCount",
                     sourceTitle = sourceTitle,
                     sourceUrl = sourceUrl,
                     text = content,

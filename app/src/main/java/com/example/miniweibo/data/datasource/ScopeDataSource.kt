@@ -1,5 +1,6 @@
 package com.example.miniweibo.data.datasource
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.example.miniweibo.api.ApiEmptyResponse
@@ -53,6 +54,7 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
                     result.removeSource(dbSource)
                     when (response) {
                         is ApiSuccessResponse -> {
+                            Log.d(TAG, "runSuccess")
                             scope.launch(Dispatchers.IO) {
                                 //先将数据保存到数据库，再从数据库拉取，保证唯一稳定数据源
                                 saveCallResult(processResponse(response))
@@ -64,6 +66,7 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
                             }
                         }
                         is ApiEmptyResponse -> {
+                            Log.d(TAG, "runEmpty")
                             scope.launch(Dispatchers.Main) {
                                 result.addSource(loadFromDb()) { newData ->
                                     setValue(Resource.success(newData))
@@ -71,10 +74,14 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
                             }
                         }
                         is ApiErrorResponse -> {
+                            Log.d(TAG, "runError${response.errorMessage}")
                             onFetchFailed()
                             result.addSource(dbSource) { newData ->
                                 setValue(Resource.error(response.errorMessage, newData))
                             }
+                        }
+                        else -> {
+                            Log.d(TAG, "else runv")
                         }
                     }
                 }
@@ -108,7 +115,7 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
     /**
      * 将网络返回数据保存到数据库中
      */
-    protected abstract fun saveCallResult(item: RequestType)
+    protected abstract suspend fun saveCallResult(item: RequestType)
 
     /**
      * 对数据进行处理，方便存储

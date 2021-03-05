@@ -18,17 +18,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_circle_corner_white"
-        app:elevation="1dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        app:elevation="1dp">
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/concern_source_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{webInfo.sourceTitle == null || webInfo.sourceTitle.empty ?View.GONE:View.VISIBLE}"
+            android:visibility="@{webInfo.sourceTitle == null || webInfo.sourceTitle.empty ? View.GONE : View.VISIBLE}"
             app:constraint_referenced_ids="concern_source_from,concern_source_tv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -91,12 +91,47 @@
             android:id="@+id/concern_content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{webInfo.text}"
             android:padding="8dp"
+            android:text="@{webInfo.text}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/concern_head_img" />
 
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/concern_content_tv">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@{webInfo.repostsCount}"
+                app:drawableLeftCompat="@drawable/ic_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{webInfo.commentsCount}"
+                app:drawableLeftCompat="@drawable/ic_comment" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@{webInfo.attitudesCount}"
+                app:drawableLeftCompat="@drawable/ic_thumb" />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

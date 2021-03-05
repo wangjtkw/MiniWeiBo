@@ -32,4 +32,5 @@ class WebInfoTypeConverter {
         return adapter.fromJson(json) ?: mutableListOf("")
     }
 
+
 }

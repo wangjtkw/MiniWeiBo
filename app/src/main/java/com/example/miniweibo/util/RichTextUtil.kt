@@ -1,11 +1,18 @@
 package com.example.miniweibo.util
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.text.style.IconMarginSpan
 import android.util.Log
 import android.widget.TextView
+import com.example.miniweibo.data.db.MiniWeiBoDb
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /*
 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE —— (a,b)
@@ -58,7 +65,7 @@ class RichTextUtil {
         val atIndexList = findIndex(mContent, '@')
         var p = 0
         while (p < atIndexList.size) {
-            val end = findAddressEndIndex(mContent, atIndexList[p])
+            val end = findAddressEndIndex(mContent, atIndexList[p], ' ')
             if (end == (atIndexList[p] + 1)) {
                 p++
                 continue
@@ -88,6 +95,48 @@ class RichTextUtil {
         )
         return this
     }
+
+    suspend fun setEmotion(context: Context, textView: TextView) {
+        check()
+        val emotionIndexList = findIndex(mContent, '[')
+        var p = 0
+        GlobalScope.launch {
+            while (p < emotionIndexList.size) {
+                val end = findAddressEndIndex(mContent, emotionIndexList[p], ']')
+                if (end == (emotionIndexList[p] + 1)) {
+                    p++
+                    continue
+                }
+                val emotion = mContent.substring(emotionIndexList[p], end + 1)
+                getEmotion(emotion, context) { bitmap ->
+                    Log.d(TAG, bitmap.toString())
+                    spannableStringBuilder!!.setSpan(
+                        IconMarginSpan(bitmap, 0),
+                        emotionIndexList[p],
+                        emotionIndexList[p] + 1,
+                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                    )
+                    launch(Dispatchers.Main) {
+                        Log.d(TAG,"run")
+                        textView.text = spannableStringBuilder!!
+                    }
+                }
+                p++
+            }
+
+        }
+    }
+
+    private suspend fun getEmotion(
+        name: String,
+        context: Context,
+        callback: (Bitmap) -> Unit
+    ) {
+        val emotionUtil = EmotionUtil(MiniWeiBoDb.getInstance(context).emotionsDao())
+        val emotionUrl = emotionUtil.getEmotionUrl(name)
+        FrescoUtil.getGitFile(emotionUrl, callback)
+    }
+
 
     fun build(): SpannableStringBuilder {
         check()
@@ -165,10 +214,10 @@ class RichTextUtil {
         return result
     }
 
-    fun findAddressEndIndex(content: String, start: Int): Int {
+    fun findAddressEndIndex(content: String, start: Int, endTarget: Char): Int {
         var p = start
         while (p < content.length) {
-            if (content[p] == ' ') {
+            if (content[p] == endTarget) {
                 return p
             }
             p++

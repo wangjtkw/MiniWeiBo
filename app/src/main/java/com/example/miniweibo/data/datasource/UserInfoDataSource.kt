@@ -5,13 +5,14 @@ import com.example.miniweibo.api.ApiResponse
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.data.bean.Resource
 import com.example.miniweibo.data.bean.UserInfoBean
+import com.example.miniweibo.data.db.MiniWeiBoDb
 import com.example.miniweibo.data.db.UserInfoDao
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 class UserInfoDataSource @Inject constructor(
     private val api: WeiBoService,
-    private val dao: UserInfoDao
+    private val db: MiniWeiBoDb
 ) {
     private val TAG = "UserInfoDataSource"
 
@@ -28,13 +29,13 @@ class UserInfoDataSource @Inject constructor(
             }
 
 
-            override fun loadFromDb() = dao.selectById(uid)
+            override fun loadFromDb() = db.userInfoDao().selectById(uid)
 
             override fun shouldFetch(data: UserInfoBean?): Boolean {
                 return true
             }
 
-            override fun saveCallResult(item: UserInfoBean) = dao.insert(item)
+            override suspend fun saveCallResult(item: UserInfoBean) = db.userInfoDao().insert(item)
 
         }.asLiveData()
 //        Log.d(TAG, result.value?.data.toString())

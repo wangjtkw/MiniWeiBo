@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.constants.PlatformParameters
 import com.example.miniweibo.data.db.AccessTokenDao
+import com.example.miniweibo.data.db.EmotionDao
 import com.example.miniweibo.data.db.MiniWeiBoDb
 import com.example.miniweibo.data.db.UserInfoDao
 import com.example.miniweibo.util.LiveDataCallAdapterFactory
@@ -73,15 +74,19 @@ class AppModel {
     @Singleton
     @Provides
     fun provideDb(application: Application): MiniWeiBoDb {
-        return Room.databaseBuilder(application, MiniWeiBoDb::class.java, "miniweibo.db")
-            .fallbackToDestructiveMigration()//数据库更新时删除数据重新创建
-            .build()
+        return MiniWeiBoDb.getInstance(application)
     }
 
     @Singleton
     @Provides
     fun provideAccessTokenDao(db: MiniWeiBoDb): AccessTokenDao {
         return db.accessTokenDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideEmotionDao(db: MiniWeiBoDb): EmotionDao {
+        return db.emotionsDao()
     }
 
     @Singleton

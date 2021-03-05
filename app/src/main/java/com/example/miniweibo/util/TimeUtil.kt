@@ -1,7 +1,6 @@
 package com.example.miniweibo.util
 
 import android.util.Log
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,6 +16,8 @@ object TimeUtil {
 
     //两天内
     const val TWO_DAY_DIFFER = 172_800
+
+    const val MONTH_DIFFER = 2_592_000
 
     private val TAG = "TimeUtil"
 
@@ -60,6 +61,8 @@ object TimeUtil {
         return "$year-$month-$day $_time"
     }
 
+
+
     /**
      * 根据yyyy-MM-dd hh:mm:ss 格式时间获取时间戳
      * @param parsedTime：yyyy-MM-dd hh:mm:ss 时间
@@ -69,7 +72,6 @@ object TimeUtil {
         val locale = Locale("zh", "CN")
         val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", locale)
         val date = sdf.parse(parsedTime)
-
         return (date?.time ?: 0) / 1000L
     }
 
@@ -79,9 +81,7 @@ object TimeUtil {
      * @return 差距代表
      */
     fun getTimeDifference(oldTimestamp: Long): String {
-        val locale = Locale("zh", "CN")
-        val calendar = Calendar.getInstance(locale)
-        val newTimestamp = calendar.timeInMillis / 1000
+        val newTimestamp = getCurrentTimestamp()
         val differ = newTimestamp - oldTimestamp
         Log.d(TAG, differ.toString())
         return when {
@@ -110,6 +110,15 @@ object TimeUtil {
             differ < MINUTE_DIFFER -> "刚刚"
             else -> ""
         }
+    }
+
+    /**
+     * 获取当前时间戳（秒）
+     */
+    fun getCurrentTimestamp(): Long {
+        val locale = Locale("zh", "CN")
+        val calendar = Calendar.getInstance(locale)
+        return calendar.timeInMillis / 1000
     }
 
     /**

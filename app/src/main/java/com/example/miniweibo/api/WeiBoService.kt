@@ -1,6 +1,7 @@
 package com.example.miniweibo.api
 
 import androidx.lifecycle.LiveData
+import com.example.miniweibo.data.bean.EmotionBeanItem
 import com.example.miniweibo.data.bean.UserInfoBean
 import com.example.miniweibo.data.bean.WebInfoBean
 import com.example.miniweibo.util.MyCall
@@ -28,5 +29,11 @@ interface WeiBoService {
 //            ApiResponse<>
 //            LiveData<ApiResponse<WebInfoBean>>
 
+    //    https://api.weibo.com/2/emotions.json
+    @GET("2/emotions.json")
+    fun getEmotion(
+        @Query("access_token") accessToken: String,
+        @Query("type") type: String
+    ): LiveData<ApiResponse<List<EmotionBeanItem>>>
 
 }
