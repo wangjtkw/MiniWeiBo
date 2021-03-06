@@ -1,4 +1,4 @@
-package com.example.miniweibo.data.bean
+package com.example.miniweibo.data.bean.bean
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -17,7 +17,6 @@ data class WebInfoBean(
     val maxIdStr: String,
     @Json(name = "statuses")
     val statuses: List<Statuse>?,
-
     //是否有未读
     @Json(name = "has_unread")
     val hasUnread: Int,

@@ -1,4 +1,4 @@
-package com.example.miniweibo.data.bean
+package com.example.miniweibo.data.bean.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

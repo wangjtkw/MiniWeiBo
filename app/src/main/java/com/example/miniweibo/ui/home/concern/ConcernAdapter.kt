@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.paging.PagingDataAdapter
 import com.example.miniweibo.R
-import com.example.miniweibo.data.bean.WebInfoEntity
+import com.example.miniweibo.data.bean.entity.WebInfoEntity
 
 class ConcernAdapter :
     PagingDataAdapter<WebInfoEntity, ConcernViewHolder>(WebInfoEntity.diffCallback) {

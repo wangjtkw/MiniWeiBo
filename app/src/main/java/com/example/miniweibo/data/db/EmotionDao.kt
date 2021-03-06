@@ -5,10 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.miniweibo.data.bean.EmotionBeanItem
-import com.example.miniweibo.data.bean.EmotionEntity
-import com.example.miniweibo.data.bean.UserInfoBean
-import com.example.miniweibo.data.bean.WebInfoEntity
+import com.example.miniweibo.data.bean.entity.EmotionEntity
 
 @Dao
 interface EmotionDao {
@@ -17,7 +14,7 @@ interface EmotionDao {
     suspend fun insertWebInfo(webInfoList: List<EmotionEntity>)
 
     @Query("select * from emotion_entity where value = :name")
-    suspend fun selectByName(name: String): EmotionEntity
+     fun selectByName(name: String): EmotionEntity
 
     @Query("select * from emotion_entity")
     fun selectAll(): LiveData<List<EmotionEntity>>

@@ -2,7 +2,7 @@ package com.example.miniweibo.sdk
 
 import android.content.Context
 import android.util.Log
-import com.example.miniweibo.data.bean.AccessTokenBean
+import com.example.miniweibo.data.bean.entity.AccessTokenEntity
 import com.example.miniweibo.constants.PlatformParameters
 import com.sina.weibo.sdk.auth.AuthInfo
 import com.sina.weibo.sdk.openapi.IWBAPI
@@ -35,7 +35,7 @@ class SDKUtil private constructor(context: Context) {
         return mWBAPI!!
     }
 
-    fun getAccessTokenBean(): AccessTokenBean {
+    fun getAccessTokenBean(): AccessTokenEntity {
         return if (sdkHelper != null) {
             sdkHelper!!.sdkSpUtil.getAccessTokenBean()
         } else {
@@ -64,7 +64,7 @@ class SDKUtil private constructor(context: Context) {
         mWBAPI?.authorizeClient(sdkHelper!!.wbAuthListener)
     }
 
-    fun setOnCompleteCallback(callback: (AccessTokenBean) -> Unit) {
+    fun setOnCompleteCallback(callback: (AccessTokenEntity) -> Unit) {
         sdkHelper!!.wbAuthListener.onCompleteCallback = callback
     }
 

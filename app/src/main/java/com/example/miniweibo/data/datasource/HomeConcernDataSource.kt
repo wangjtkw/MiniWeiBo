@@ -1,11 +1,11 @@
 package com.example.miniweibo.data.datasource
 
-import androidx.lifecycle.LiveData
-import androidx.paging.*
-import com.example.miniweibo.api.ApiResponse
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.miniweibo.api.WeiBoService
-import com.example.miniweibo.data.bean.WebInfoBean
-import com.example.miniweibo.data.bean.WebInfoEntity
+import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class HomeConcernDataSource @Inject constructor(
     fun fetchPokemonList(): Flow<PagingData<WebInfoEntity>> {
         val pagingConfig = PagingConfig(
             // 每页显示的数据的大小
-            pageSize = 20,
+            pageSize = 15,
 
             // 开启占位符
             enablePlaceholders = true,
@@ -33,7 +33,7 @@ class HomeConcernDataSource @Inject constructor(
              * internal const val DEFAULT_INITIAL_PAGE_MULTIPLIER = 3
              * val initialLoadSize: Int = pageSize * DEFAULT_INITIAL_PAGE_MULTIPLIER
              */
-            initialLoadSize = 20
+            initialLoadSize = 45
         )
         return Pager(
             config = pagingConfig,

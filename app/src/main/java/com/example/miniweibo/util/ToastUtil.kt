@@ -1,5 +1,6 @@
 package com.example.miniweibo.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
 import com.example.miniweibo.MyApplication
@@ -12,6 +13,7 @@ class ToastUtil @Inject constructor(val context: Context) {
     private var TOAST_DURATION = 2000
     private var toast: Toast? = null
 
+    @SuppressLint("ShowToast")
     fun makeToast(message: CharSequence) {
         curShowMsg = message.toString()
         val currentShowTime = System.currentTimeMillis()

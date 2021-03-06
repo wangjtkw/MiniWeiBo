@@ -75,7 +75,7 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
                         }
                         is ApiErrorResponse -> {
                             Log.d(TAG, "runError${response.errorMessage}")
-                            onFetchFailed()
+                            onFetchFailed(response)
                             result.addSource(dbSource) { newData ->
                                 setValue(Resource.error(response.errorMessage, newData))
                             }
@@ -125,5 +125,5 @@ abstract class ScopeDataSource<RequestType, ResultType>(private val scope: Corou
     /**
      * 进行异常处理
      */
-    protected open fun onFetchFailed() {}
+    protected open fun onFetchFailed(response: ApiErrorResponse<RequestType>) {}
 }

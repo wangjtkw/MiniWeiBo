@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import com.example.miniweibo.api.ApiResponse
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.data.bean.Resource
-import com.example.miniweibo.data.bean.UserInfoBean
+import com.example.miniweibo.data.bean.entity.UserInfoEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
-import com.example.miniweibo.data.db.UserInfoDao
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
@@ -20,10 +19,10 @@ class UserInfoDataSource @Inject constructor(
         scope: CoroutineScope,
         uid: String,
         access_token: String
-    ): LiveData<Resource<UserInfoBean>> {
+    ): LiveData<Resource<UserInfoEntity>> {
 
-        val result = object : ScopeDataSource<UserInfoBean, UserInfoBean>(scope) {
-            override suspend fun loadData(): LiveData<ApiResponse<UserInfoBean>> {
+        val result = object : ScopeDataSource<UserInfoEntity, UserInfoEntity>(scope) {
+            override suspend fun loadData(): LiveData<ApiResponse<UserInfoEntity>> {
 //                api.getHomeTimelineList(access_token, 1)
                 return api.getUserInfo(access_token, uid)
             }
@@ -31,11 +30,11 @@ class UserInfoDataSource @Inject constructor(
 
             override fun loadFromDb() = db.userInfoDao().selectById(uid)
 
-            override fun shouldFetch(data: UserInfoBean?): Boolean {
+            override fun shouldFetch(data: UserInfoEntity?): Boolean {
                 return true
             }
 
-            override suspend fun saveCallResult(item: UserInfoBean) = db.userInfoDao().insert(item)
+            override suspend fun saveCallResult(item: UserInfoEntity) = db.userInfoDao().insert(item)
 
         }.asLiveData()
 //        Log.d(TAG, result.value?.data.toString())

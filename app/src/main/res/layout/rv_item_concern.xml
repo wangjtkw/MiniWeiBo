@@ -7,11 +7,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.example.miniweibo.data.bean.WebInfoEntity" />
+        <import type="com.example.miniweibo.data.bean.entity.WebInfoEntity" />
 
         <variable
             name="webInfo"
-            type="WebInfoEntity" />
+            type="com.example.miniweibo.data.bean.entity.WebInfoEntity" />
 
     </data>
 
@@ -92,7 +92,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="@{webInfo.text}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/concern_head_img" />

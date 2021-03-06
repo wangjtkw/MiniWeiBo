@@ -2,17 +2,17 @@ package com.example.miniweibo.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.miniweibo.data.bean.UserInfoBean
+import com.example.miniweibo.data.bean.entity.UserInfoEntity
 
 @Dao
 interface UserInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(userInfoBean: UserInfoBean)
+    fun insert(userInfoEntity: UserInfoEntity)
 
     @Delete
-    fun delete(userInfoBean: UserInfoBean)
+    fun delete(userInfoEntity: UserInfoEntity)
 
-    @Query("select * from user_info_bean where id = :id")
-    fun selectById(id: String): LiveData<UserInfoBean>
+    @Query("select * from user_info_entity where id = :id")
+    fun selectById(id: String): LiveData<UserInfoEntity>
 }

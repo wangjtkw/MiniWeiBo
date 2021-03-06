@@ -50,9 +50,8 @@ class MineFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userViewModel.user.observe(viewLifecycleOwner) {
-            binding!!.userInfoBean = it
+            binding!!.userInfoEntity = it.data
         }
-
     }
 
     companion object {

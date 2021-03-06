@@ -1,4 +1,4 @@
-package com.example.miniweibo.data.bean
+package com.example.miniweibo.data.bean.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -8,8 +8,8 @@ import com.squareup.moshi.JsonClass
 
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "user_info_bean")
-data class UserInfoBean(
+@Entity(tableName = "user_info_entity")
+data class UserInfoEntity(
     //用户UID
     @PrimaryKey
     val id: String,

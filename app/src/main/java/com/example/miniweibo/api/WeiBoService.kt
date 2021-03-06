@@ -1,11 +1,9 @@
 package com.example.miniweibo.api
 
 import androidx.lifecycle.LiveData
-import com.example.miniweibo.data.bean.EmotionBeanItem
-import com.example.miniweibo.data.bean.UserInfoBean
-import com.example.miniweibo.data.bean.WebInfoBean
-import com.example.miniweibo.util.MyCall
-import kotlinx.coroutines.Deferred
+import com.example.miniweibo.data.bean.bean.EmotionBeanItem
+import com.example.miniweibo.data.bean.entity.UserInfoEntity
+import com.example.miniweibo.data.bean.bean.WebInfoBean
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,7 +17,7 @@ interface WeiBoService {
     fun getUserInfo(
         @Query("access_token") accessToken: String,
         @Query("uid") uid: String
-    ): LiveData<ApiResponse<UserInfoBean>>
+    ): LiveData<ApiResponse<UserInfoEntity>>
 
     @GET("2/statuses/home_timeline.json")
     suspend fun getHomeTimelineList(

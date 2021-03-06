@@ -10,13 +10,18 @@ import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.paging.map
 import com.example.miniweibo.R
 import com.example.miniweibo.databinding.FragmentHomeConcernBinding
 import com.example.miniweibo.databinding.FragmentMineBinding
+import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.ui.mine.MineViewModel
+import com.example.miniweibo.util.ToastUtil
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -37,7 +42,6 @@ class HomeConcernFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        Log.d(TAG,"Run")
     }
 
     override fun onCreateView(
@@ -55,19 +59,35 @@ class HomeConcernFragment : Fragment() {
         return binding?.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!requireContext().isConnectedNetwork()) {
+            ToastUtil(requireContext()).makeToast("当前网络未连接！")
+        }
+    }
+
     private fun init() {
         require(binding != null) { "binding is null" }
-        mAdapter = ConcernAdapter()
-        binding!!.concernRv.apply {
-            adapter = mAdapter
-        }
-        homeConcernViewModel.postOfData().observe(viewLifecycleOwner) {
-            it.map { entity ->
-                Log.d(TAG, entity.toString())
-            }
+        initRV()
+        initSwipeToRefresh()
+    }
 
-            mAdapter!!.submitData(lifecycle, it)
+    private fun initRV() {
+        mAdapter = ConcernAdapter()
+        binding!!.concernRv.adapter = mAdapter
+        homeConcernViewModel
+            .postOfData()
+            .observe(viewLifecycleOwner) { mAdapter!!.submitData(lifecycle, it) }
+
+        lifecycleScope.launchWhenCreated {
+            mAdapter!!.loadStateFlow.collectLatest { loadStates ->
+                binding!!.concernSwipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+            }
         }
+    }
+
+    private fun initSwipeToRefresh() {
+        binding!!.concernSwipeRefresh.setOnRefreshListener { mAdapter!!.refresh() }
     }
 
 }

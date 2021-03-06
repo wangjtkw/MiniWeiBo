@@ -1,8 +1,6 @@
 package com.example.miniweibo.api
 
-import com.squareup.moshi.JsonClass
 import retrofit2.Response
-import java.io.Serializable
 
 //利用密封类来对网络请求结果进行分类，供后续使用
 

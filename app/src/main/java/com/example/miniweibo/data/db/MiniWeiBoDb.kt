@@ -1,19 +1,20 @@
 package com.example.miniweibo.data.db
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.miniweibo.data.bean.*
+import com.example.miniweibo.data.bean.entity.*
 
 @Database(
     entities = [
-        AccessTokenBean::class,
-        UserInfoBean::class,
+        AccessTokenEntity::class,
+        UserInfoEntity::class,
         WebInfoEntity::class,
-        EmotionEntity::class],
+        RemoteKeyEntity::class,
+        EmotionEntity::class,
+    ],
     version = 1,
     exportSchema = false
 )
@@ -26,6 +27,8 @@ abstract class MiniWeiBoDb : RoomDatabase() {
     abstract fun webInfoDao(): WebInfoDao
 
     abstract fun emotionsDao(): EmotionDao
+
+    abstract fun remoteKeyDao(): RemoteKeyDao
 
     companion object {
 

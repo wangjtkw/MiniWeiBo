@@ -1,16 +1,13 @@
-package com.example.miniweibo.data.bean
+package com.example.miniweibo.data.bean.entity
 
 import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.*
+import com.example.miniweibo.data.bean.bean.Statuse
 import com.example.miniweibo.ext.getEmptyOrDefault
 import com.example.miniweibo.util.RegExUtil
 import com.example.miniweibo.util.RichTextUtil
 import com.example.miniweibo.util.TimeUtil
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.regex.Pattern
 
 @Entity(tableName = "web_info_entity")
 data class WebInfoEntity(

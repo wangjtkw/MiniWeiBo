@@ -1,22 +1,18 @@
 package com.example.miniweibo.data.datasource
 
 import android.util.Log
-import androidx.lifecycle.asFlow
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.miniweibo.api.ApiEmptyResponse
-import com.example.miniweibo.api.ApiErrorResponse
-import com.example.miniweibo.api.ApiSuccessResponse
 import com.example.miniweibo.api.WeiBoService
-import com.example.miniweibo.data.bean.WebInfoEntity
+import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
+import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
 import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.sdk.SDKUtil
 import com.example.miniweibo.util.AppHelper
-import kotlinx.coroutines.Deferred
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -33,17 +29,22 @@ class WebInfoRemoteMediator(
     ): MediatorResult {
         try {
             val webInfoDao = db.webInfoDao()
-
+            val remoteKeyDao = db.remoteKeyDao()
             val loadKey = when (loadType) {
                 LoadType.REFRESH -> null
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
-                        ?: return MediatorResult.Success(
+                    val remoteKey = db.withTransaction {
+                        remoteKeyDao.getKeyByType(RemoteKeyEntity.TYPE_CONCERN)
+                    }
+
+                    if (remoteKey.nextPageKey == null) {
+                        Log.d(TAG, "end 1")
+                        return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
-
-                    lastItem.page
+                    }
+                    remoteKey.nextPageKey
                 }
             }
             if (!AppHelper.mContext.isConnectedNetwork()) {
@@ -58,7 +59,7 @@ class WebInfoRemoteMediator(
                 page
             )
             if (result == null) {
-                Log.d(TAG, "true1")
+                Log.d(TAG, "true 1")
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
             if (result.statuses.isNullOrEmpty()) {
@@ -75,7 +76,9 @@ class WebInfoRemoteMediator(
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     webInfoDao.clearWebInfo()
+                    remoteKeyDao.deleteByType(RemoteKeyEntity.TYPE_CONCERN)
                 }
+                remoteKeyDao.insert(RemoteKeyEntity(RemoteKeyEntity.TYPE_CONCERN, page + 1))
                 webInfoDao.insertWebInfo(items)
             }
             return MediatorResult.Success(endOfPaginationReached = false)

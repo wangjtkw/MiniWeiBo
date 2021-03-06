@@ -2,21 +2,21 @@ package com.example.miniweibo.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.miniweibo.data.bean.AccessTokenBean
+import com.example.miniweibo.data.bean.entity.AccessTokenEntity
 
 @Dao
 interface AccessTokenDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(accessTokenBean: AccessTokenBean)
+    fun insert(accessTokenEntity: AccessTokenEntity)
 
     @Update
-    fun update(accessTokenBean: AccessTokenBean)
+    fun update(accessTokenEntity: AccessTokenEntity)
 
-    @Query("select * from access_token_bean")
-    fun select(): LiveData<AccessTokenBean>
+    @Query("select * from access_token_entity")
+    fun select(): LiveData<AccessTokenEntity>
 
     @Delete
-    fun delete(accessTokenBean: AccessTokenBean)
+    fun delete(accessTokenEntity: AccessTokenEntity)
 
 }

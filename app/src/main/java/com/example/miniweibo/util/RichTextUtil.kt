@@ -3,16 +3,19 @@ package com.example.miniweibo.util
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.IconMarginSpan
+import android.text.style.ImageSpan
 import android.util.Log
-import android.widget.TextView
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import com.example.miniweibo.MyApplication
+import com.example.miniweibo.R
 import com.example.miniweibo.data.db.MiniWeiBoDb
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+
 
 /*
 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE —— (a,b)
@@ -65,10 +68,13 @@ class RichTextUtil {
         val atIndexList = findIndex(mContent, '@')
         var p = 0
         while (p < atIndexList.size) {
-            val end = findAddressEndIndex(mContent, atIndexList[p], ' ')
+            var end = findAddressEndIndex(mContent, atIndexList[p], ' ')
             if (end == (atIndexList[p] + 1)) {
                 p++
                 continue
+            }
+            if (end == -1) {
+                end = mContent.length
             }
             spannableStringBuilder!!.setSpan(
                 ForegroundColorSpan(Color.RED),
@@ -96,45 +102,52 @@ class RichTextUtil {
         return this
     }
 
-    suspend fun setEmotion(context: Context, textView: TextView) {
-        check()
-        val emotionIndexList = findIndex(mContent, '[')
-        var p = 0
-        GlobalScope.launch {
-            while (p < emotionIndexList.size) {
-                val end = findAddressEndIndex(mContent, emotionIndexList[p], ']')
-                if (end == (emotionIndexList[p] + 1)) {
-                    p++
-                    continue
-                }
-                val emotion = mContent.substring(emotionIndexList[p], end + 1)
-                getEmotion(emotion, context) { bitmap ->
-                    Log.d(TAG, bitmap.toString())
-                    spannableStringBuilder!!.setSpan(
-                        IconMarginSpan(bitmap, 0),
-                        emotionIndexList[p],
-                        emotionIndexList[p] + 1,
-                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                    )
-                    launch(Dispatchers.Main) {
-                        Log.d(TAG,"run")
-                        textView.text = spannableStringBuilder!!
-                    }
-                }
-                p++
-            }
-
+    fun setEmotionTest(context: Context): RichTextUtil {
+        val drawable: Drawable? =
+            ContextCompat.getDrawable(context, R.drawable.ic_share)
+        if (drawable == null) {
+            Log.d(TAG, "drawable is null")
+            return this
         }
+        drawable.setBounds(0, 0, 42, 42)
+        val imageSpan = ImageSpan(drawable)
+        spannableStringBuilder!!.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        return this
     }
 
-    private suspend fun getEmotion(
-        name: String,
+    fun setEmotion(
         context: Context,
-        callback: (Bitmap) -> Unit
-    ) {
+//                           callback: (SpannableStringBuilder) -> Unit
+    ): RichTextUtil {
+        check()
+        val emotionIndexList = findIndex(mContent, '[')
+        emotionIndexList.map { index ->
+            val end = findAddressEndIndex(mContent, index, ']')
+            if (end != -1) {
+                val emotion = mContent.substring(index, end + 1)
+                val bitmap = getEmotion(emotion, context)
+                Log.d(TAG, "表情:$emotion bitmap:$bitmap")
+                Log.d(TAG, "表情时间 ${System.currentTimeMillis()}")
+                spannableStringBuilder!!.setSpan(
+                    ImageSpan(context, bitmap),
+                    index,
+                    end + 1,
+                    Spanned.SPAN_INCLUSIVE_INCLUSIVE
+                )
+            }
+        }
+//        callback(spannableStringBuilder!!)
+        return this
+    }
+
+
+    private fun getEmotion(
+        name: String,
+        context: Context
+    ): Bitmap {
         val emotionUtil = EmotionUtil(MiniWeiBoDb.getInstance(context).emotionsDao())
         val emotionUrl = emotionUtil.getEmotionUrl(name)
-        FrescoUtil.getGitFile(emotionUrl, callback)
+        return PicUtil.loadPic(context, emotionUrl)
     }
 
 
@@ -222,7 +235,7 @@ class RichTextUtil {
             }
             p++
         }
-        return p
+        return -1
     }
 
     private fun check() {

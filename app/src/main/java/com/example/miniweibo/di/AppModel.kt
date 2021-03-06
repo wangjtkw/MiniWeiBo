@@ -2,7 +2,6 @@ package com.example.miniweibo.di
 
 import android.app.Application
 import android.util.Log
-import androidx.room.Room
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.constants.PlatformParameters
 import com.example.miniweibo.data.db.AccessTokenDao
@@ -10,8 +9,6 @@ import com.example.miniweibo.data.db.EmotionDao
 import com.example.miniweibo.data.db.MiniWeiBoDb
 import com.example.miniweibo.data.db.UserInfoDao
 import com.example.miniweibo.util.LiveDataCallAdapterFactory
-import com.example.miniweibo.util.MyConverterFactory
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

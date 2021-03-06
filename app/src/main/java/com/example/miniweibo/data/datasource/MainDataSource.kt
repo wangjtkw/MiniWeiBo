@@ -2,11 +2,15 @@ package com.example.miniweibo.data.datasource
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.miniweibo.api.ApiErrorResponse
 import com.example.miniweibo.api.ApiResponse
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.data.bean.*
+import com.example.miniweibo.data.bean.bean.EmotionBeanItem
+import com.example.miniweibo.data.bean.entity.EmotionEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
-import com.example.miniweibo.util.FrescoUtil
+import com.example.miniweibo.util.AppHelper
+import com.example.miniweibo.util.PicUtil
 import com.example.miniweibo.util.TimeUtil
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
@@ -31,7 +35,7 @@ class LoginDataSource @Inject constructor(
                 val dbList = ArrayList<EmotionEntity>()
                 Log.d(TAG, "run")
                 item.map {
-                    FrescoUtil.downloadPic(it.url)
+                    PicUtil.preloadPic(AppHelper.mContext, it.url)
                     val entity = EmotionEntity(it.icon, it.value, TimeUtil.getCurrentTimestamp())
                     dbList.add(entity)
                 }
@@ -52,8 +56,9 @@ class LoginDataSource @Inject constructor(
                 return false
             }
 
-            override fun onFetchFailed() {
-                super.onFetchFailed()
+            override fun onFetchFailed(response: ApiErrorResponse<List<EmotionBeanItem>>) {
+                Log.d(TAG, "$TAG: ${response.errorMessage}")
+                super.onFetchFailed(response)
             }
         }.asLiveData()
     }

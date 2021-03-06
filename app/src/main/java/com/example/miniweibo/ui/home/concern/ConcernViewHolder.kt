@@ -1,14 +1,13 @@
 package com.example.miniweibo.ui.home.concern
 
-import android.text.Html
-import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.util.Log
 import android.view.View
 import com.example.miniweibo.common.DataBindingViewHolder
-import com.example.miniweibo.data.bean.WebInfoEntity
+import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.databinding.RvItemConcernBinding
 import com.example.miniweibo.util.RichTextUtil
 import com.example.miniweibo.util.TimeUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -19,12 +18,27 @@ class ConcernViewHolder(view: View) : DataBindingViewHolder<WebInfoEntity>(view)
     override fun bindData(data: WebInfoEntity, position: Int) {
         mBinding.webInfo = data
         mBinding.concernTimeTv.text = TimeUtil.getTimeDifference(data.createdAt)
-        val content = RichTextUtil()
-            .init(data.text!!)
-            .setSharp()
-            .setAt()
-            .setAllContent()
-        mBinding.concernContentTv.text = content.build()
+        GlobalScope.launch {
+            val content = RichTextUtil()
+                .init(data.text!!)
+                .setSharp()
+                .setAt()
+                .setAllContent()
+                .setEmotion(view.context)
+                .build()
+            launch(Dispatchers.Main) {
+                Log.d(TAG, "执行时间 ${System.currentTimeMillis()} content：$content")
+                mBinding.concernContentTv.text = content
+            }
+
+//            content.setEmotion(view.context) { spannableStringBuilder ->
+//                launch(Dispatchers.Main) {
+//                    Log.d(TAG, "执行时间 ${System.currentTimeMillis()}")
+//                    mBinding.concernContentTv.text = spannableStringBuilder
+//                }
+//            }
+        }
+
 
 //        Html.fromHtml()
 //        FROM_HTML_MODE_COMPACT：html块元素之间使用一个换行符分隔

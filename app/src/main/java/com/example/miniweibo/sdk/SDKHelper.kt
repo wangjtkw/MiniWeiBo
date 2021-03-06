@@ -2,7 +2,7 @@ package com.example.miniweibo.sdk
 
 import android.content.Context
 import android.util.Log
-import com.example.miniweibo.data.bean.AccessTokenBean
+import com.example.miniweibo.data.bean.entity.AccessTokenEntity
 import com.sina.weibo.sdk.auth.Oauth2AccessToken
 import com.sina.weibo.sdk.auth.WbAuthListener
 import com.sina.weibo.sdk.common.UiError
@@ -14,27 +14,27 @@ class SDKHelper constructor(context: Context) {
 
     inner class WbAuthListenerImpl : WbAuthListener {
 
-        var onCompleteCallback: (AccessTokenBean) -> Unit = {
+        var onCompleteCallback: (AccessTokenEntity) -> Unit = {
             Log.d(TAG, "未切换")
         }
 
         private val TAG = "WbAuthListenerImpl"
 
         override fun onComplete(p0: Oauth2AccessToken?) {
-            var accessTokenBean: AccessTokenBean?
+            var accessTokenEntity: AccessTokenEntity?
             p0?.apply {
-                accessTokenBean =
-                    AccessTokenBean(
+                accessTokenEntity =
+                    AccessTokenEntity(
                         uid = uid,
                         userName = screenName,
                         accessToken = accessToken,
                         expiresIn = expiresTime,
                         refreshToken = refreshToken
                     )
-                sdkSpUtil.save(accessTokenBean!!)
-                onCompleteCallback(accessTokenBean!!)
+                sdkSpUtil.save(accessTokenEntity!!)
+                onCompleteCallback(accessTokenEntity!!)
                 Log.d(TAG, "onCompleteCallback ----> $onCompleteCallback")
-                Log.d(TAG, "onComplete ----> $accessTokenBean")
+                Log.d(TAG, "onComplete ----> $accessTokenEntity")
             }
         }
 
