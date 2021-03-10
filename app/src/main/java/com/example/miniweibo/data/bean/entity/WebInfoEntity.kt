@@ -75,14 +75,15 @@ data class WebInfoEntity(
     //名称
     @ColumnInfo(name = "name")
     val name: String?,
-    val page: Int
+    val page: Int,
+    val type: String
 ) {
 
 
     companion object {
         private val TAG = "WebInfoEntity"
 
-        fun convert2WebInfoEntity(statuse: Statuse, page: Int): WebInfoEntity {
+        fun convert2WebInfoEntity(statuse: Statuse, page: Int, type: String): WebInfoEntity {
             return statuse.run {
                 val picList = mutableListOf<String>()
 
@@ -101,11 +102,15 @@ data class WebInfoEntity(
                 if (text != null) {
                     val richTextUtil = RichTextUtil()
                     val addressIndexList = richTextUtil.findStr(text, "http")
-                    if (addressIndexList.size == 1) {
-                        val end = richTextUtil.findAddressEndIndex(text, addressIndexList[0], ' ')
-                        contentUrl =
-                            text.substring(startIndex = addressIndexList[0], endIndex = end)
-                        content = text.substring(startIndex = 0, endIndex = addressIndexList[0] - 1)
+                    addressIndexList.map { index ->
+                        if (richTextUtil.isEndAddress(text, index)) {
+                            val end =
+                                richTextUtil.findAddressEndIndex(text, addressIndexList[0], ' ')
+                            contentUrl =
+                                text.substring(startIndex = addressIndexList[0], endIndex = end)
+                            content =
+                                text.substring(startIndex = 0, endIndex = addressIndexList[0] - 1)
+                        }
                     }
                 }
                 if (content.endsWith("全文：")) {
@@ -140,7 +145,8 @@ data class WebInfoEntity(
                     avatarHd = user?.avatarHd ?: "",
                     name = user?.name ?: "",
                     page = page,
-                    contentUrl = contentUrl
+                    contentUrl = contentUrl,
+                    type = type
                 )
             }
         }

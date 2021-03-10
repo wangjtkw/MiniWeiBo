@@ -88,7 +88,7 @@ object TimeUtil {
             differ > TWO_DAY_DIFFER -> {
                 val month = getDateByTimestamp(oldTimestamp).get(Calendar.MONTH)
                 val day = getDateByTimestamp(oldTimestamp).get(Calendar.DAY_OF_MONTH)
-                "$month-$day"
+                "${month}月${day}日"
             }
             differ in (DAY_DIFFER + 1) until TWO_DAY_DIFFER -> {
                 val hour = getDateByTimestamp(oldTimestamp).get(Calendar.HOUR_OF_DAY)

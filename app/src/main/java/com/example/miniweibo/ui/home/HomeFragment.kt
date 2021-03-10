@@ -11,6 +11,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.viewpager2.widget.ViewPager2
 import com.example.miniweibo.R
 import com.example.miniweibo.common.ViewPagerAdapter
+import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
 import com.example.miniweibo.databinding.FragmentHomeBinding
 import com.example.miniweibo.ui.home.concern.HomeConcernFragment
 import com.example.miniweibo.ui.home.mine.HomeMineFragment
@@ -44,8 +45,8 @@ class HomeFragment : Fragment() {
 
     private fun initViewPager() {
         val fragmentList = listOf(
-            HomeConcernFragment(),
-            HomeMineFragment.newInstance("1", "1")
+            HomeConcernFragment.newInstance(RemoteKeyEntity.TYPE_CONCERN),
+            HomeConcernFragment.newInstance(RemoteKeyEntity.TYPE_OTHER)
         )
         val mAdapter = ViewPagerAdapter(fragmentList, requireActivity())
         binding!!.homeVp.apply {

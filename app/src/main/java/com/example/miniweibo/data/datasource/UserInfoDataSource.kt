@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import com.example.miniweibo.api.ApiResponse
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.data.bean.Resource
+import com.example.miniweibo.data.bean.bean.UserInfoBean
 import com.example.miniweibo.data.bean.entity.UserInfoEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
+import com.example.miniweibo.ext.isConnectedNetwork
+import com.example.miniweibo.util.AppHelper
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
@@ -21,9 +24,8 @@ class UserInfoDataSource @Inject constructor(
         access_token: String
     ): LiveData<Resource<UserInfoEntity>> {
 
-        val result = object : ScopeDataSource<UserInfoEntity, UserInfoEntity>(scope) {
-            override suspend fun loadData(): LiveData<ApiResponse<UserInfoEntity>> {
-//                api.getHomeTimelineList(access_token, 1)
+        val result = object : ScopeDataSource<UserInfoBean, UserInfoEntity>(scope) {
+            override suspend fun loadData(): LiveData<ApiResponse<UserInfoBean>> {
                 return api.getUserInfo(access_token, uid)
             }
 
@@ -31,10 +33,16 @@ class UserInfoDataSource @Inject constructor(
             override fun loadFromDb() = db.userInfoDao().selectById(uid)
 
             override fun shouldFetch(data: UserInfoEntity?): Boolean {
-                return true
+                return AppHelper.mContext.isConnectedNetwork()
             }
 
-            override suspend fun saveCallResult(item: UserInfoEntity) = db.userInfoDao().insert(item)
+            override suspend fun saveCallResult(item: UserInfoBean) {
+                if (item.id.isEmpty()) {
+                    return
+                }
+                db.userInfoDao().insert(UserInfoEntity.convert2UserInfoEntity(item))
+            }
+
 
         }.asLiveData()
 //        Log.d(TAG, result.value?.data.toString())

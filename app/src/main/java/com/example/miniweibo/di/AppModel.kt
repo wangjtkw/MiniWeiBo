@@ -2,6 +2,7 @@ package com.example.miniweibo.di
 
 import android.app.Application
 import android.util.Log
+import com.example.miniweibo.api.ImgService
 import com.example.miniweibo.api.WeiBoService
 import com.example.miniweibo.constants.PlatformParameters
 import com.example.miniweibo.data.db.AccessTokenDao
@@ -55,7 +56,19 @@ class AppModel {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): WeiBoService {
+    fun provideImgService(okHttpClient: OkHttpClient): ImgService {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(PlatformParameters.IMG_BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .build()
+            .create(ImgService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideWebService(okHttpClient: OkHttpClient, moshi: Moshi): WeiBoService {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(PlatformParameters.BASE_URL)

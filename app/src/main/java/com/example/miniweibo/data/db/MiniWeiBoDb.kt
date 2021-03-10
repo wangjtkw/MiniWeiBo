@@ -30,6 +30,8 @@ abstract class MiniWeiBoDb : RoomDatabase() {
 
     abstract fun remoteKeyDao(): RemoteKeyDao
 
+    abstract fun imgDao(): ImgDao
+
     companion object {
 
         @Volatile

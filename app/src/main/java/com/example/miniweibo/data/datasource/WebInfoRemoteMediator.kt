@@ -7,6 +7,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.miniweibo.api.WeiBoService
+import com.example.miniweibo.data.bean.bean.WebInfoBean
 import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
 import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
@@ -19,7 +20,8 @@ import java.io.IOException
 @OptIn(ExperimentalPagingApi::class)
 class WebInfoRemoteMediator(
     val api: WeiBoService,
-    val db: MiniWeiBoDb
+    val db: MiniWeiBoDb,
+    val type: String
 ) : RemoteMediator<Int, WebInfoEntity>() {
     private val TAG = "WebInfoRemoteMediator"
 
@@ -34,9 +36,21 @@ class WebInfoRemoteMediator(
                 LoadType.REFRESH -> null
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    val remoteKey = db.withTransaction {
-                        remoteKeyDao.getKeyByType(RemoteKeyEntity.TYPE_CONCERN)
+
+                    var remoteKey: RemoteKeyEntity? = null
+                    when (type) {
+                        RemoteKeyEntity.TYPE_CONCERN -> {
+                            remoteKey = db.withTransaction {
+                                remoteKeyDao.getKeyByType(RemoteKeyEntity.TYPE_CONCERN)
+                            }
+                        }
+                        else -> {
+                            remoteKey = db.withTransaction {
+                                remoteKeyDao.getKeyByType(type)
+                            }
+                        }
                     }
+
 
                     if (remoteKey.nextPageKey == null) {
                         Log.d(TAG, "end 1")
@@ -52,12 +66,22 @@ class WebInfoRemoteMediator(
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
             val page = loadKey ?: 1
-            Log.d(TAG, "PAGE$page")
+            var result: WebInfoBean? = null
+            val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
+            result = when (type) {
+                RemoteKeyEntity.TYPE_CONCERN -> {
+                    api.getHomeTimelineList(
+                        accessToken,
+                        page
+                    )
+                }
+                else -> {
+                    api.getMineTimelineList(
+                        accessToken, type, page
+                    )
+                }
+            }
 
-            val result = api.getHomeTimelineList(
-                SDKUtil.getSDKUtil().getAccessTokenBean().accessToken,
-                page
-            )
             if (result == null) {
                 Log.d(TAG, "true 1")
                 return MediatorResult.Success(endOfPaginationReached = true)
@@ -66,8 +90,8 @@ class WebInfoRemoteMediator(
                 Log.d(TAG, "true2")
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
-            val items = result.statuses.map {
-                WebInfoEntity.convert2WebInfoEntity(it, page + 1)
+            val items = result.statuses!!.map {
+                WebInfoEntity.convert2WebInfoEntity(it, page + 1, type)
             }
             if (items.isNullOrEmpty()) {
                 Log.d(TAG, "true3")
@@ -75,51 +99,14 @@ class WebInfoRemoteMediator(
             }
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    webInfoDao.clearWebInfo()
-                    remoteKeyDao.deleteByType(RemoteKeyEntity.TYPE_CONCERN)
+                    webInfoDao.clearWebInfoByType(type)
+                    remoteKeyDao.deleteByType(type)
                 }
-                remoteKeyDao.insert(RemoteKeyEntity(RemoteKeyEntity.TYPE_CONCERN, page + 1))
+                remoteKeyDao.insert(RemoteKeyEntity(type, page + 1))
                 webInfoDao.insertWebInfo(items)
             }
             return MediatorResult.Success(endOfPaginationReached = false)
 
-
-//
-//            var endOfPaginationReached = true
-//            Log.d(TAG, "运行")
-//            when (result) {
-//                is ApiSuccessResponse -> {
-//                    endOfPaginationReached = result.body.statuses.isNullOrEmpty()
-//                    val items = result.body.statuses?.map {
-//                        WebInfoEntity.convert2WebInfoEntity(it, page + 1)
-//                    }
-//                    Log.d(TAG, "运行${items!![0].bmiddlePic}")
-//                    if (items.isNullOrEmpty()) {
-//                        endOfPaginationReached = true
-//                    }
-//                    db.withTransaction {
-//                        if (loadType == LoadType.REFRESH) {
-//                            webInfoDao.clearWebInfo()
-//                        }
-//
-//                        webInfoDao.insertWebInfo(items!!)
-//                    }
-//                    return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-//                }
-//                is ApiEmptyResponse -> {
-//                    Log.d(TAG, "运行空")
-//                    return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-//                }
-//                is ApiErrorResponse -> {
-//                    Log.d(TAG, "运行错误")
-//                    return MediatorResult.Error(Throwable(result.errorMessage))
-//                }
-//                else -> {
-//                    Log.d(TAG, "运行未执行")
-//                }
-//            }
-//
-//            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: IOException) {
             return MediatorResult.Error(e)
         } catch (e: HttpException) {

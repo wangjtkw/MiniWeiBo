@@ -10,11 +10,16 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.IconMarginSpan
 import android.text.style.ImageSpan
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.example.miniweibo.MyApplication
 import com.example.miniweibo.R
+import com.example.miniweibo.common.span.OnClickListener
+import com.example.miniweibo.common.span.SpanClickableSpan
+import com.example.miniweibo.data.bean.bean.WebViewJumpBean
 import com.example.miniweibo.data.db.MiniWeiBoDb
+import com.example.miniweibo.ui.WebViewActivity
 
 
 /*
@@ -102,6 +107,51 @@ class RichTextUtil {
         return this
     }
 
+    fun setLink(context: Context): RichTextUtil {
+        val drawable: Drawable? =
+            ContextCompat.getDrawable(context, R.drawable.ic_link)
+        if (drawable == null) {
+            Log.d(TAG, "drawable is null")
+            return this
+        }
+        drawable.setBounds(0, 0, 42, 42)
+        val httpIndexList = findStr(mContent, "http")
+        var p = httpIndexList.size - 1
+        while (p >= 0) {
+            val previousStr = findHttpPrevious(mContent, httpIndexList[p])
+            val afterStr = findHttpAfter(mContent, httpIndexList[p])
+            mContent.replace(afterStr, "@!$previousStr")
+            p--
+        }
+        httpIndexList.map { index ->
+            Log.d(TAG, "index:$index")
+            val imageSpan = ImageSpan(drawable)
+            val previousStr = findHttpPrevious(mContent, index)
+            val afterStr = findHttpAfter(mContent, index + 2)
+            var mIndex = index
+            spannableStringBuilder!!.setSpan(
+                imageSpan,
+                mIndex,
+                mIndex + 2,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            mIndex = mIndex + 2
+            val color = Color.parseColor("#1565C0")
+            spannableStringBuilder!!.setSpan(
+                SpanClickableSpan(color, object : OnClickListener {
+                    override fun <T> onClick(widget: View?, span: T) {
+                        val jumpBean = WebViewJumpBean(afterStr, "", "")
+                        WebViewActivity.actionStart(context, jumpBean)
+                        Log.d(TAG, "onClick 点击")
+                    }
+
+                }), mIndex,
+                mIndex + afterStr.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+        }
+        return this
+    }
+
     fun setEmotionTest(context: Context): RichTextUtil {
         val drawable: Drawable? =
             ContextCompat.getDrawable(context, R.drawable.ic_share)
@@ -125,9 +175,12 @@ class RichTextUtil {
             val end = findAddressEndIndex(mContent, index, ']')
             if (end != -1) {
                 val emotion = mContent.substring(index, end + 1)
-                val bitmap = getEmotion(emotion, context)
+                val bitmap = getEmotion(emotion, context) ?: return@map
                 Log.d(TAG, "表情:$emotion bitmap:$bitmap")
                 Log.d(TAG, "表情时间 ${System.currentTimeMillis()}")
+                if (bitmap == null){
+                    return@map
+                }
                 spannableStringBuilder!!.setSpan(
                     ImageSpan(context, bitmap),
                     index,
@@ -136,7 +189,6 @@ class RichTextUtil {
                 )
             }
         }
-//        callback(spannableStringBuilder!!)
         return this
     }
 
@@ -144,7 +196,7 @@ class RichTextUtil {
     private fun getEmotion(
         name: String,
         context: Context
-    ): Bitmap {
+    ): Bitmap? {
         val emotionUtil = EmotionUtil(MiniWeiBoDb.getInstance(context).emotionsDao())
         val emotionUrl = emotionUtil.getEmotionUrl(name)
         return PicUtil.loadPic(context, emotionUrl)
@@ -207,6 +259,35 @@ class RichTextUtil {
                 k = next[k]
             }
         }
+    }
+
+    fun findHttpPrevious(content: String, index: Int): String {
+        var p = index
+        while (p > 0) {
+            if (content[p] == ' ') {
+                break
+            }
+            p--
+        }
+        return content.substring(p, index)
+    }
+
+    fun findHttpAfter(content: String, index: Int): String {
+        var p = index
+        while (p < content.length) {
+            if (content[p] == ' ') {
+                break
+            }
+            p++
+        }
+        return content.substring(index, p)
+    }
+
+    fun isEndAddress(content: String, index: Int): Boolean {
+        if (index > 1 && content[index - 1] == ' ') {
+            return true
+        }
+        return false
     }
 
     fun findIndex(content: String, target: Char): List<Int> {

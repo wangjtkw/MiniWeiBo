@@ -12,9 +12,12 @@ import com.example.miniweibo.data.datasource.HomeConcernDataSource
 import javax.inject.Inject
 
 @ExperimentalPagingApi
-class HomeConcernViewModel @Inject constructor(private val dataSource: HomeConcernDataSource) :
+class HomeViewModel @Inject constructor(private val dataSource: HomeConcernDataSource) :
     ViewModel() {
 
-    fun postOfData(): LiveData<PagingData<WebInfoEntity>> =
-        dataSource.fetchPokemonList().cachedIn(viewModelScope).asLiveData()
+    fun postOfConcernData(): LiveData<PagingData<WebInfoEntity>> =
+        dataSource.fetchConcernPokemonList().cachedIn(viewModelScope).asLiveData()
+
+    fun postOfMineData(type: String): LiveData<PagingData<WebInfoEntity>> =
+        dataSource.fetchTypePokemonList(type).cachedIn(viewModelScope).asLiveData()
 }

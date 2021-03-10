@@ -12,5 +12,7 @@ class PlatformParameters {
         const val APP_SECRET = "2993147dca2957c280decc91a9d39069"
         const val SCOPE = "all"
         const val BASE_URL = "https://api.weibo.com/"
+
+        const val IMG_BASE_URL = "http://shibe.online/api/"
     }
 }

@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.miniweibo.api.WeiBoService
+import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
 import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.data.db.MiniWeiBoDb
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,7 @@ class HomeConcernDataSource @Inject constructor(
     val db: MiniWeiBoDb
 ) {
     @ExperimentalPagingApi
-    fun fetchPokemonList(): Flow<PagingData<WebInfoEntity>> {
+    fun fetchConcernPokemonList(): Flow<PagingData<WebInfoEntity>> {
         val pagingConfig = PagingConfig(
             // 每页显示的数据的大小
             pageSize = 15,
@@ -37,10 +38,27 @@ class HomeConcernDataSource @Inject constructor(
         )
         return Pager(
             config = pagingConfig,
-            remoteMediator = WebInfoRemoteMediator(api, db)
+            remoteMediator = WebInfoRemoteMediator(api, db, RemoteKeyEntity.TYPE_CONCERN)
         ) {
-            db.webInfoDao().getWebInfo()
+            db.webInfoDao().getWebInfoByType(RemoteKeyEntity.TYPE_CONCERN)
         }.flow
     }
+
+    @ExperimentalPagingApi
+    fun fetchTypePokemonList(type: String): Flow<PagingData<WebInfoEntity>> {
+        val pagingConfig = PagingConfig(
+            pageSize = 15,
+            enablePlaceholders = true,
+            prefetchDistance = 4,
+            initialLoadSize = 45
+        )
+        return Pager(
+            config = pagingConfig,
+            remoteMediator = WebInfoRemoteMediator(api, db, type)
+        ) {
+            db.webInfoDao().getWebInfoByType(type)
+        }.flow
+    }
+
 
 }

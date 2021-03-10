@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--字体-->
+    <dimen name="text_small_tips">12sp</dimen>
+    <dimen name="text_normal_text">14sp</dimen>
+    <dimen name="text_small_title">16sp</dimen>
+    <dimen name="text_app_bar">20sp</dimen>
+    <dimen name="text_big_title">24sp</dimen>
+    <dimen name="text_super_1">34sp</dimen>
+    <dimen name="text_super_2">45sp</dimen>
+    <dimen name="text_super_3">56sp</dimen>
+
+    <!--头像大小-->
+    <dimen name="head_size_normal">40dp</dimen>
+    <dimen name="head_size_big">64dp</dimen>
+
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_card">8dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_big">32dp</dimen>
+
+
+</resources>

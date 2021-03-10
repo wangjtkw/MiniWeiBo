@@ -8,18 +8,18 @@ data class WebInfoBean(
     //未知
     val hasvisible: Boolean,
     //未知
-    val interval: Int,
+    val interval: Int?,
     //总数
     @Json(name = "total_number")
     val totalNumber: Int,
     //请求时返回小于等于
     @Json(name = "max_id_str")
-    val maxIdStr: String,
+    val maxIdStr: String?,
     @Json(name = "statuses")
     val statuses: List<Statuse>?,
     //是否有未读
     @Json(name = "has_unread")
-    val hasUnread: Int,
+    val hasUnread: Int?,
 )
 @JsonClass(generateAdapter = true)
 data class Statuse(

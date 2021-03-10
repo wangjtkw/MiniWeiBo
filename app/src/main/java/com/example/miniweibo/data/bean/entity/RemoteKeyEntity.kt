@@ -11,5 +11,6 @@ data class RemoteKeyEntity(
 ) {
     companion object {
         const val TYPE_CONCERN = "type_concern"
+        const val TYPE_OTHER = "type_other"
     }
 }

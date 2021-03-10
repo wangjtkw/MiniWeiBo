@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
 import com.example.miniweibo.common.MyViewModelFactory
-import com.example.miniweibo.ui.home.concern.HomeConcernViewModel
+import com.example.miniweibo.ui.home.concern.HomeViewModel
 import com.example.miniweibo.ui.login.LoginViewModel
 import com.example.miniweibo.ui.mine.MineViewModel
 import dagger.Binds
@@ -17,8 +17,8 @@ abstract class ViewModelModel {
     @OptIn(ExperimentalPagingApi::class)
     @Binds
     @IntoMap
-    @ViewModelKey(HomeConcernViewModel::class)
-    abstract fun bindHomeConcernViewModel(homeConcernViewModel: HomeConcernViewModel): ViewModel
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeConcernViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @Binds
     @IntoMap

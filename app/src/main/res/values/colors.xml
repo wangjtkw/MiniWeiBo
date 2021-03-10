@@ -10,6 +10,16 @@
 
     <color name="gray_50">#FAFAFA</color>
     <color name="gray_200">#EEEEEE</color>
+
+    <color name="black_normal_color">#DE000000</color>
+    <color name="black_lighten_color">#8A000000</color>
+    <color name="black_hint_disable_color">#42000000</color>
+    <color name="black_line_color">#1F000000</color>
+
+    <color name="white_normal_color">#FFFFFF</color>
+    <color name="white_lighten_color">#B3FFFFFF</color>
+    <color name="white_hint_disable_color">#4DFFFFFF</color>
+    <color name="white_line_color">#1FFFFFFF</color>
     
 
 </resources>

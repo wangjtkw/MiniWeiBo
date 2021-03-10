@@ -16,11 +16,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/concern_web_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="@dimen/margin_card"
+        android:layout_marginTop="@dimen/margin_card"
+        android:layout_marginRight="@dimen/margin_card"
         android:background="@drawable/shape_circle_corner_white"
         app:elevation="1dp">
 
@@ -37,7 +38,7 @@
             android:id="@+id/concern_head_img"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/margin_card"
             app:imageUrl="@{webInfo.avatarHd}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,10 +49,10 @@
             android:id="@+id/concern_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="@dimen/margin_card"
+            android:layout_marginLeft="@dimen/margin_card"
             android:text="@{webInfo.name}"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_normal_text"
             app:layout_constraintLeft_toRightOf="@id/concern_head_img"
             app:layout_constraintTop_toTopOf="@id/concern_head_img" />
 
@@ -59,9 +60,9 @@
             android:id="@+id/concern_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:textSize="12sp"
+            android:layout_marginStart="@dimen/margin_card"
+            android:layout_marginLeft="@dimen/margin_card"
+            android:textSize="@dimen/text_small_tips"
             app:layout_constraintBottom_toBottomOf="@id/concern_head_img"
             app:layout_constraintLeft_toRightOf="@id/concern_head_img" />
 
@@ -69,10 +70,10 @@
             android:id="@+id/concern_source_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="@dimen/margin_card"
+            android:layout_marginLeft="@dimen/margin_card"
             android:text="@string/concern_from"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_small_tips"
             app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
             app:layout_constraintLeft_toRightOf="@id/concern_time_tv" />
 
@@ -80,10 +81,10 @@
             android:id="@+id/concern_source_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="@dimen/margin_card"
+            android:layout_marginLeft="@dimen/margin_card"
             android:text="@{webInfo.sourceTitle}"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_small_tips"
             app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
             app:layout_constraintLeft_toRightOf="@id/concern_source_from" />
 
@@ -91,16 +92,17 @@
             android:id="@+id/concern_content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="@dimen/margin_card"
+            android:textSize="@dimen/text_normal_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:gravity="start|center_vertical"
             app:layout_constraintTop_toBottomOf="@id/concern_head_img" />
-
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
+            android:paddingBottom="@dimen/margin_card"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/concern_content_tv">
@@ -109,9 +111,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
                 android:text="@{webInfo.repostsCount}"
+                android:textSize="@dimen/text_normal_text"
                 app:drawableLeftCompat="@drawable/ic_share" />
 
             <TextView
@@ -119,15 +122,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@{webInfo.commentsCount}"
+                android:textSize="@dimen/text_normal_text"
                 app:drawableLeftCompat="@drawable/ic_comment" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"
                 android:text="@{webInfo.attitudesCount}"
+                android:textSize="@dimen/text_normal_text"
                 app:drawableLeftCompat="@drawable/ic_thumb" />
 
         </FrameLayout>

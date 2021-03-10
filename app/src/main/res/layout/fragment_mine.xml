@@ -12,6 +12,8 @@
 
         <import type="com.example.miniweibo.data.bean.entity.UserInfoEntity" />
 
+        <import type="android.view.View" />
+
         <variable
             name="userInfoEntity"
             type="com.example.miniweibo.data.bean.entity.UserInfoEntity" />
@@ -20,10 +22,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray_200"
         tools:context=".ui.mine.MineFragment">
 
         <View
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,15 +33,124 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/mine_head_img"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            app:imageUrl="@{userInfoEntity.profileImageUrl}"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_50"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            fresco:roundAsCircle="true" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/mine_head_img"
+                android:layout_width="@dimen/head_size_big"
+                android:layout_height="@dimen/head_size_big"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_big"
+                app:imageUrl="@{userInfoEntity.avatarHd}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                fresco:roundAsCircle="true" />
+
+            <TextView
+                android:id="@+id/mine_screen_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_card"
+                android:layout_marginLeft="@dimen/margin_card"
+                android:text="@{userInfoEntity.screenName}"
+                android:textColor="@color/black_normal_color"
+                android:textSize="@dimen/text_small_title"
+                app:layout_constraintLeft_toRightOf="@id/mine_head_img"
+                app:layout_constraintTop_toTopOf="@id/mine_head_img" />
+
+            <TextView
+                android:id="@+id/mine_description_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_card"
+                android:layout_marginLeft="@dimen/margin_card"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{userInfoEntity.description}"
+                android:textColor="@color/black_lighten_color"
+                android:textSize="@dimen/text_small_tips"
+                android:visibility="@{userInfoEntity.description.empty ? View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/mine_head_img"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@id/mine_head_img"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/mine_statuses_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@{userInfoEntity.statusesCount}"
+                android:textColor="@color/black_normal_color"
+                android:textSize="@dimen/text_normal_text"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mine_head_img" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/margin_normal"
+                android:text="@string/mine_weibo"
+                android:textColor="@color/black_lighten_color"
+                app:layout_constraintLeft_toLeftOf="@id/mine_statuses_count_tv"
+                app:layout_constraintRight_toRightOf="@id/mine_statuses_count_tv"
+                app:layout_constraintTop_toBottomOf="@id/mine_statuses_count_tv" />
+
+            <TextView
+                android:id="@+id/mine_friends_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@{userInfoEntity.friendsCount}"
+                android:textColor="@color/black_normal_color"
+                android:textSize="@dimen/text_normal_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mine_head_img" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/margin_normal"
+                android:text="@string/mine_concern"
+                android:textColor="@color/black_lighten_color"
+                app:layout_constraintLeft_toLeftOf="@id/mine_friends_count_tv"
+                app:layout_constraintRight_toRightOf="@id/mine_friends_count_tv"
+                app:layout_constraintTop_toBottomOf="@id/mine_friends_count_tv" />
+
+            <TextView
+                android:id="@+id/mine_followers_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@{userInfoEntity.followersCount}"
+                android:textColor="@color/black_normal_color"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mine_head_img" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/margin_normal"
+                android:text="@string/mine_fans"
+                android:textColor="@color/black_lighten_color"
+                app:layout_constraintLeft_toLeftOf="@id/mine_followers_count_tv"
+                app:layout_constraintRight_toRightOf="@id/mine_followers_count_tv"
+                app:layout_constraintTop_toBottomOf="@id/mine_followers_count_tv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

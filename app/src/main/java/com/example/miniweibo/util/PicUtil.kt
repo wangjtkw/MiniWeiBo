@@ -40,12 +40,18 @@ object PicUtil {
         url: String,
         width: Int = 48,
         height: Int = 48
-    ):Bitmap {
-        return Glide.with(context)
-            .asBitmap()
-            .load(url)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .submit(width, height)
-            .get()
+    ): Bitmap? {
+        var bitmap: Bitmap? = null
+        try {
+            bitmap = Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .submit(width, height)
+                .get()
+        } catch (e: Exception) {
+            Log.d(TAG, e.toString())
+        }
+        return bitmap
     }
 }

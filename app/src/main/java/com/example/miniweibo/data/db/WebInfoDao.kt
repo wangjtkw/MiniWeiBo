@@ -13,11 +13,11 @@ interface WebInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWebInfo(webInfoList: List<WebInfoEntity>)
 
-    @Query("SELECT * FROM web_info_entity ORDER BY page ASC")
-    fun getWebInfo(): PagingSource<Int, WebInfoEntity>
+    @Query("SELECT * FROM web_info_entity where type = :type ORDER BY page ASC")
+    fun getWebInfoByType(type: String): PagingSource<Int, WebInfoEntity>
 
-    @Query("DELETE FROM web_info_entity")
-    suspend fun clearWebInfo()
+    @Query("DELETE FROM web_info_entity where type = :type")
+    suspend fun clearWebInfoByType(type: String)
 
 
 }
