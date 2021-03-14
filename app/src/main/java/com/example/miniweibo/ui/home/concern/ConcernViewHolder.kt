@@ -2,6 +2,7 @@ package com.example.miniweibo.ui.home.concern
 
 import android.util.Log
 import android.view.View
+import androidx.databinding.ViewDataBinding
 import com.example.miniweibo.ui.WebViewActivity
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.bean.WebViewJumpBean
@@ -17,10 +18,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class ConcernViewHolder(view: View) : DataBindingViewHolder<WebInfoEntity>(view) {
+class ConcernViewHolder(private val mBinding: RvItemConcernBinding) :
+    DataBindingViewHolder<WebInfoEntity>(mBinding.root) {
     private val TAG = "ConcernViewHolder"
 
-    private val mBinding: RvItemConcernBinding by viewHolderBinding(view)
     override fun bindData(data: WebInfoEntity, position: Int) {
         mBinding.webInfo = data
         mBinding.concernTimeTv.text = TimeUtil.getTimeDifference(data.createdAt)
@@ -31,7 +32,7 @@ class ConcernViewHolder(view: View) : DataBindingViewHolder<WebInfoEntity>(view)
                 .setAt()
                 .setAllContent()
 //                .setLink(view.context)
-                .setEmotion(view.context)
+                .setEmotion(context())
                 .build()
             launch(Dispatchers.Main) {
                 Log.d(TAG, "执行时间 ${System.currentTimeMillis()} content：$content")
@@ -39,15 +40,15 @@ class ConcernViewHolder(view: View) : DataBindingViewHolder<WebInfoEntity>(view)
             }
             mBinding.concernHeadImg.setOnClickListener {
                 if (!view.context.isConnectedNetwork()) {
-                    ToastUtil(view.context).makeToast("当前网络未连接！")
-                }else{
-                    Log.d(TAG,"click")
-                    InfoDetailActivity.actionStart(view.context)
+                    ToastUtil(context()).makeToast("当前网络未连接！")
+                } else {
+                    Log.d(TAG, "click")
+                    InfoDetailActivity.actionStart(context())
                 }
             }
             mBinding.concernWebLayout.setOnClickListener {
                 if (!view.context.isConnectedNetwork()) {
-                    ToastUtil(view.context).makeToast("当前网络未连接！")
+                    ToastUtil(context()).makeToast("当前网络未连接！")
                 } else {
                     val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
                     val url =
@@ -57,7 +58,7 @@ class ConcernViewHolder(view: View) : DataBindingViewHolder<WebInfoEntity>(view)
                         data.idstr,
                         data.userIdStr
                     )
-                    WebViewActivity.actionStart(view.context, jumpBean)
+                    WebViewActivity.actionStart(context(), jumpBean)
                 }
             }
 

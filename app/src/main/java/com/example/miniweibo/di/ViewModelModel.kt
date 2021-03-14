@@ -7,12 +7,20 @@ import com.example.miniweibo.common.MyViewModelFactory
 import com.example.miniweibo.ui.home.concern.HomeViewModel
 import com.example.miniweibo.ui.login.LoginViewModel
 import com.example.miniweibo.ui.mine.MineViewModel
+import com.example.miniweibo.ui.video.VideoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModel {
+
+    @OptIn(ExperimentalPagingApi::class)
+    @Binds
+    @IntoMap
+    @ViewModelKey(VideoViewModel::class)
+    abstract fun bindVideoViewModel(videoViewModel: VideoViewModel): ViewModel
+
 
     @OptIn(ExperimentalPagingApi::class)
     @Binds

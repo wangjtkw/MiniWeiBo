@@ -11,6 +11,7 @@ import com.example.miniweibo.common.ViewPagerAdapter
 import com.example.miniweibo.databinding.ActivityMainBinding
 import com.example.miniweibo.ui.home.HomeFragment
 import com.example.miniweibo.ui.mine.MineFragment
+import com.example.miniweibo.ui.video.VideoFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -58,8 +59,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private fun initViewPager() {
         val fragmentList = listOf(
             HomeFragment(),
-            MessageFragment.newInstance("1", "2"),
-            VideoFragment.newInstance("1", "2"),
+            MessageFragment(),
+            VideoFragment(),
             MineFragment.newInstance()
         )
         val mAdapter = ViewPagerAdapter(fragmentList, this)

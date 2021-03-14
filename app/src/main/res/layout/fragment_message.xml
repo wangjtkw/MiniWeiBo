@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MessageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="picUrl"
+            type="java.lang.String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".ui.MessageFragment">
 
-</FrameLayout>
+        <com.example.miniweibo.myview.VideoPlayerView
+            android:id="@+id/test_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/test_img"
+            app:layout_constraintRight_toRightOf="@id/test_img"
+            app:layout_constraintTop_toTopOf="@id/test_img" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/test_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_card"
+            android:layout_marginTop="@dimen/margin_card"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_card"
+            app:imageUrl="@{picUrl}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            fresco:placeholderImage="@drawable/bg_img"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:viewAspectRatio="1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

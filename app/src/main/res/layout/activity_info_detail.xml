@@ -24,7 +24,6 @@
                     android:layout_margin="@dimen/margin_card"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    fresco:placeholderImage="@drawable/bg_info_detail"
                     fresco:placeholderImageScaleType="centerCrop"/>
 
                 <androidx.appcompat.widget.Toolbar

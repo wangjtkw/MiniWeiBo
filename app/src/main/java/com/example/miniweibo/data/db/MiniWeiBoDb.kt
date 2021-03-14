@@ -14,6 +14,7 @@ import com.example.miniweibo.data.bean.entity.*
         WebInfoEntity::class,
         RemoteKeyEntity::class,
         EmotionEntity::class,
+        ImgEntity::class
     ],
     version = 1,
     exportSchema = false

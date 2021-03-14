@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_200"
         android:orientation="vertical"
-        tools:context=".ui.VideoFragment">
+        tools:context=".ui.video.VideoFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -25,12 +25,21 @@
                 android:textSize="@dimen/text_app_bar" />
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/video_rv"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/video_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_card"
-            android:layout_marginLeft="@dimen/margin_card" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/video_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_card"
+                android:layout_marginLeft="@dimen/margin_card" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     </LinearLayout>
 

@@ -47,6 +47,7 @@ class HomeConcernFragment : Fragment() {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         paramType = arguments?.getString(PARAM_TYPE) ?: ""
+        Log.d(TAG,"argument:$arguments")
     }
 
     override fun onCreateView(
@@ -85,8 +86,8 @@ class HomeConcernFragment : Fragment() {
                 homeViewModel
                     .postOfConcernData()
                     .observe(viewLifecycleOwner) {
-                        it.map {
-                            Log.d(TAG, it.toString())
+                        it.map { entity ->
+                            Log.d(TAG, entity.toString())
                         }
                         mAdapter!!.submitData(lifecycle, it)
                     }
@@ -95,8 +96,8 @@ class HomeConcernFragment : Fragment() {
                 homeViewModel
                     .postOfMineData(SDKUtil.getSDKUtil().getAccessTokenBean().uid)
                     .observe(viewLifecycleOwner) {
-                        it.map {
-                            Log.d(TAG, it.toString())
+                        it.map { entity ->
+                            Log.d(TAG, entity.toString())
                         }
                         mAdapter!!.submitData(lifecycle, it)
                     }
@@ -106,7 +107,8 @@ class HomeConcernFragment : Fragment() {
 
         lifecycleScope.launchWhenCreated {
             mAdapter!!.loadStateFlow.collectLatest { loadStates ->
-                binding!!.concernSwipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+                binding!!.concernSwipeRefresh.isRefreshing =
+                    (loadStates.refresh is LoadState.Loading)
             }
         }
     }

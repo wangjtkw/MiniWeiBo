@@ -17,9 +17,7 @@ abstract class DataBindingViewHolder<T>(val view: View) : RecyclerView.ViewHolde
         return view.context
     }
 
-    inline fun <reified T : ViewDataBinding> viewHolderBinding(view: View): Lazy<T> =
-        lazy(LazyThreadSafetyMode.NONE) {
-            requireNotNull(DataBindingUtil.bind<T>(view)) { "cannot find the layout file" }
-        }
+    inline fun <reified T : ViewDataBinding> viewHolderBinding(view: View) =
+        requireNotNull(DataBindingUtil.bind<T>(view)) { "cannot find the layout file" }
 
 }

@@ -1,60 +1,57 @@
 package com.example.miniweibo.ui
 
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.miniweibo.R
+import com.example.miniweibo.databinding.FragmentMessageBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MessageFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MessageFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val TAG = "MessageFragment"
+
+    private var binding: FragmentMessageBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false)
+        binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.fragment_message,
+            container,
+            false,
+//            dataBindingComponent
+        )
+        init()
+        return binding!!.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MessageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MessageFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun init() {
+        binding!!.testImg.setImageURI("http://cdn.shibe.online/shibes/3a77a2b738c071b2b1f21e44cc1dd5c6a328c9a7.jpg")
+//        setMedia()
     }
+
+    override fun onResume() {
+        super.onResume()
+        setMedia()
+    }
+
+    private fun setMedia() {
+        Log.d(TAG, "start")
+
+//        mediaPlayer.setDataSource("http://vodkgeyttp8.vod.126.net/cloudmusic/ZDBkICFhMSEhMCA0YiIgZA==/mv/2424/d2c248693946d2688bc64dbada5c01e3.mp4?wsSecret=629a01636488165b33d01b8b53b309fa&wsTime=1615620761")
+
+        binding!!.testPlayerView
+    }
+
 }
