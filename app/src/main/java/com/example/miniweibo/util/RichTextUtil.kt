@@ -115,19 +115,10 @@ class RichTextUtil {
             return this
         }
         drawable.setBounds(0, 0, 42, 42)
-        val httpIndexList = findStr(mContent, "http")
-        var p = httpIndexList.size - 1
-        while (p >= 0) {
-            val previousStr = findHttpPrevious(mContent, httpIndexList[p])
-            val afterStr = findHttpAfter(mContent, httpIndexList[p])
-            mContent.replace(afterStr, "@!$previousStr")
-            p--
-        }
+        val httpIndexList = findStr(mContent, "!$", 0)
+
         httpIndexList.map { index ->
-            Log.d(TAG, "index:$index")
             val imageSpan = ImageSpan(drawable)
-            val previousStr = findHttpPrevious(mContent, index)
-            val afterStr = findHttpAfter(mContent, index + 2)
             var mIndex = index
             spannableStringBuilder!!.setSpan(
                 imageSpan,
@@ -135,39 +126,24 @@ class RichTextUtil {
                 mIndex + 2,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-            mIndex = mIndex + 2
+            val afterStr = findHttpAfter(mContent, index + 2)
             val color = Color.parseColor("#1565C0")
             spannableStringBuilder!!.setSpan(
                 SpanClickableSpan(color, object : OnClickListener {
                     override fun <T> onClick(widget: View?, span: T) {
+                        Log.d(TAG, "onClick 点击")
                         val jumpBean = WebViewJumpBean(afterStr, "", "")
                         WebViewActivity.actionStart(context, jumpBean)
-                        Log.d(TAG, "onClick 点击")
                     }
-
                 }), mIndex,
-                mIndex + afterStr.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                mIndex + afterStr.length + 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
             )
         }
         return this
     }
 
-    fun setEmotionTest(context: Context): RichTextUtil {
-        val drawable: Drawable? =
-            ContextCompat.getDrawable(context, R.drawable.ic_share)
-        if (drawable == null) {
-            Log.d(TAG, "drawable is null")
-            return this
-        }
-        drawable.setBounds(0, 0, 42, 42)
-        val imageSpan = ImageSpan(drawable)
-        spannableStringBuilder!!.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        return this
-    }
-
     fun setEmotion(
-        context: Context,
-//                           callback: (SpannableStringBuilder) -> Unit
+        context: Context
     ): RichTextUtil {
         check()
         val emotionIndexList = findIndex(mContent, '[')
@@ -178,7 +154,7 @@ class RichTextUtil {
                 val bitmap = getEmotion(emotion, context) ?: return@map
                 Log.d(TAG, "表情:$emotion bitmap:$bitmap")
                 Log.d(TAG, "表情时间 ${System.currentTimeMillis()}")
-                if (bitmap == null){
+                if (bitmap == null) {
                     return@map
                 }
                 spannableStringBuilder!!.setSpan(
@@ -218,8 +194,8 @@ class RichTextUtil {
     /**
      * KMP 算法实现
      */
-    fun findStr(content: String, target: String): List<Int> {
-        var p = 0
+    fun findStr(content: String, target: String, start: Int): List<Int> {
+        var p = start
         var q = 0
         val slen = content.length
         val plen = target.length

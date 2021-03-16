@@ -128,26 +128,27 @@ data class WebInfoEntity(
                 var content = text ?: ""
                 if (text != null) {
                     val richTextUtil = RichTextUtil()
-                    val addressIndexList = richTextUtil.findStr(text, "http")
-                    addressIndexList.map { index ->
-                        if (richTextUtil.isEndAddress(text, index)) {
-                            val end =
-                                richTextUtil.findAddressEndIndex(text, addressIndexList[0], ' ')
-                            contentUrl =
-                                text.substring(startIndex = addressIndexList[0], endIndex = end)
-                            content =
-                                text.substring(startIndex = 0, endIndex = addressIndexList[0] - 1)
-                        }
-                    }
-                }
-                if (content.endsWith("全文：")) {
-                    content = content.substring(startIndex = 0, endIndex = content.length - 1)
-                }
+                    val addressIndexList = richTextUtil.findStr(text, "http", 0)
 
+                    val totalTextIndex = richTextUtil.findStr(text, "全文", 0)
+                    if (!totalTextIndex.isNullOrEmpty()) {
+                        content = text.substring(0, totalTextIndex[0] + 2)
+                    } else {
+                        content = text
+                    }
+
+
+                    val stringBuilder = StringBuilder(content)
+                    addressIndexList.map { index ->
+                        if (index >= content.length) {
+                            return@map
+                        }
+                        stringBuilder.insert(index, "!$")
+                    }
+                    content = stringBuilder.toString()
+                }
 
                 Log.d(TAG, "contentUrl:$contentUrl")
-
-
 
                 WebInfoEntity(
                     idstr = idstr,

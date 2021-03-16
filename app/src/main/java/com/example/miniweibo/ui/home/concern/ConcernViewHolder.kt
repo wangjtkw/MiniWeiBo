@@ -1,5 +1,6 @@
 package com.example.miniweibo.ui.home.concern
 
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -34,11 +35,12 @@ class ConcernViewHolder(view: View) :
                 .setSharp()
                 .setAt()
                 .setAllContent()
-//                .setLink(view.context)
+                .setLink(context())
                 .setEmotion(context())
                 .build()
             launch(Dispatchers.Main) {
 //                Log.d(TAG, "content：$content")
+                mBinding.concernContentTv.movementMethod = LinkMovementMethod.getInstance()
                 mBinding.concernContentTv.text = content
             }
         }
@@ -66,9 +68,6 @@ class ConcernViewHolder(view: View) :
                 WebViewActivity.actionStart(context(), jumpBean)
             }
         }
-
-        Log.d(TAG, "entity:${data}")
-//        setImg(data)
         initRV(data)
 
     }
