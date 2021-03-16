@@ -1,10 +1,8 @@
 package com.example.miniweibo.ui.video
 
-import android.graphics.SurfaceTexture
 import android.media.MediaPlayer
 import android.util.Log
 import android.view.Surface
-import android.view.TextureView
 import android.view.View
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.entity.ImgEntity
@@ -34,8 +32,6 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
         mBinding.videoPlayerView.getMySurfaceTexture()?.let {
             mediaPlayer.setSurface(Surface(it))
         }?:Log.d(TAG,"surface is null")
-
-
 
         mediaPlayer.reset()
         mediaPlayer.setDataSource(mData!!.videoUrl)

@@ -1,0 +1,6 @@
+com/facebook/imagepipeline/memory/AshmemMemoryChunkPool.java
+ com.facebook.imagepipeline.memory.AshmemMemoryChunkPool
+com/facebook/imagepipeline/memory/AshmemMemoryChunk.java
+ com.facebook.imagepipeline.memory.AshmemMemoryChunk
+com/facebook/fresco/memorytypes/ashmem/BuildConfig.java
+ com.facebook.fresco.memorytypes.ashmem.BuildConfig

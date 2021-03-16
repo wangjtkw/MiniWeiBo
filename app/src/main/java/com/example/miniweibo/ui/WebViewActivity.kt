@@ -9,6 +9,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.bean.WebViewJumpBean
+import com.example.miniweibo.util.AppHelper
 import com.example.miniweibo.util.ToastUtil
 
 class WebViewActivity : AppCompatActivity() {

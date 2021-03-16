@@ -92,20 +92,74 @@
             android:id="@+id/concern_content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
             android:padding="@dimen/margin_card"
             android:textSize="@dimen/text_normal_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:gravity="start|center_vertical"
             app:layout_constraintTop_toBottomOf="@id/concern_head_img" />
 
+
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/concern_single_img_fl"-->
+        <!--            android:layout_width="150dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/concern_tag_fl"-->
+        <!--            app:layout_constraintHorizontal_weight="2"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toLeftOf="@id/concern_temp"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/concern_content_tv">-->
+
+        <!--            <com.facebook.drawee.view.SimpleDraweeView-->
+        <!--                android:id="@+id/concern_show_img"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_margin="@dimen/margin_card"-->
+        <!--                android:visibility="gone"-->
+        <!--                fresco:actualImageScaleType="centerCrop"-->
+        <!--                fresco:placeholderImage="@drawable/bg_img"-->
+        <!--                fresco:placeholderImageScaleType="centerCrop"-->
+        <!--                fresco:failureImage="@drawable/bg_img"-->
+        <!--                fresco:failureImageScaleType="centerCrop"/>-->
+        <!--        </FrameLayout>-->
+
+
+        <!--        <View-->
+        <!--            android:id="@+id/concern_temp"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            app:layout_constraintHorizontal_weight="1"-->
+        <!--            app:layout_constraintLeft_toRightOf="@id/concern_single_img_fl"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/concern_single_img_fl" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/concern_show_img_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/concern_tag_fl"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/concern_content_tv" />
+
+        <!--        <androidx.constraintlayout.widget.Barrier-->
+        <!--            android:id="@+id/concern_barrier"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:barrierDirection="bottom"-->
+        <!--            app:constraint_referenced_ids="concern_single_img_fl,concern_show_img_rv" />-->
+
         <FrameLayout
+            android:id="@+id/concern_tag_fl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/margin_card"
+            android:layout_marginTop="@dimen/margin_small"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/concern_content_tv">
+            app:layout_constraintTop_toBottomOf="@id/concern_show_img_rv">
 
             <TextView
                 android:layout_width="wrap_content"

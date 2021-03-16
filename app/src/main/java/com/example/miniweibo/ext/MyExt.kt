@@ -3,7 +3,6 @@ package com.example.miniweibo.ext
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 
@@ -11,6 +10,7 @@ import android.net.NetworkInfo
 fun Context.isConnectedNetwork(): Boolean = run {
     val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+
         val nw = cm.activeNetwork ?: return false
         val actNw = cm.getNetworkCapabilities(nw) ?: return false
         return when {

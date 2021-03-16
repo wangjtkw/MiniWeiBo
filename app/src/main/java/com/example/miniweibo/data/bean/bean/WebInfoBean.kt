@@ -21,6 +21,7 @@ data class WebInfoBean(
     @Json(name = "has_unread")
     val hasUnread: Int?,
 )
+
 @JsonClass(generateAdapter = true)
 data class Statuse(
     //微博id
@@ -29,9 +30,6 @@ data class Statuse(
     //点赞数
     @Json(name = "attitudes_count")
     val attitudesCount: Int?,
-    //中等尺寸图片显示图片
-    @Json(name = "bmiddle_pic")
-    val bmiddlePic: String?,
     //评论数
     @Json(name = "comments_count")
     val commentsCount: Int?,
@@ -50,37 +48,45 @@ data class Statuse(
     //微博的mid
     @Json(name = "mid")
     val mid: String?,
-    //原图
-    @Json(name = "original_pic")
-    val originalPic: String?,
     //图片数量
     @Json(name = "pic_num")
-    val picNum: Int?,
+    var picNum: Int = 0,
     @Json(name = "pic_urls")
     val picUrls: List<PicUrl>?,
+
+    @Json(name = "thumbnail_pic")
+    val thumbnailPic: String?,
+    @Json(name = "bmiddle_pic")
+    val bmiddlePic: String?,
+    @Json(name = "original_pic")
+    val originalPic: String?,
+
     //转发数
     @Json(name = "reposts_count")
     val repostsCount: Int?,
-    //来源
+
+//来源
     @Json(name = "source")
     val source: String?,
-    //文本内容
+
+//文本内容
     @Json(name = "text")
     val text: String?,
-    //文本长度
+
+//文本长度
     @Json(name = "textLength")
     val textLength: Int?,
-    //缩略图
-    @Json(name = "thumbnail_pic")
-    val thumbnailPic: String?,
+
     @Json(name = "user")
     val user: User?,
 )
+
 @JsonClass(generateAdapter = true)
 data class PicUrl(
     @Json(name = "thumbnail_pic")
     val thumbnailPic: String
 )
+
 @JsonClass(generateAdapter = true)
 data class User(
     @Json(name = "idstr")

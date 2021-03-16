@@ -1,0 +1,2 @@
+com/facebook/fresco/vito/ktx/BuildConfig.java
+ com.facebook.fresco.vito.ktx.BuildConfig

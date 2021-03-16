@@ -1,0 +1,17 @@
+com/facebook/fresco/ui/common/BuildConfig.java
+ com.facebook.fresco.ui.common.BuildConfig
+com/facebook/fresco/ui/common/OnDrawControllerListener.java
+ com.facebook.fresco.ui.common.OnDrawControllerListener
+com/facebook/fresco/ui/common/BaseControllerListener2.java
+ com.facebook.fresco.ui.common.BaseControllerListener2
+com/facebook/fresco/ui/common/LoggingListener.java
+ com.facebook.fresco.ui.common.LoggingListener
+com/facebook/fresco/ui/common/DimensionsInfo.java
+ com.facebook.fresco.ui.common.DimensionsInfo
+com/facebook/fresco/ui/common/ForwardingControllerListener2.java
+ com.facebook.fresco.ui.common.ForwardingControllerListener2
+com/facebook/fresco/ui/common/MultiUriHelper.java
+ com.facebook.fresco.ui.common.MultiUriHelper
+com/facebook/fresco/ui/common/ControllerListener2.java
+ com.facebook.fresco.ui.common.ControllerListener2
+ com.facebook.fresco.ui.common.ControllerListener2$Extras

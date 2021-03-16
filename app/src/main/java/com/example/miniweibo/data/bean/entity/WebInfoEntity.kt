@@ -45,8 +45,12 @@ data class WebInfoEntity(
     //图片数量
     @ColumnInfo(name = "pic_num")
     val picNum: Int?,
-    @ColumnInfo(name = "pic_urls")
-    val picUrls: List<String>?,
+    @ColumnInfo(name = "thumbnail_pic_urls")
+    val thumbnailPicUrls: List<String>?,
+    @ColumnInfo(name = "bmiddle_pic_urls")
+    val bmiddlePicUrls: List<String>?,
+    @ColumnInfo(name = "origina_pic_urls")
+    val originaPicUrls: List<String>?,
     //转发数
     @ColumnInfo(name = "reposts_count")
     val repostsCount: String,
@@ -81,15 +85,38 @@ data class WebInfoEntity(
 
 
     companion object {
-        private val TAG = "WebInfoEntity"
+        private const val TAG = "WebInfoEntity"
 
         fun convert2WebInfoEntity(statuse: Statuse, page: Int, type: String): WebInfoEntity {
             return statuse.run {
-                val picList = mutableListOf<String>()
-
-                picUrls?.forEach {
-                    picList.add(it.thumbnailPic)
+                val thumbnailPicList = mutableListOf<String>()
+                val bmiddlePicList = mutableListOf<String>()
+                val originalPicList = mutableListOf<String>()
+                var bmiddlePicHost: String = ""
+                var originalPicHost: String = ""
+                if (!bmiddlePic.isNullOrEmpty()) {
+                    bmiddlePicHost = findAndSubString(bmiddlePic, "bmiddle", true)
                 }
+                if (!originalPic.isNullOrEmpty()) {
+                    originalPicHost = findAndSubString(originalPic, "large", true)
+                }
+
+                if (picNum > 0) {
+                    picUrls?.forEach {
+                        thumbnailPicList.add(it.thumbnailPic)
+                        val picAfter = findAndSubString(it.thumbnailPic, "thumbnail", false)
+                        val bmiddlePicUrl = "${bmiddlePicHost}${picAfter}"
+                        val originalPicUrl = "${originalPicHost}${picAfter}"
+                        Log.d(
+                            TAG,
+                            "bmiddlePicUrl:$bmiddlePicUrl thumbnailPic:${it.thumbnailPic} content：$text"
+                        )
+                        Log.d(TAG, "originalPicUrl:$originalPicUrl")
+                        bmiddlePicList.add(bmiddlePicUrl)
+                        originalPicList.add(originalPicUrl)
+                    }
+                }
+
                 val entityCreatedAt = TimeUtil.getTimestamp(TimeUtil.parseTime(createdAt))
                 val sourceTitle = source?.let {
                     RegExUtil.parseSourceTitle(it)
@@ -134,7 +161,9 @@ data class WebInfoEntity(
                     mid = mid?.getEmptyOrDefault { "" },
                     originalPic = originalPic?.getEmptyOrDefault { "" },
                     picNum = picNum,
-                    picUrls = picList,
+                    thumbnailPicUrls = thumbnailPicList,
+                    bmiddlePicUrls = bmiddlePicList,
+                    originaPicUrls = originalPicList,
                     repostsCount = "$repostsCount",
                     sourceTitle = sourceTitle,
                     sourceUrl = sourceUrl,
@@ -149,6 +178,24 @@ data class WebInfoEntity(
                     type = type
                 )
             }
+        }
+
+        private fun findAndSubString(
+            originStr: String,
+            target: String,
+            needBefore: Boolean
+        ): String {
+            val index = originStr.indexOf(target)
+            var sub = ""
+            if (index <= 0) {
+                return sub
+            }
+            if (needBefore) {
+                sub = originStr.substring(0, index + target.length)
+            } else {
+                sub = originStr.substring(index + target.length, originStr.length)
+            }
+            return sub
         }
 
         val diffCallback = object : DiffUtil.ItemCallback<WebInfoEntity>() {
@@ -167,6 +214,8 @@ data class WebInfoEntity(
     }
 
     override fun toString(): String {
-        return "WebInfoEntity(idstr='$idstr', attitudesCount=$attitudesCount, bmiddlePic=$bmiddlePic, commentsCount=$commentsCount, createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, picUrls=$picUrls, repostsCount=$repostsCount, sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page)"
+        return "WebInfoEntity(idstr='$idstr', attitudesCount='$attitudesCount', bmiddlePic=$bmiddlePic, commentsCount='$commentsCount', createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, thumbnailPicUrls=$thumbnailPicUrls, bmiddlePicUrls=$bmiddlePicUrls, originaPicUrls=$originaPicUrls, repostsCount='$repostsCount', sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, contentUrl='$contentUrl', thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page, type='$type')"
     }
+
+
 }

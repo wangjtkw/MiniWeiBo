@@ -1,0 +1,15 @@
+com/facebook/imagepipeline/debug/FlipperCloseableReferenceLeakTracker.java
+ com.facebook.imagepipeline.debug.FlipperCloseableReferenceLeakTracker
+com/facebook/fresco/flipper/BuildConfig.java
+ com.facebook.fresco.flipper.BuildConfig
+com/facebook/imagepipeline/debug/DebugImageTracker.java
+ com.facebook.imagepipeline.debug.DebugImageTracker
+com/facebook/imagepipeline/debug/FlipperImageTracker.java
+ com.facebook.imagepipeline.debug.FlipperImageTracker
+ com.facebook.imagepipeline.debug.FlipperImageTracker$ImageDebugData
+com/facebook/imagepipeline/debug/FlipperCacheKeyFactory.java
+ com.facebook.imagepipeline.debug.FlipperCacheKeyFactory
+com/facebook/imagepipeline/debug/LruMap.java
+ com.facebook.imagepipeline.debug.LruMap
+com/facebook/imagepipeline/debug/NoOpDebugImageTracker.java
+ com.facebook.imagepipeline.debug.NoOpDebugImageTracker

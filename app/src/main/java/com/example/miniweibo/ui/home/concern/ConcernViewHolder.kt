@@ -2,8 +2,8 @@ package com.example.miniweibo.ui.home.concern
 
 import android.util.Log
 import android.view.View
-import androidx.databinding.ViewDataBinding
-import com.example.miniweibo.ui.WebViewActivity
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.bean.WebViewJumpBean
 import com.example.miniweibo.data.bean.entity.WebInfoEntity
@@ -11,6 +11,7 @@ import com.example.miniweibo.databinding.RvItemConcernBinding
 import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.sdk.SDKUtil
 import com.example.miniweibo.ui.InfoDetailActivity
+import com.example.miniweibo.ui.WebViewActivity
 import com.example.miniweibo.util.RichTextUtil
 import com.example.miniweibo.util.TimeUtil
 import com.example.miniweibo.util.ToastUtil
@@ -18,8 +19,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class ConcernViewHolder(private val mBinding: RvItemConcernBinding) :
-    DataBindingViewHolder<WebInfoEntity>(mBinding.root) {
+class ConcernViewHolder(view: View) :
+    DataBindingViewHolder<WebInfoEntity>(view) {
+
+    private val mBinding: RvItemConcernBinding = DataBindingUtil.bind(view)!!
     private val TAG = "ConcernViewHolder"
 
     override fun bindData(data: WebInfoEntity, position: Int) {
@@ -35,44 +38,69 @@ class ConcernViewHolder(private val mBinding: RvItemConcernBinding) :
                 .setEmotion(context())
                 .build()
             launch(Dispatchers.Main) {
-                Log.d(TAG, "执行时间 ${System.currentTimeMillis()} content：$content")
+//                Log.d(TAG, "content：$content")
                 mBinding.concernContentTv.text = content
             }
-            mBinding.concernHeadImg.setOnClickListener {
-                if (!view.context.isConnectedNetwork()) {
-                    ToastUtil(context()).makeToast("当前网络未连接！")
-                } else {
-                    Log.d(TAG, "click")
-                    InfoDetailActivity.actionStart(context())
-                }
+        }
+        mBinding.concernHeadImg.setOnClickListener {
+            if (!view.context.isConnectedNetwork()) {
+                ToastUtil(context()).makeToast("当前网络未连接！")
+            } else {
+                Log.d(TAG, "click")
+                InfoDetailActivity.actionStart(context())
             }
-            mBinding.concernWebLayout.setOnClickListener {
-                if (!view.context.isConnectedNetwork()) {
-                    ToastUtil(context()).makeToast("当前网络未连接！")
-                } else {
-                    val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
-                    val url =
-                        "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
-                    val jumpBean = WebViewJumpBean(
-                        url,
-                        data.idstr,
-                        data.userIdStr
-                    )
-                    WebViewActivity.actionStart(context(), jumpBean)
-                }
-            }
+        }
+        mBinding.concernContentTv.setOnClickListener {
 
-//            content.setEmotion(view.context) { spannableStringBuilder ->
-//                launch(Dispatchers.Main) {
-//                    Log.d(TAG, "执行时间 ${System.currentTimeMillis()}")
-//                    mBinding.concernContentTv.text = spannableStringBuilder
-//                }
-//            }
+            if (!view.context.isConnectedNetwork()) {
+                ToastUtil(context()).makeToast("当前网络未连接！")
+            } else {
+                val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
+                val url =
+                    "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
+                val jumpBean = WebViewJumpBean(
+                    url,
+                    data.idstr,
+                    data.userIdStr
+                )
+                WebViewActivity.actionStart(context(), jumpBean)
+            }
         }
 
+        Log.d(TAG, "entity:${data}")
+//        setImg(data)
+        initRV(data)
 
-//        Html.fromHtml()
-//        FROM_HTML_MODE_COMPACT：html块元素之间使用一个换行符分隔
-//        FROM_HTML_MODE_LEGACY：html块元素之间使用两个换行符分隔
+    }
+
+//    fun setImg(data: WebInfoEntity) {
+//        if (data.picNum ?: 0 > 1) {
+////            Log.d(TAG, "setImg run")
+//            Log.d(TAG, "picNum:${data.picNum.toString()} data:${data.text}")
+////            Log.d(TAG, "picUrl:${data.bmiddlePicUrls!![0]}")
+//            data.originaPicUrls?.map {
+//                Log.d(TAG, "url:$it")
+//            }
+//
+//            mBinding.concernSingleImgFl.visibility = View.VISIBLE
+//            mBinding.concernShowImg.visibility = View.VISIBLE
+//            mBinding.concernShowImg.setImageURI(Uri.parse(data.bmiddlePicUrls!![0]))
+//        }
+//    }
+
+    fun initRV(data: WebInfoEntity) {
+        if (data.picNum == null || data.picNum <= 0 || data.bmiddlePicUrls.isNullOrEmpty()) {
+            mBinding.concernShowImgRv.visibility = View.GONE
+            return
+        }
+        val mAdapter = ImgAdapter()
+
+        mBinding.concernShowImgRv.run {
+            visibility = View.VISIBLE
+            adapter = mAdapter
+            layoutManager = GridLayoutManager(context(), 3)
+        }
+        mAdapter.addDataList(data.bmiddlePicUrls)
     }
 }
+

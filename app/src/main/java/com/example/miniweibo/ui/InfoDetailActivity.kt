@@ -17,7 +17,7 @@ class InfoDetailActivity : AppCompatActivity() {
         const val INFO_DETAIL_PARAM = "info_detail_param"
 
         fun actionStart(context: Context) {
-            val intent = Intent(context, WebViewActivity::class.java)
+            val intent = Intent(context, InfoDetailActivity::class.java)
             context.startActivity(intent)
         }
     }

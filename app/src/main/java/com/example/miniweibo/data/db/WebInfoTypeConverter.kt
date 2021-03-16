@@ -13,7 +13,7 @@ class WebInfoTypeConverter {
         val moshi = Moshi.Builder().build()
         val adapter = moshi.adapter<List<String>>(
             Types.newParameterizedType(
-                MutableList::class.java,
+                List::class.java,
                 String::class.java
             )
         )
@@ -25,7 +25,7 @@ class WebInfoTypeConverter {
         val moshi = Moshi.Builder().build()
         val adapter = moshi.adapter<List<String>>(
             Types.newParameterizedType(
-                MutableList::class.java,
+                List::class.java,
                 String::class.java
             )
         )

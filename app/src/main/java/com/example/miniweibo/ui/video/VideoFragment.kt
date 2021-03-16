@@ -38,9 +38,9 @@ class VideoFragment : Fragment() {
 
     private val videoList =
         listOf<String>(
-            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5002502198/4738/3d15/27ac/f47aeaedd94a2118402964f482bdd1d1.mp4?wsSecret=129c40c6d5634639834f69c77899452b&wsTime=1615639716",
-            "http://vodkgeyttp8.vod.126.net/cloudmusic/0hlxWfMa_3122336150_shd.mp4?wsSecret=07b397a56e73aa8fee7d1532409fbed2&wsTime=1615639945",
-            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/7127093712/4e8b/9d78/587e/8d81f0b5e5d49b5464bb645c95765615.mp4?wsSecret=95ddb1f856b01da2248378d0017135cc&wsTime=1615639987"
+            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5017546271/62ad/f325/c1f4/8a73eea5e15b6d53f388c4f01ab39507.mp4?wsSecret=858a8d6b71f6f3dc0e01af894e6b321d&wsTime=1615709612",
+            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5017546271/62ad/f325/c1f4/8a73eea5e15b6d53f388c4f01ab39507.mp4?wsSecret=858a8d6b71f6f3dc0e01af894e6b321d&wsTime=1615709612",
+            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5017546271/62ad/f325/c1f4/8a73eea5e15b6d53f388c4f01ab39507.mp4?wsSecret=858a8d6b71f6f3dc0e01af894e6b321d&wsTime=1615709612"
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +65,16 @@ class VideoFragment : Fragment() {
         return binding?.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer!!.reset()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer!!.release()
+    }
+
     fun init() {
         mediaPlayer = MediaPlayer()
         initRV()
@@ -78,7 +88,7 @@ class VideoFragment : Fragment() {
         binding!!.videoRv.run {
             layoutManager = mLayoutManager
             adapter = mAdapter
-            addOnScrollListener(MyMediaController(mLayoutManager,mediaPlayer!!))
+            addOnScrollListener(MyMediaController(mLayoutManager, mediaPlayer!!))
         }
     }
 

@@ -19,6 +19,9 @@ class MyMediaController(
         if (newState == SCROLL_STATE_IDLE) {
             val firstIndex = layoutManager.findFirstVisibleItemPosition()
             val lastIndex = layoutManager.findLastVisibleItemPosition()
+            if (firstIndex < 0 || lastIndex < 0) {
+                return
+            }
             val randomIndex = ((firstIndex + 2) until lastIndex - 1).random()
             Log.d(TAG, "随机位置为：$randomIndex")
             val view = layoutManager.findViewByPosition(randomIndex)

@@ -1,0 +1,8 @@
+com/facebook/nativeimagetranscoder/BuildConfig.java
+ com.facebook.nativeimagetranscoder.BuildConfig
+com/facebook/imagepipeline/nativecode/NativeJpegTranscoder.java
+ com.facebook.imagepipeline.nativecode.NativeJpegTranscoder
+com/facebook/imagepipeline/nativecode/NativeJpegTranscoderSoLoader.java
+ com.facebook.imagepipeline.nativecode.NativeJpegTranscoderSoLoader
+com/facebook/imagepipeline/nativecode/NativeJpegTranscoderFactory.java
+ com.facebook.imagepipeline.nativecode.NativeJpegTranscoderFactory

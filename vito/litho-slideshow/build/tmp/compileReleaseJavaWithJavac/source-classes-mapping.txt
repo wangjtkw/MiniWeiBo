@@ -1,0 +1,8 @@
+com/facebook/fresco/vito/litho/slideshow/FrescoVitoSlideshowDrawable.java
+ com.facebook.fresco.vito.litho.slideshow.FrescoVitoSlideshowDrawable
+com/facebook/fresco/vito/litho/slideshow/BuildConfig.java
+ com.facebook.fresco.vito.litho.slideshow.BuildConfig
+com/facebook/fresco/vito/litho/slideshow/FrescoVitoSlideshowComponentSpec.java
+ com.facebook.fresco.vito.litho.slideshow.FrescoVitoSlideshowComponentSpec
+ com.facebook.fresco.vito.litho.slideshow.FrescoVitoSlideshowComponentSpec$1
+ com.facebook.fresco.vito.litho.slideshow.FrescoVitoSlideshowComponentSpec$2

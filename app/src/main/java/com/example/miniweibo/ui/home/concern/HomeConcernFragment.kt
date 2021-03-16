@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.map
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
 import com.example.miniweibo.databinding.FragmentHomeConcernBinding
@@ -47,13 +48,15 @@ class HomeConcernFragment : Fragment() {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
         paramType = arguments?.getString(PARAM_TYPE) ?: ""
-        Log.d(TAG,"argument:$arguments")
+        Log.d(TAG, "argument:$arguments")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_home_concern,
@@ -81,6 +84,9 @@ class HomeConcernFragment : Fragment() {
     private fun initRV() {
         mAdapter = ConcernAdapter()
         binding!!.concernRv.adapter = mAdapter
+        binding!!.concernRv.layoutManager = LinearLayoutManager(requireContext())
+
+
         when (paramType) {
             RemoteKeyEntity.TYPE_CONCERN -> {
                 homeViewModel

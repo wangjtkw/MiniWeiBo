@@ -1,12 +1,11 @@
 package com.example.miniweibo.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.paging.ExperimentalPagingApi
 import androidx.viewpager2.widget.ViewPager2
 import com.example.miniweibo.R
@@ -14,7 +13,6 @@ import com.example.miniweibo.common.ViewPagerAdapter
 import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
 import com.example.miniweibo.databinding.FragmentHomeBinding
 import com.example.miniweibo.ui.home.concern.HomeConcernFragment
-import com.example.miniweibo.ui.home.mine.HomeMineFragment
 import com.google.android.material.tabs.TabLayout
 
 
