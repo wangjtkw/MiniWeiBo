@@ -67,7 +67,6 @@ class ImgListViewerActivity : AppCompatActivity() {
         }
     }
 
-
     companion object {
         const val IMG_VIEWER_PARAM_LIST = "img_viewer_param_list"
         const val IMG_VIEWER_PARAM_INDEX = "img_viewer_param_index"

@@ -7,13 +7,10 @@ import android.graphics.drawable.Drawable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.IconMarginSpan
 import android.text.style.ImageSpan
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import com.example.miniweibo.MyApplication
 import com.example.miniweibo.R
 import com.example.miniweibo.common.span.OnClickListener
 import com.example.miniweibo.common.span.SpanClickableSpan
@@ -119,11 +116,10 @@ class RichTextUtil {
 
         httpIndexList.map { index ->
             val imageSpan = ImageSpan(drawable)
-            var mIndex = index
             spannableStringBuilder!!.setSpan(
                 imageSpan,
-                mIndex,
-                mIndex + 2,
+                index,
+                index + 2,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             val afterStr = findHttpAfter(mContent, index + 2)
@@ -135,8 +131,8 @@ class RichTextUtil {
                         val jumpBean = WebViewJumpBean(afterStr, "", "")
                         WebViewActivity.actionStart(context, jumpBean)
                     }
-                }), mIndex,
-                mIndex + afterStr.length + 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                }), index,
+                index + afterStr.length + 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
             )
         }
         return this
@@ -154,9 +150,6 @@ class RichTextUtil {
                 val bitmap = getEmotion(emotion, context) ?: return@map
                 Log.d(TAG, "表情:$emotion bitmap:$bitmap")
                 Log.d(TAG, "表情时间 ${System.currentTimeMillis()}")
-                if (bitmap == null) {
-                    return@map
-                }
                 spannableStringBuilder!!.setSpan(
                     ImageSpan(context, bitmap),
                     index,
@@ -203,14 +196,18 @@ class RichTextUtil {
         getNext(target, next)
         val result = ArrayList<Int>()
         while (p < slen && q < plen) {
-            if (content[p] == target[q]) {
-                p++
-                q++
-            } else if (next[q] == -1) {
-                p++
-                q = 0
-            } else {
-                q = next[q]
+            when {
+                content[p] == target[q] -> {
+                    p++
+                    q++
+                }
+                next[q] == -1 -> {
+                    p++
+                    q = 0
+                }
+                else -> {
+                    q = next[q]
+                }
             }
             if (q == plen) {
                 result.add(p - q)

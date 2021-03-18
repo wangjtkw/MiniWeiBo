@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val dataSource: LoginDataSource) : ViewModel() {
 
-    val isLoading = MutableLiveData(true)
+    private val isLoading = MutableLiveData(true)
 
     fun getEmotion(accessToken: AccessTokenEntity): LiveData<Resource<List<EmotionEntity>>> {
         val result = dataSource.getEmotion(

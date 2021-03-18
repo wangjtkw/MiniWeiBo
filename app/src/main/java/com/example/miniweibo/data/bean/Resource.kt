@@ -2,6 +2,9 @@ package com.example.miniweibo.data.bean
 
 import com.example.miniweibo.data.bean.Status.*
 
+/**
+ * 返回数据封装
+ */
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {
         fun <T> success(data: T?): Resource<T> {

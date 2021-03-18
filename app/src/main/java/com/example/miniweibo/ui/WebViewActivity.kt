@@ -2,14 +2,13 @@ package com.example.miniweibo.ui
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.bean.WebViewJumpBean
-import com.example.miniweibo.util.AppHelper
 import com.example.miniweibo.util.ToastUtil
 
 class WebViewActivity : AppCompatActivity() {
@@ -50,15 +49,15 @@ class WebViewActivity : AppCompatActivity() {
                 return true
             }
         }
-        webView!!.setOnKeyListener { v, keyCode, event ->
+        webView!!.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_BACK && webView!!.canGoBack()) { // 表示按返回键
                 // 时的操作
-                webView!!.goBack(); // 后退
+                webView!!.goBack() // 后退
                 // webview.goForward();//前进
             } else {
                 finish()
             }
-            true; // 已处理
+            true // 已处理
         }
 
     }

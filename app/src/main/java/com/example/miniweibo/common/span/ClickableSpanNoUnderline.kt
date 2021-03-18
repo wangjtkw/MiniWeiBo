@@ -12,7 +12,7 @@ abstract class ClickableSpanNoUnderline(
     private val mOnClickListener: OnClickListener?
 ) :
     ClickableSpan() {
-    constructor(onClickListener: OnClickListener) : this(NO_COLOR, onClickListener) {}
+    constructor(onClickListener: OnClickListener) : this(NO_COLOR, onClickListener)
 
     override fun updateDrawState(@NonNull ds: TextPaint) {
         super.updateDrawState(ds)

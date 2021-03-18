@@ -1,10 +1,8 @@
 package com.example.miniweibo.ui.imgviewer
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.miniweibo.data.bean.bean.ImgWrapBean
 import com.example.miniweibo.myview.OnChildMovingListener
 

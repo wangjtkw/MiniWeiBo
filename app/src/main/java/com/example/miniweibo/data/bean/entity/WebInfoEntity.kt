@@ -92,8 +92,8 @@ data class WebInfoEntity(
                 val thumbnailPicList = mutableListOf<String>()
                 val bmiddlePicList = mutableListOf<String>()
                 val originalPicList = mutableListOf<String>()
-                var bmiddlePicHost: String = ""
-                var originalPicHost: String = ""
+                var bmiddlePicHost = ""
+                var originalPicHost = ""
                 if (!bmiddlePic.isNullOrEmpty()) {
                     bmiddlePicHost = findAndSubString(bmiddlePic, "bmiddle", true)
                 }
@@ -124,17 +124,17 @@ data class WebInfoEntity(
                 val sourceUrl = source?.let {
                     RegExUtil.parseSourceUrl(it)
                 }
-                var contentUrl = ""
+                val contentUrl = ""
                 var content = text ?: ""
                 if (text != null) {
                     val richTextUtil = RichTextUtil()
                     val addressIndexList = richTextUtil.findStr(text, "http", 0)
 
                     val totalTextIndex = richTextUtil.findStr(text, "全文", 0)
-                    if (!totalTextIndex.isNullOrEmpty()) {
-                        content = text.substring(0, totalTextIndex[0] + 2)
+                    content = if (!totalTextIndex.isNullOrEmpty()) {
+                        text.substring(0, totalTextIndex[0] + 2)
                     } else {
-                        content = text
+                        text
                     }
 
 
@@ -191,10 +191,10 @@ data class WebInfoEntity(
             if (index <= 0) {
                 return sub
             }
-            if (needBefore) {
-                sub = originStr.substring(0, index + target.length)
+            sub = if (needBefore) {
+                originStr.substring(0, index + target.length)
             } else {
-                sub = originStr.substring(index + target.length, originStr.length)
+                originStr.substring(index + target.length, originStr.length)
             }
             return sub
         }

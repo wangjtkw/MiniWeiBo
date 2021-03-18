@@ -19,8 +19,6 @@ package com.example.miniweibo.util
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.miniweibo.R
-
 import com.example.miniweibo.api.ApiResponse
 import com.squareup.moshi.rawType
 import retrofit2.Call

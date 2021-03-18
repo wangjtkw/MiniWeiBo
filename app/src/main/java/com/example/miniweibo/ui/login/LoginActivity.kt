@@ -1,24 +1,20 @@
 package com.example.miniweibo.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.RemoteMediator
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.Status
 import com.example.miniweibo.databinding.ActivityLoginBinding
 import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.sdk.SDKUtil
 import com.example.miniweibo.ui.MainActivity
-import com.example.miniweibo.ui.mine.MineViewModel
 import com.example.miniweibo.util.AppHelper
 import com.example.miniweibo.util.ToastUtil
 import dagger.android.AndroidInjection

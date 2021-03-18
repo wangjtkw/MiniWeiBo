@@ -1,10 +1,8 @@
 package com.example.miniweibo.data.db
 
 import androidx.room.TypeConverter
-import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import com.squareup.moshi.adapter
 
 class WebInfoTypeConverter {
 
@@ -17,7 +15,7 @@ class WebInfoTypeConverter {
                 String::class.java
             )
         )
-        return adapter.toJson(data);
+        return adapter.toJson(data)
     }
 
     @TypeConverter

@@ -8,7 +8,7 @@ class EmotionUtil @Inject constructor(private val emotionDao: EmotionDao) {
     private val TAG = "EmotionUtil"
 
     fun getEmotionUrl(emotionName: String): String {
-        val emotionEntity = emotionDao.selectByName(emotionName) ?: return ""
+        val emotionEntity = emotionDao.selectByName(emotionName)
         return emotionEntity.icon
     }
 

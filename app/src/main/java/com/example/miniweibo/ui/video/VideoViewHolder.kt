@@ -7,6 +7,7 @@ import android.view.View
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.entity.ImgEntity
 import com.example.miniweibo.databinding.RvItemVideoBinding
+import com.example.miniweibo.util.ToastUtil
 
 class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
     DataBindingViewHolder<ImgEntity>(view) {
@@ -23,7 +24,7 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
         mBinding.videoImg.visibility = View.VISIBLE
     }
 
-    fun imgInvisible() {
+    private fun imgInvisible() {
         mBinding.videoImg.visibility = View.INVISIBLE
     }
 
@@ -36,9 +37,11 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
         mediaPlayer.reset()
         mediaPlayer.setDataSource(mData!!.videoUrl)
         mediaPlayer.prepareAsync()
+        ToastUtil(context()).makeToast("视频加载中...")
         mediaPlayer.setOnPreparedListener {
             imgInvisible()
             mediaPlayer.start()
+            ToastUtil(context()).makeToast("视频加载完成")
             Log.d(TAG, "on start")
         }
 

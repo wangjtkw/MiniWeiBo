@@ -24,7 +24,8 @@ class UserInfoDataSource @Inject constructor(
         access_token: String
     ): LiveData<Resource<UserInfoEntity>> {
 
-        val result = object : ScopeDataSource<UserInfoBean, UserInfoEntity>(scope) {
+        //        Log.d(TAG, result.value?.data.toString())
+        return object : ScopeDataSource<UserInfoBean, UserInfoEntity>(scope) {
             override suspend fun loadData(): LiveData<ApiResponse<UserInfoBean>> {
                 return api.getUserInfo(access_token, uid)
             }
@@ -45,8 +46,6 @@ class UserInfoDataSource @Inject constructor(
 
 
         }.asLiveData()
-//        Log.d(TAG, result.value?.data.toString())
-        return result
     }
 
 

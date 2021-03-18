@@ -34,7 +34,6 @@ class ImgAdapter : RecyclerView.Adapter<ImgViewHolder>() {
         notifyDataSetChanged()
     }
 
-
     private fun inflateView(viewGroup: ViewGroup, @LayoutRes viewType: Int): View {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
         return layoutInflater.inflate(viewType, viewGroup, false)

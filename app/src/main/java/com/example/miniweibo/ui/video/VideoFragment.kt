@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.MediaController
-import android.widget.VideoView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,10 +35,10 @@ class VideoFragment : Fragment() {
     private var mediaPlayer: MediaPlayer? = null
 
     private val videoList =
-        listOf<String>(
-            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5017546271/62ad/f325/c1f4/8a73eea5e15b6d53f388c4f01ab39507.mp4?wsSecret=858a8d6b71f6f3dc0e01af894e6b321d&wsTime=1615709612",
-            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5017546271/62ad/f325/c1f4/8a73eea5e15b6d53f388c4f01ab39507.mp4?wsSecret=858a8d6b71f6f3dc0e01af894e6b321d&wsTime=1615709612",
-            "http://vodkgeyttp8.vod.126.net/cloudmusic/obj/w5zDkcKQw6LDiWzDgcK2/5017546271/62ad/f325/c1f4/8a73eea5e15b6d53f388c4f01ab39507.mp4?wsSecret=858a8d6b71f6f3dc0e01af894e6b321d&wsTime=1615709612"
+        listOf(
+            "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",
+//            "https://media.w3.org/2010/05/sintel/trailer.mp4",
+//            "https://www.w3schools.com/html/movie.mp4"
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,12 +75,13 @@ class VideoFragment : Fragment() {
 
     fun init() {
         mediaPlayer = MediaPlayer()
+        mediaPlayer!!.isLooping = true
         initRV()
         initSwipeRefresh()
         requestData()
     }
 
-    fun initRV() {
+    private fun initRV() {
         mAdapter = VideoAdapter(mediaPlayer!!)
         val mLayoutManager = GridLayoutManager(requireContext(), 2)
         binding!!.videoRv.run {
@@ -92,13 +91,13 @@ class VideoFragment : Fragment() {
         }
     }
 
-    fun initSwipeRefresh() {
+    private fun initSwipeRefresh() {
         binding!!.videoSwipeRefresh.setOnRefreshListener {
             requestData()
         }
     }
 
-    fun requestData() {
+    private fun requestData() {
         videoViewModel.getImg().observe(viewLifecycleOwner) {
             fetchData(it)
         }

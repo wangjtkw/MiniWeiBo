@@ -3,6 +3,9 @@ package com.example.miniweibo.data.bean.bean
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * 表情数据bean
+ */
 @JsonClass(generateAdapter = true)
 data class EmotionItem(
     @Json(name = "category")
@@ -47,6 +50,4 @@ data class EmotionBeanItem(
     //表情名
     @Json(name = "value")
     val value: String
-) {
-
-}
+)

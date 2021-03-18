@@ -62,7 +62,7 @@ data class UserInfoEntity(
             return userInfoBean.run {
                 val entityCreatedAt = TimeUtil.getTimestamp(TimeUtil.parseTime(createdAt))
 
-                val entityDescription = if (description.isNullOrEmpty()) {
+                val entityDescription = if (description.isEmpty()) {
                     ""
                 } else {
                     "简介:$description"

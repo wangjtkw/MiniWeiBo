@@ -54,8 +54,5 @@ abstract class MiniWeiBoDb : RoomDatabase() {
                 .fallbackToDestructiveMigration()//数据库更新时删除数据重新创建
                 .build().also { this.instance = it }
         }
-
     }
-
-
 }

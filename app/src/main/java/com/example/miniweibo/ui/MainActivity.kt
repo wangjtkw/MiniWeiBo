@@ -29,19 +29,19 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     private var binding: ActivityMainBinding? = null
 
-    val tabSelectIc = listOf(
-        R.drawable.ic_home_select,
-        R.drawable.ic_message_select,
-        R.drawable.ic_vedio_select,
-        R.drawable.ic_mine_select
-    )
-
-    val tabUnSelectIc = listOf(
-        R.drawable.ic_home,
-        R.drawable.ic_message,
-        R.drawable.ic_video,
-        R.drawable.ic_mine
-    )
+//    val tabSelectIc = listOf(
+//        R.drawable.ic_home_select,
+//        R.drawable.ic_message_select,
+//        R.drawable.ic_vedio_select,
+//        R.drawable.ic_mine_select
+//    )
+//
+//    val tabUnSelectIc = listOf(
+//        R.drawable.ic_home,
+//        R.drawable.ic_message,
+//        R.drawable.ic_video,
+//        R.drawable.ic_mine
+//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

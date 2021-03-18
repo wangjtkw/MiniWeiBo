@@ -9,7 +9,6 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.entity.ImgEntity
-import okhttp3.internal.notify
 
 class VideoAdapter(private val mediaPlayer: MediaPlayer) : RecyclerView.Adapter<VideoViewHolder>() {
     private val TAG = "VideoAdapter"

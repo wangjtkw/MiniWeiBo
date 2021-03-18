@@ -1,9 +1,7 @@
 package com.example.miniweibo.common.span
 
-class SpanClickableSpan : ClickableSpanNoUnderline {
-    var urlString: String? = null
+class SpanClickableSpan(color: Int, onClickListener: OnClickListener?) :
+    ClickableSpanNoUnderline(color, onClickListener) {
 
-    constructor(color: Int, onClickListener: OnClickListener?) : super(color, onClickListener) {}
-
-    constructor(onClickListener: OnClickListener?) : super(onClickListener!!) {}
+//    constructor(onClickListener: OnClickListener?) : super(onClickListener!!)
 }
