@@ -2,11 +2,11 @@ package com.example.miniweibo.ui.home.concern
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +19,6 @@ import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
 import com.example.miniweibo.databinding.FragmentHomeConcernBinding
 import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.sdk.SDKUtil
-import com.example.miniweibo.ui.home.mine.HomeMineFragment
 import com.example.miniweibo.util.ToastUtil
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.flow.collectLatest

@@ -49,8 +49,8 @@ data class WebInfoEntity(
     val thumbnailPicUrls: List<String>?,
     @ColumnInfo(name = "bmiddle_pic_urls")
     val bmiddlePicUrls: List<String>?,
-    @ColumnInfo(name = "origina_pic_urls")
-    val originaPicUrls: List<String>?,
+    @ColumnInfo(name = "original_pic_urls")
+    val originalPicUrls: List<String>?,
     //转发数
     @ColumnInfo(name = "reposts_count")
     val repostsCount: String,
@@ -164,7 +164,7 @@ data class WebInfoEntity(
                     picNum = picNum,
                     thumbnailPicUrls = thumbnailPicList,
                     bmiddlePicUrls = bmiddlePicList,
-                    originaPicUrls = originalPicList,
+                    originalPicUrls = originalPicList,
                     repostsCount = "$repostsCount",
                     sourceTitle = sourceTitle,
                     sourceUrl = sourceUrl,
@@ -215,7 +215,7 @@ data class WebInfoEntity(
     }
 
     override fun toString(): String {
-        return "WebInfoEntity(idstr='$idstr', attitudesCount='$attitudesCount', bmiddlePic=$bmiddlePic, commentsCount='$commentsCount', createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, thumbnailPicUrls=$thumbnailPicUrls, bmiddlePicUrls=$bmiddlePicUrls, originaPicUrls=$originaPicUrls, repostsCount='$repostsCount', sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, contentUrl='$contentUrl', thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page, type='$type')"
+        return "WebInfoEntity(idstr='$idstr', attitudesCount='$attitudesCount', bmiddlePic=$bmiddlePic, commentsCount='$commentsCount', createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, thumbnailPicUrls=$thumbnailPicUrls, bmiddlePicUrls=$bmiddlePicUrls, originaPicUrls=$originalPicUrls, repostsCount='$repostsCount', sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, contentUrl='$contentUrl', thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page, type='$type')"
     }
 
 

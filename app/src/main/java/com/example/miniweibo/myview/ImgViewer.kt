@@ -149,7 +149,10 @@ class ImgViewer : View {
      * 通过链接进行设置，内部使用fresco进行加载，通常情况下会使用缓存加载
      * @param url：图片链接
      */
-    fun setImg(url: String) {
+    fun setImg(url: String?) {
+        if (url.isNullOrEmpty()) {
+            return
+        }
         val imageRequest = ImageRequestBuilder
             .newBuilderWithSource(
                 Uri.parse(url)

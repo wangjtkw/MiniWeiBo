@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniweibo.R
+import com.example.miniweibo.data.bean.bean.ImgWrapBean
 
 class ImgAdapter : RecyclerView.Adapter<ImgViewHolder>() {
-    private val dataList = ArrayList<String>()
+    private val dataList = ArrayList<ImgWrapBean>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImgViewHolder {
         val view = inflateView(parent, R.layout.rv_item_concern_img)
@@ -20,10 +21,14 @@ class ImgAdapter : RecyclerView.Adapter<ImgViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return if (dataList.size > 9) {
+            9
+        } else {
+            dataList.size
+        }
     }
 
-    fun addDataList(list: List<String>) {
+    fun addDataList(list: List<ImgWrapBean>) {
         dataList.clear()
         dataList.addAll(list)
         notifyDataSetChanged()

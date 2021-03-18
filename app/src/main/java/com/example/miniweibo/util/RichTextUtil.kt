@@ -58,7 +58,7 @@ class RichTextUtil {
                 ForegroundColorSpan(Color.RED),
                 sharpIndexList[p],
                 sharpIndexList[p + 1] + 1,
-                Spanned.SPAN_INCLUSIVE_INCLUSIVE
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
             )
             p += 2
         }

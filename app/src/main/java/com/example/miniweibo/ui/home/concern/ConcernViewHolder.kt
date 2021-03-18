@@ -1,11 +1,13 @@
 package com.example.miniweibo.ui.home.concern
 
+import android.net.Uri
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.miniweibo.common.DataBindingViewHolder
+import com.example.miniweibo.data.bean.bean.ImgWrapBean
 import com.example.miniweibo.data.bean.bean.WebViewJumpBean
 import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.databinding.RvItemConcernBinding
@@ -13,6 +15,7 @@ import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.sdk.SDKUtil
 import com.example.miniweibo.ui.InfoDetailActivity
 import com.example.miniweibo.ui.WebViewActivity
+import com.example.miniweibo.ui.imgviewer.ImgViewerActivity
 import com.example.miniweibo.util.RichTextUtil
 import com.example.miniweibo.util.TimeUtil
 import com.example.miniweibo.util.ToastUtil
@@ -68,32 +71,47 @@ class ConcernViewHolder(view: View) :
                 WebViewActivity.actionStart(context(), jumpBean)
             }
         }
+        setImg(data)
         initRV(data)
 
     }
 
-//    fun setImg(data: WebInfoEntity) {
-//        if (data.picNum ?: 0 > 1) {
-////            Log.d(TAG, "setImg run")
-//            Log.d(TAG, "picNum:${data.picNum.toString()} data:${data.text}")
-////            Log.d(TAG, "picUrl:${data.bmiddlePicUrls!![0]}")
-//            data.originaPicUrls?.map {
-//                Log.d(TAG, "url:$it")
-//            }
-//
-//            mBinding.concernSingleImgFl.visibility = View.VISIBLE
-//            mBinding.concernShowImg.visibility = View.VISIBLE
-//            mBinding.concernShowImg.setImageURI(Uri.parse(data.bmiddlePicUrls!![0]))
-//        }
-//    }
+    fun setImg(data: WebInfoEntity) {
+        if (data.picNum ?: 0 == 1) {
+            mBinding.concernSingleImgFl.visibility = View.VISIBLE
+            val imgWrapBean = ImgWrapBean(data.bmiddlePicUrls!![0], data.originalPicUrls!![0])
+            mBinding.concernShowImg.run {
+                visibility = View.VISIBLE
+                setImageURI(Uri.parse(data.bmiddlePicUrls[0]), context())
+                setOnClickListener {
+                    ImgViewerActivity.actionStart(
+                        context,
+                        imgWrapBean
+                    )
+                }
+            }
+
+        } else {
+            mBinding.concernSingleImgFl.visibility = View.GONE
+            mBinding.concernShowImg.visibility = View.GONE
+        }
+    }
 
     fun initRV(data: WebInfoEntity) {
-        if (data.picNum == null || data.picNum <= 0 || data.bmiddlePicUrls.isNullOrEmpty()) {
+        if (data.picNum == null || data.picNum <= 1 || data.bmiddlePicUrls.isNullOrEmpty()) {
             mBinding.concernShowImgRv.visibility = View.GONE
             return
         }
         val mAdapter = ImgAdapter()
-        mAdapter.addDataList(data.bmiddlePicUrls)
+        val imgList = ArrayList<ImgWrapBean>()
+        var p = 0
+        while (p < data.picNum) {
+            val imgWrapBean =
+                ImgWrapBean(data.bmiddlePicUrls[p], data.originalPicUrls?.get(p) ?: "")
+            imgList.add(imgWrapBean)
+            p++
+        }
+        mAdapter.addDataList(imgList)
         mBinding.concernShowImgRv.run {
             visibility = View.VISIBLE
             adapter = mAdapter

@@ -1,20 +1,20 @@
 package com.example.miniweibo.ui.imgviewer
 
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.miniweibo.R
+import com.example.miniweibo.data.bean.bean.ImgWrapBean
+import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.myview.ImgViewer
 import com.example.miniweibo.myview.OnChildMovingListener
+import com.example.miniweibo.util.ToastUtil
 
 class ImgViewerFragment : Fragment() {
-    private var url: String? = null
+    private var url: ImgWrapBean? = null
 
     private var imgViewer: ImgViewer? = null
 
@@ -22,8 +22,7 @@ class ImgViewerFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        url = arguments?.getString(IMG_VIEWER_URL) ?: ""
-        Log.d(TAG, "url: $url")
+        url = arguments?.getParcelable(IMG_VIEWER_URL)
     }
 
     override fun onCreateView(
@@ -31,7 +30,6 @@ class ImgViewerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_img_viewer, container, false)
-
         return view
     }
 
@@ -45,8 +43,12 @@ class ImgViewerFragment : Fragment() {
         if (imgViewer == null) {
             Log.d(TAG, "viewer is null")
         }
+        if (!requireContext().isConnectedNetwork()) {
+            ToastUtil(requireContext()).makeToast("当前网络未连接！")
+        }
         imgViewer!!.setImg(R.drawable.bg_img)
-        imgViewer!!.setImg(url!!)
+        imgViewer!!.setImg(url?.url)
+        imgViewer!!.setImg(url?.originUrl)
         require(mOnChildMovingListener != null) { "OnChildMovingListener is not be null" }
         imgViewer!!.setOnMovingListener(mOnChildMovingListener!!)
     }
@@ -60,13 +62,13 @@ class ImgViewerFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(
-            url: String,
+            url: ImgWrapBean,
             onChildMovingListener: OnChildMovingListener
         ): ImgViewerFragment {
             mOnChildMovingListener = onChildMovingListener
             return ImgViewerFragment().apply {
                 arguments = Bundle().apply {
-                    putString(IMG_VIEWER_URL, url)
+                    putParcelable(IMG_VIEWER_URL, url)
                 }
             }
         }
