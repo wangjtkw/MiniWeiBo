@@ -16,10 +16,7 @@ class ImgAdapter : RecyclerView.Adapter<ImgViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ImgViewHolder, position: Int) {
-        val data = getItem(position)
-        data.let {
-            holder.bindData(it, position)
-        }
+        holder.bindData(dataList, position)
     }
 
     override fun getItemCount(): Int {
@@ -32,9 +29,6 @@ class ImgAdapter : RecyclerView.Adapter<ImgViewHolder>() {
         notifyDataSetChanged()
     }
 
-    private fun getItem(position: Int): String {
-        return dataList[position]
-    }
 
     private fun inflateView(viewGroup: ViewGroup, @LayoutRes viewType: Int): View {
         val layoutInflater = LayoutInflater.from(viewGroup.context)

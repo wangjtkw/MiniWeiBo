@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.miniweibo.R
 import com.example.miniweibo.databinding.ActivityImgViewerBinding
@@ -30,6 +31,7 @@ class ImgViewerActivity : AppCompatActivity() {
                 R.layout.activity_img_viewer
             ) as ActivityImgViewerBinding
         getParam()
+        init()
     }
 
     private fun getParam() {
@@ -39,12 +41,31 @@ class ImgViewerActivity : AppCompatActivity() {
     }
 
     fun init() {
+        var text = "${(currentIndex ?: 0) + 1}${temp}"
+        binding!!.imgViewerIndicatorTv.text = text
         require(!imgUrlList.isNullOrEmpty()) { "imgUrlList must not be null" }
-        mAdapter = ImagePagerAdapter(this, imgUrlList!!)
-        binding!!.imgViewerPager.adapter = mAdapter
-        binding!!.imgViewerPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        binding!!.imgViewerPager.run {
+            mAdapter = ImagePagerAdapter(supportFragmentManager, imgUrlList!!, this)
+            adapter = mAdapter
+            currentItem = currentIndex ?: 0
+            addOnPageChangeListener(object :
+                ViewPager.OnPageChangeListener {
+                override fun onPageSelected(position: Int) {
+                    text = "${position + 1}${temp}"
+                    binding!!.imgViewerIndicatorTv.text = text
+                }
 
-        })
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+            })
+        }
     }
 
 
@@ -53,7 +74,7 @@ class ImgViewerActivity : AppCompatActivity() {
         const val IMG_VIEWER_PARAM_INDEX = "img_viewer_param_index"
 
         fun actionStart(context: Context, list: ArrayList<String>, index: Int) {
-            val intent = Intent(context, WebViewActivity::class.java)
+            val intent = Intent(context, ImgViewerActivity::class.java)
             intent.putStringArrayListExtra(IMG_VIEWER_PARAM_LIST, list)
             intent.putExtra(IMG_VIEWER_PARAM_INDEX, index)
             context.startActivity(intent)

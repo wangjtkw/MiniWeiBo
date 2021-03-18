@@ -93,13 +93,13 @@ class ConcernViewHolder(view: View) :
             return
         }
         val mAdapter = ImgAdapter()
-
+        mAdapter.addDataList(data.bmiddlePicUrls)
         mBinding.concernShowImgRv.run {
             visibility = View.VISIBLE
             adapter = mAdapter
             layoutManager = GridLayoutManager(context(), 3)
         }
-        mAdapter.addDataList(data.bmiddlePicUrls)
+
     }
 }
 

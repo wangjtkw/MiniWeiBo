@@ -1,6 +1,0 @@
-com/facebook/imagepipeline/memory/BufferMemoryChunk.java
- com.facebook.imagepipeline.memory.BufferMemoryChunk
-com/facebook/imagepipeline/memory/BufferMemoryChunkPool.java
- com.facebook.imagepipeline.memory.BufferMemoryChunkPool
-com/facebook/fresco/memorytypes/simple/BuildConfig.java
- com.facebook.fresco.memorytypes.simple.BuildConfig

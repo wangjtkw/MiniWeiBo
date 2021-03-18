@@ -2,16 +2,24 @@ package com.example.miniweibo.ui.imgviewer
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.miniweibo.myview.OnChildMovingListener
 
-class ImagePagerAdapter(activity: FragmentActivity, private val mImgUrlList: ArrayList<String>) :
-    FragmentStateAdapter(activity) {
+@Suppress("DEPRECATION")
+class ImagePagerAdapter(
+    fragmentManager: FragmentManager,
+    private val mImgUrlList: ArrayList<String>,
+    private val onChildMovingListener: OnChildMovingListener
+) :
+    FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    override fun getItemCount(): Int {
+    override fun getCount(): Int {
         return mImgUrlList.size
     }
 
-    override fun createFragment(position: Int): Fragment {
-        return ImgViewerFragment.newInstance(mImgUrlList[position])
+    override fun getItem(position: Int): Fragment {
+        return ImgViewerFragment.newInstance(mImgUrlList[position], onChildMovingListener)
     }
 }

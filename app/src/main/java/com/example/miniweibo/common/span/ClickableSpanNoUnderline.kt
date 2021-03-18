@@ -14,11 +14,6 @@ abstract class ClickableSpanNoUnderline(
     ClickableSpan() {
     constructor(onClickListener: OnClickListener) : this(NO_COLOR, onClickListener) {}
 
-    /**
-     * Makes the text underlined and in the link color.
-     *
-     * @param ds
-     */
     override fun updateDrawState(@NonNull ds: TextPaint) {
         super.updateDrawState(ds)
         // 设置文字颜色
@@ -33,11 +28,6 @@ abstract class ClickableSpanNoUnderline(
         ds.bgColor = Color.TRANSPARENT
     }
 
-    /**
-     * Performs the click action associated with this span.
-     *
-     * @param widget widget
-     */
     override fun onClick(widget: View) {
         if (mOnClickListener != null) {
             mOnClickListener.onClick(widget, this)

@@ -2,5 +2,7 @@
 <resources>
 
     <declare-styleable name="VideoPlayerView"></declare-styleable>
+    <declare-styleable name="ImgViewer"></declare-styleable>
+    <declare-styleable name="ImgViewerPager"></declare-styleable>
 
 </resources>

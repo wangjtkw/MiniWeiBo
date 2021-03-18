@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.imgviewer.ImgViewerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.miniweibo.myview.ImgViewer
+        android:id="@+id/img_viewer_viewer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
