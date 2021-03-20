@@ -93,11 +93,6 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
         finish()
     }
 
-    override fun onPause() {
-        super.onPause()
-        binding!!.loginGroup.visibility = View.GONE
-    }
-
     private fun noNetworkToast() {
         if (!AppHelper.mContext.isConnectedNetwork()) {
             //如果网络未连接，则不进行网络加载
