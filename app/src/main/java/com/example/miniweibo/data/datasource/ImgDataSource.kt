@@ -37,7 +37,10 @@ class ImgDataSource @Inject constructor(
                 }
                 db.imgDao().insertImgUrl(imgEntityList)
             }
-
         }.asLiveData()
+    }
+
+    fun setUpdate(imgEntity: ImgEntity) {
+        db.imgDao().update(imgEntity)
     }
 }

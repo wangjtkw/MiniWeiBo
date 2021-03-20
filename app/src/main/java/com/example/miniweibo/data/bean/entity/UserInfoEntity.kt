@@ -25,7 +25,7 @@ data class UserInfoEntity(
     //用户所在地
     val location: String,
     //用户个人描述
-    val description: String,
+    var description: String,
     //头像地址(50x50)
     @ColumnInfo(name = "profile_image_url")
     val profileImageUrl: String,

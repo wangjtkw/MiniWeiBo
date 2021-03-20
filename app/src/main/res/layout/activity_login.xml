@@ -32,17 +32,50 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/login_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="splash_logo_img,splash_tv,login_bt" />
+
+        <ImageView
+            android:id="@+id/splash_logo_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/splash_logo_img_description"
+            android:src="@drawable/ic_logo"
+            android:transitionName="logo_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <TextView
+            android:id="@+id/splash_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/project_name"
+            android:textColor="@color/purple_700"
+            android:textSize="@dimen/text_super_2"
+            android:textStyle="bold"
+            android:transitionName="splash_tv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/splash_logo_img" />
+
         <Button
             android:id="@+id/login_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:background="@color/white"
             android:text="@string/login_bt_tx"
             android:textSize="@dimen/text_normal_text"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/splash_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

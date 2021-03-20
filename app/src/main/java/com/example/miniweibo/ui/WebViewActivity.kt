@@ -38,6 +38,7 @@ class WebViewActivity : AppCompatActivity() {
         mUrl = param!!.url ?: ""
         uid = param.uid ?: ""
         webId = param.webId ?: ""
+
     }
 
     private fun load() {

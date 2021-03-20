@@ -15,4 +15,7 @@ interface UserInfoDao {
 
     @Query("select * from user_info_entity where id = :id")
     fun selectById(id: String): LiveData<UserInfoEntity>
+
+    @Update
+    suspend fun update(userInfoEntity: UserInfoEntity)
 }

@@ -12,4 +12,8 @@ class VideoViewModel @Inject constructor(private val imgDataSource: ImgDataSourc
 //    private val l:MutableLiveData
 
     fun getImg(): LiveData<Resource<List<ImgEntity>>> = imgDataSource.getImg(viewModelScope)
+
+    fun changeFavorite(imgEntity: ImgEntity) {
+        imgDataSource.setUpdate(imgEntity)
+    }
 }

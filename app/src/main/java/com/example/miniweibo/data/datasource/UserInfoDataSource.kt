@@ -10,6 +10,7 @@ import com.example.miniweibo.data.db.MiniWeiBoDb
 import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.util.AppHelper
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class UserInfoDataSource @Inject constructor(
@@ -46,6 +47,13 @@ class UserInfoDataSource @Inject constructor(
 
 
         }.asLiveData()
+    }
+
+    fun changeInfo(scope: CoroutineScope, userInfoEntity: UserInfoEntity) {
+        scope.launch {
+            db.userInfoDao().update(userInfoEntity)
+        }
+
     }
 
 

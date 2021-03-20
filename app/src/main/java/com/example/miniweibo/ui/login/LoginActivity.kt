@@ -2,10 +2,14 @@ package com.example.miniweibo.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Explode
+import android.transition.Fade
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
@@ -40,12 +44,19 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+//        window.enterTransition = Explode ().setDuration(200);
+//        getWindow().setExitTransition(new Explode ().setDuration(2000));
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         SDKUtil.getSDKUtil().register(this)
         init()
     }
 
     private fun init() {
+        ViewCompat.animate(binding!!.loginBt)
+            .setDuration(500)
+            .translationY(-150f)
+            .start()
 
         noNetworkToast()
 
@@ -75,6 +86,16 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding!!.loginGroup.visibility = View.GONE
     }
 
     private fun noNetworkToast() {

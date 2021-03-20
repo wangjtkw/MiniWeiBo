@@ -14,5 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:windowContentTransitions">true</item>
+    </style>
 </resources>

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.miniweibo.R
+import com.example.miniweibo.data.bean.Status
+import com.example.miniweibo.data.bean.entity.UserInfoEntity
 import com.example.miniweibo.databinding.FragmentMineBinding
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -20,6 +22,8 @@ class MineFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var binding: FragmentMineBinding? = null
+
+    private var userInfoEntity: UserInfoEntity? = null
 
 //    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -47,7 +51,18 @@ class MineFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userViewModel.user.observe(viewLifecycleOwner) {
+            if (it.status == Status.SUCCESS) {
+                userInfoEntity = it.data
+            }
             binding!!.userInfoEntity = it.data
+        }
+        initChangeButton()
+    }
+
+    fun initChangeButton() {
+        binding!!.changeButton.setOnClickListener {
+            userInfoEntity!!.description = (0..100).random().toString()
+            userViewModel.update(userInfoEntity!!)
         }
     }
 

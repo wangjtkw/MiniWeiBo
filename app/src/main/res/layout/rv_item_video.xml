@@ -38,6 +38,14 @@
             fresco:placeholderImageScaleType="centerCrop"
             fresco:viewAspectRatio="1" />
 
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintRight_toRightOf="@id/video_img"
+            app:layout_constraintTop_toTopOf="@id/video_img"
+            android:layout_margin="8dp"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

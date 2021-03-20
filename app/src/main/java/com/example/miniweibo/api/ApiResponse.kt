@@ -5,7 +5,7 @@ import retrofit2.Response
 //利用密封类来对网络请求结果进行分类，供后续使用
 
 @JvmSuppressWildcards
-sealed class ApiResponse<T>{
+sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
@@ -14,7 +14,7 @@ sealed class ApiResponse<T>{
         fun <T> create(response: Response<T>): ApiResponse<T> {
             if (response.isSuccessful) {
                 val body = response.body()
-                return if (body == null || response.code() == 204) {
+                return if (body == null || response.code() == 204 || response.code() == 403) {
                     ApiEmptyResponse()
                 } else {
                     ApiSuccessResponse(body)

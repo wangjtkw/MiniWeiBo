@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.entity.RemoteKeyEntity
@@ -39,8 +38,6 @@ class HomeConcernFragment : Fragment() {
 
     private var binding: FragmentHomeConcernBinding? = null
 
-//    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-
     private var mAdapter: ConcernAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +51,6 @@ class HomeConcernFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_home_concern,
@@ -84,16 +79,11 @@ class HomeConcernFragment : Fragment() {
         mAdapter = ConcernAdapter()
         binding!!.concernRv.adapter = mAdapter
         binding!!.concernRv.layoutManager = LinearLayoutManager(requireContext())
-
-
         when (paramType) {
             RemoteKeyEntity.TYPE_CONCERN -> {
                 homeViewModel
                     .postOfConcernData()
                     .observe(viewLifecycleOwner) {
-                        it.map { entity ->
-                            Log.d(TAG, entity.toString())
-                        }
                         mAdapter!!.submitData(lifecycle, it)
                     }
             }
@@ -101,13 +91,11 @@ class HomeConcernFragment : Fragment() {
                 homeViewModel
                     .postOfMineData(SDKUtil.getSDKUtil().getAccessTokenBean().uid)
                     .observe(viewLifecycleOwner) {
-                        it.map { entity ->
-                            Log.d(TAG, entity.toString())
-                        }
                         mAdapter!!.submitData(lifecycle, it)
                     }
             }
         }
+
 
 
         lifecycleScope.launchWhenCreated {
@@ -131,5 +119,4 @@ class HomeConcernFragment : Fragment() {
                 }
             }
     }
-
 }

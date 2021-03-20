@@ -44,8 +44,6 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
             ToastUtil(context()).makeToast("视频加载完成")
             Log.d(TAG, "on start")
         }
-
-
     }
 
     fun reset() {
