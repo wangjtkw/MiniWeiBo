@@ -1,6 +1,0 @@
-com/facebook/imagepipeline/memory/NativeMemoryChunk.java
- com.facebook.imagepipeline.memory.NativeMemoryChunk
-com/facebook/imagepipeline/memory/NativeMemoryChunkPool.java
- com.facebook.imagepipeline.memory.NativeMemoryChunkPool
-com/facebook/fresco/memorytypes/nativememory/BuildConfig.java
- com.facebook.fresco.memorytypes.nativememory.BuildConfig

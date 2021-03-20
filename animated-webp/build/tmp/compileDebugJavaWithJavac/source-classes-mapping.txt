@@ -1,8 +1,0 @@
-com/facebook/animated/webp/WebPImage.java
- com.facebook.animated.webp.WebPImage
-com/facebook/animated/webpdrawable/WebpAnimationBackend.java
- com.facebook.animated.webpdrawable.WebpAnimationBackend
-com/facebook/animated/webp/WebPFrame.java
- com.facebook.animated.webp.WebPFrame
-com/facebook/animated/webp/BuildConfig.java
- com.facebook.animated.webp.BuildConfig

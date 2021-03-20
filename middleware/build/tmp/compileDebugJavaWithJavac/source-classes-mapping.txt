@@ -1,4 +1,0 @@
-com/facebook/fresco/common/middleware/BuildConfig.java
- com.facebook.fresco.common.middleware.BuildConfig
-com/facebook/fresco/middleware/MiddlewareUtils.java
- com.facebook.fresco.middleware.MiddlewareUtils

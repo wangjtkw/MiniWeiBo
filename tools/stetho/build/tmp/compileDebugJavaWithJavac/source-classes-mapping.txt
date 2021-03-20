@@ -1,6 +1,0 @@
-com/facebook/imagepipeline/stetho/FrescoStethoPlugin.java
- com.facebook.imagepipeline.stetho.FrescoStethoPlugin
-com/facebook/imagepipeline/stetho/BaseFrescoStethoPlugin.java
- com.facebook.imagepipeline.stetho.BaseFrescoStethoPlugin
-com/facebook/fresco/stetho/BuildConfig.java
- com.facebook.fresco.stetho.BuildConfig

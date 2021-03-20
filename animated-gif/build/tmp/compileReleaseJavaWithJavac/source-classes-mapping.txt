@@ -1,6 +1,0 @@
-com/facebook/animated/gif/GifFrame.java
- com.facebook.animated.gif.GifFrame
-com/facebook/animated/gif/BuildConfig.java
- com.facebook.animated.gif.BuildConfig
-com/facebook/animated/gif/GifImage.java
- com.facebook.animated.gif.GifImage
