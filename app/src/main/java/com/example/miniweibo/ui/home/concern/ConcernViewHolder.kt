@@ -49,7 +49,7 @@ class ConcernViewHolder(view: View) :
         }
         mBinding.concernHeadImg.setOnClickListener {
             if (!view.context.isConnectedNetwork()) {
-                ToastUtil(context()).makeToast("当前网络未连接！")
+                ToastUtil.makeToast("当前网络未连接！")
             } else {
                 Log.d(TAG, "click")
                 InfoDetailActivity.actionStart(context())
@@ -58,7 +58,7 @@ class ConcernViewHolder(view: View) :
         mBinding.concernContentTv.setOnClickListener {
 
             if (!view.context.isConnectedNetwork()) {
-                ToastUtil(context()).makeToast("当前网络未连接！")
+                ToastUtil.makeToast("当前网络未连接！")
             } else {
                 val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
                 val url =

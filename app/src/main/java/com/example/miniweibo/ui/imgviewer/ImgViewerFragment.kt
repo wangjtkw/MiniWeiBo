@@ -43,7 +43,7 @@ class ImgViewerFragment : Fragment() {
             Log.d(TAG, "viewer is null")
         }
         if (!requireContext().isConnectedNetwork()) {
-            ToastUtil(requireContext()).makeToast("当前网络未连接！")
+            ToastUtil.makeToast("当前网络未连接！")
         }
         imgViewer!!.setImg(R.drawable.bg_img)
         imgViewer!!.setImg(url?.url)

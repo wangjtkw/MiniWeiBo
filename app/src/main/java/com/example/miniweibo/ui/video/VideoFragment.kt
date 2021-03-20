@@ -117,7 +117,7 @@ class VideoFragment : Fragment() {
             Status.LOADING -> {
             }
             Status.ERROR -> {
-                ToastUtil(requireContext()).makeToast("请求发生错误：${result.message ?: ""}")
+                ToastUtil.makeToast("请求发生错误：${result.message ?: ""}")
             }
         }
         binding!!.videoSwipeRefresh.isRefreshing = (result.status == Status.LOADING)

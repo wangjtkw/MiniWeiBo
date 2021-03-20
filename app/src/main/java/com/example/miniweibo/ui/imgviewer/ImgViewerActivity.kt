@@ -29,7 +29,7 @@ class ImgViewerActivity : AppCompatActivity() {
     private fun init() {
         imgViewer = findViewById(R.id.img_viewer_viewer)
         if (!isConnectedNetwork()) {
-            ToastUtil(this).makeToast("当前网络未连接！")
+            ToastUtil.makeToast("当前网络未连接！")
         }
         imgViewer!!.setImg(R.drawable.bg_img)
         imgViewer!!.setImg(mUrl?.url)

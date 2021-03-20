@@ -32,7 +32,7 @@ class WebViewActivity : AppCompatActivity() {
     private fun initParam() {
         val param = intent.getParcelableExtra<WebViewJumpBean>(WEB_VIEW_JUMP_PARAM)
         if (param == null || param.url.isNullOrEmpty()) {
-            ToastUtil(this).makeToast("请求参数错误")
+            ToastUtil.makeToast("请求参数错误")
             finish()
         }
         mUrl = param!!.url ?: ""

@@ -79,7 +79,7 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
                 if (SDKUtil.getSDKUtil().needLogin()) {
                     SDKUtil.getSDKUtil().login()
                 } else {
-                    ToastUtil(this).makeToast("已经不需要登录了")
+                    ToastUtil.makeToast("已经不需要登录了")
                     Log.d(TAG, "start :${System.currentTimeMillis()}")
                     Log.d(TAG, SDKUtil.getSDKUtil().getAccessTokenBean().toString())
                     Log.d(TAG, "end :${System.currentTimeMillis()}")
@@ -101,7 +101,7 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
     private fun noNetworkToast() {
         if (!AppHelper.mContext.isConnectedNetwork()) {
             //如果网络未连接，则不进行网络加载
-            ToastUtil(this).makeToast("当前网络未连接")
+            ToastUtil.makeToast("当前网络未连接")
         }
     }
 

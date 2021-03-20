@@ -349,10 +349,11 @@ class ImgViewer : View {
      */
     private fun getScreenSize() {
         val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             totalWidth = windowManager.currentWindowMetrics.bounds.width()
             totalHeight = windowManager.currentWindowMetrics.bounds.height()
-        } else {
+        }else{
             totalWidth = windowManager.defaultDisplay.width
             totalHeight = windowManager.defaultDisplay.height
         }

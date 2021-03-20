@@ -65,7 +65,7 @@ class HomeConcernFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (!requireContext().isConnectedNetwork()) {
-            ToastUtil(requireContext()).makeToast("当前网络未连接！")
+            ToastUtil.makeToast("当前网络未连接！")
         }
     }
 

@@ -5,7 +5,7 @@ import android.content.Context
 import android.widget.Toast
 import javax.inject.Inject
 
-class ToastUtil @Inject constructor(val context: Context) {
+object ToastUtil {
     private var lastShowTime = 0L
     private var lastShowMsg: String? = null
     private var curShowMsg: String? = null
@@ -23,7 +23,7 @@ class ToastUtil @Inject constructor(val context: Context) {
         lastShowTime = currentShowTime
         lastShowMsg = curShowMsg
         if (toast == null) {
-            toast = Toast.makeText(context, curShowMsg, Toast.LENGTH_SHORT)
+            toast = Toast.makeText(AppHelper.mContext, curShowMsg, Toast.LENGTH_SHORT)
         } else {
             toast?.setText(curShowMsg)
         }

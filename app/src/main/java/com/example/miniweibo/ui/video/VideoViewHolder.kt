@@ -37,11 +37,11 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
         mediaPlayer.reset()
         mediaPlayer.setDataSource(mData!!.videoUrl)
         mediaPlayer.prepareAsync()
-        ToastUtil(context()).makeToast("视频加载中...")
+        ToastUtil.makeToast("视频加载中...")
         mediaPlayer.setOnPreparedListener {
             imgInvisible()
             mediaPlayer.start()
-            ToastUtil(context()).makeToast("视频加载完成")
+            ToastUtil.makeToast("视频加载完成")
             Log.d(TAG, "on start")
         }
     }
