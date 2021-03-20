@@ -8,8 +8,16 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+*/build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+#/animated-base/build
+#/animated-drawable/build
+#/animated-gif/build
+#/animated-gif-lite/build
+#/animated-webp/build
+#/build
+#/build
+#/build
