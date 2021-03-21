@@ -81,6 +81,7 @@ class WebInfoRemoteMediator(
                     )
                 }
             }
+
 //            return MediatorResult.Success(endOfPaginationReached = true)
             if (result == null) {
                 Log.d(TAG, "true 1")
@@ -90,6 +91,7 @@ class WebInfoRemoteMediator(
                 Log.d(TAG, "true2")
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
+            Log.d(TAG,"dataBean:${result.statuses}")
             val items = result.statuses!!.map {
                 WebInfoEntity.convert2WebInfoEntity(it, page + 1, type)
             }
@@ -97,6 +99,7 @@ class WebInfoRemoteMediator(
                 Log.d(TAG, "true3")
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
+
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     webInfoDao.clearWebInfoByType(type)

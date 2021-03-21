@@ -79,7 +79,11 @@ data class Statuse(
 
     @Json(name = "user")
     val user: User?,
-)
+){
+    override fun toString(): String {
+        return "Statuse(idstr='$idstr', attitudesCount=$attitudesCount, commentsCount=$commentsCount, createdAt='$createdAt', favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, picNum=$picNum, picUrls=$picUrls, thumbnailPic=$thumbnailPic, bmiddlePic=$bmiddlePic, originalPic=$originalPic, repostsCount=$repostsCount, source=$source, text=$text, textLength=$textLength, user=$user)"
+    }
+}
 
 @JsonClass(generateAdapter = true)
 data class PicUrl(

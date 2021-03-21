@@ -88,6 +88,11 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding!!.loginGroup.visibility = View.GONE
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         finish()

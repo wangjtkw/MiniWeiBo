@@ -26,7 +26,8 @@ import kotlinx.coroutines.launch
 class ConcernViewHolder(view: View) :
     DataBindingViewHolder<WebInfoEntity>(view) {
 
-    private val mBinding: RvItemConcernBinding = DataBindingUtil.bind(view)!!
+    private val mBinding: RvItemConcernBinding =
+        DataBindingUtil.bind(view)!!
     private val TAG = "ConcernViewHolder"
 
     override fun bindData(data: WebInfoEntity, position: Int) {
@@ -98,6 +99,7 @@ class ConcernViewHolder(view: View) :
     }
 
     fun initRV(data: WebInfoEntity) {
+        Log.d(TAG, "initRV:$data")
         if (data.picNum == null || data.picNum <= 1 || data.bmiddlePicUrls.isNullOrEmpty()) {
             mBinding.concernShowImgRv.visibility = View.GONE
             return
@@ -105,7 +107,7 @@ class ConcernViewHolder(view: View) :
         val mAdapter = ImgAdapter()
         val imgList = ArrayList<ImgWrapBean>()
         var p = 0
-        while (p < data.picNum) {
+        while (p < data.bmiddlePicUrls.size) {
             val imgWrapBean =
                 ImgWrapBean(data.bmiddlePicUrls[p], data.originalPicUrls?.get(p) ?: "")
             imgList.add(imgWrapBean)

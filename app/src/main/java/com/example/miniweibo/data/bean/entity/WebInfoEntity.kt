@@ -215,7 +215,7 @@ data class WebInfoEntity(
     }
 
     override fun toString(): String {
-        return "WebInfoEntity(idstr='$idstr', attitudesCount='$attitudesCount', bmiddlePic=$bmiddlePic, commentsCount='$commentsCount', createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, thumbnailPicUrls=$thumbnailPicUrls, bmiddlePicUrls=$bmiddlePicUrls, originaPicUrls=$originalPicUrls, repostsCount='$repostsCount', sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, contentUrl='$contentUrl', thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page, type='$type')"
+        return "WebInfoEntity(idstr='$idstr', attitudesCount='$attitudesCount', bmiddlePic=$bmiddlePic, commentsCount='$commentsCount', createdAt=$createdAt, favorited=$favorited, isLongText=$isLongText, isVote=$isVote, mid=$mid, originalPic=$originalPic, picNum=$picNum, thumbnailPicUrls=$thumbnailPicUrls, bmiddlePicUrls=$bmiddlePicUrls, originalPicUrls=$originalPicUrls, repostsCount='$repostsCount', sourceTitle=$sourceTitle, sourceUrl=$sourceUrl, text=$text, textLength=$textLength, contentUrl='$contentUrl', thumbnailPic=$thumbnailPic, userIdStr=$userIdStr, avatarHd=$avatarHd, name=$name, page=$page, type='$type')"
     }
 
 
