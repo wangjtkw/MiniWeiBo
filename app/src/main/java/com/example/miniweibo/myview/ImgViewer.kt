@@ -201,6 +201,7 @@ class ImgViewer : View {
     private fun init() {
         getScreenSize()
         mPaint = Paint()
+        mPaint!!.isAntiAlias = true
         centerX = totalWidth / 2f
         centerY = totalHeight / 2f
         Log.d(TAG, "centerX:$centerX centerY:$centerY")
@@ -298,6 +299,7 @@ class ImgViewer : View {
         val distance =
             sqrt((xTemp * xTemp + yTemp * yTemp).toDouble())
         if (!isScaling && isTouchBitmap(xIndex, yIndex) && distance > minDistance) {
+
             mBitmapRect!!.run {
                 if (left <= 0 && right >= totalWidth) {
                     if (left + xTemp <= 0 && right + xTemp >= totalWidth) {
@@ -313,14 +315,26 @@ class ImgViewer : View {
                             mOnMoveListener!!.stopDrag()
                         }
                     }
+                } else {
+                    left += xTemp
+                    right += xTemp
+
+                    if (mOnMoveListener != null) {
+                        Log.d(TAG, "stop run")
+                        mOnMoveListener!!.startDrag()
+                    }
                 }
-                if (top <= 0 && bottom >= totalHeight && top + yTemp <= 0 && bottom + yTemp >= totalHeight) {
-                    top += yTemp
-                    bottom += yTemp
-                }
+                top += yTemp
+                bottom += yTemp
             }
-            invalidate()
+
+        } else if (!isTouchBitmap(xIndex, yIndex)) {
+            if (mOnMoveListener != null) {
+                Log.d(TAG, "stop run")
+                mOnMoveListener!!.stopDrag()
+            }
         }
+        invalidate()
         lastIndexX = xIndex
         lastIndexY = yIndex
     }
@@ -353,7 +367,7 @@ class ImgViewer : View {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             totalWidth = windowManager.currentWindowMetrics.bounds.width()
             totalHeight = windowManager.currentWindowMetrics.bounds.height()
-        }else{
+        } else {
             totalWidth = windowManager.defaultDisplay.width
             totalHeight = windowManager.defaultDisplay.height
         }

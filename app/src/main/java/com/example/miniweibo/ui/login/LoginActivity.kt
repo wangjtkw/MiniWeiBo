@@ -88,8 +88,8 @@ class LoginActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         binding!!.loginGroup.visibility = View.GONE
     }
 

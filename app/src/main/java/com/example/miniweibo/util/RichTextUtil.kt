@@ -46,6 +46,10 @@ class RichTextUtil {
     fun setSharp(): RichTextUtil {
         check()
         val sharpIndexList = findIndex(mContent, '#')
+        Log.d(TAG, "sharpIndexList.size:${sharpIndexList.size}")
+        if (sharpIndexList.size % 2 == 1) {
+            Log.d(TAG, "simple is $mContent")
+        }
         if (sharpIndexList.isEmpty()) {
             return this
         }
@@ -267,15 +271,16 @@ class RichTextUtil {
         var p = 0
         var q = content.length - 1
         val result = ArrayList<Int>()
-        while (p <= q) {
+        while (p < content.length - 1) {
             if (content[p] == target) {
                 result.add(p)
             }
-            if (content[q] == target) {
-                result.add(q)
-            }
             p++
-            q--
+
+//            if (content[q] == target) {
+//                result.add(q)
+//                q--
+//            }
         }
         result.sort()
         return result

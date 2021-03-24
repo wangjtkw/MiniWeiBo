@@ -72,7 +72,8 @@ class WebInfoRemoteMediator(
                 RemoteKeyEntity.TYPE_CONCERN -> {
                     api.getHomeTimelineList(
                         accessToken,
-                        page
+                        page,
+                        40
                     )
                 }
                 else -> {
@@ -82,7 +83,7 @@ class WebInfoRemoteMediator(
                 }
             }
 
-//            return MediatorResult.Success(endOfPaginationReached = true)
+            return MediatorResult.Success(endOfPaginationReached = true)
             if (result == null) {
                 Log.d(TAG, "true 1")
                 return MediatorResult.Success(endOfPaginationReached = true)

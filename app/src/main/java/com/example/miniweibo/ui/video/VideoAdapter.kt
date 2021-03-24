@@ -30,8 +30,10 @@ class VideoAdapter(private val mediaPlayer: MediaPlayer) : RecyclerView.Adapter<
     override fun onViewRecycled(holder: VideoViewHolder) {
         super.onViewRecycled(holder)
         Log.d(TAG, System.currentTimeMillis().toString())
-        holder.reset()
+        holder.resetVideo()
+//        holder.releaseSweep()
     }
+
 
     override fun getItemCount(): Int {
         return dataList.size

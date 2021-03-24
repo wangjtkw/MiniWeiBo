@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.util.Log
 import android.view.Surface
 import android.view.View
+import com.example.miniweibo.R
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.entity.ImgEntity
 import com.example.miniweibo.databinding.RvItemVideoBinding
@@ -18,6 +19,19 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
     override fun bindData(data: ImgEntity, position: Int) {
         mData = data
         mBinding.imgEntity = data
+//        mBinding.videoImgSweep.setImgUrl(
+//            data.url
+//        )
+//        mBinding.videoImgSweep.setImgListResource(
+//            listOf(
+//                R.drawable.img_1,
+//                R.drawable.img_2,
+//                R.drawable.img_3,
+//                R.drawable.img_4,
+//            )
+//        )
+//        mBinding.videoImgSweep.setImgListResource()
+
     }
 
     fun imgVisible() {
@@ -29,10 +43,10 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
     }
 
 
-    fun play() {
+    fun playVideo() {
         mBinding.videoPlayerView.getMySurfaceTexture()?.let {
             mediaPlayer.setSurface(Surface(it))
-        }?:Log.d(TAG,"surface is null")
+        } ?: Log.d(TAG, "surface is null")
 
         mediaPlayer.reset()
         mediaPlayer.setDataSource(mData!!.videoUrl)
@@ -46,8 +60,20 @@ class VideoViewHolder(view: View, private val mediaPlayer: MediaPlayer) :
         }
     }
 
-    fun reset() {
+    fun resetVideo() {
+        imgVisible()
         imgVisible()
         mediaPlayer.reset()
+    }
+
+    fun releaseSweep() {
+        mBinding.videoImgSweep.releaseBitmap()
+    }
+
+    fun playSweep() {
+        mBinding.videoImgSweep.prepareBitmap()
+        imgInvisible()
+        mBinding.videoImgSweep.startShow()
+
     }
 }

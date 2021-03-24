@@ -42,6 +42,8 @@ class VideoFragment : Fragment() {
 //            "https://www.w3schools.com/html/movie.mp4"
         )
 
+    private var myMediaController: MyMediaController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -67,6 +69,7 @@ class VideoFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         mediaPlayer!!.reset()
+        myMediaController!!.resetImg(binding!!.videoRv)
     }
 
     override fun onDestroy() {
@@ -77,6 +80,7 @@ class VideoFragment : Fragment() {
     fun init() {
         mediaPlayer = MediaPlayer()
         mediaPlayer!!.isLooping = true
+
         initRV()
         initSwipeRefresh()
         requestData()
@@ -85,10 +89,11 @@ class VideoFragment : Fragment() {
     private fun initRV() {
         mAdapter = VideoAdapter(mediaPlayer!!)
         val mLayoutManager = GridLayoutManager(requireContext(), 2)
+        myMediaController = MyMediaController(mLayoutManager, mediaPlayer!!)
         binding!!.videoRv.run {
             layoutManager = mLayoutManager
             adapter = mAdapter
-            addOnScrollListener(MyMediaController(mLayoutManager, mediaPlayer!!))
+            addOnScrollListener(myMediaController!!)
         }
     }
 

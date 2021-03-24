@@ -45,7 +45,7 @@ class ImgViewerFragment : Fragment() {
         if (!requireContext().isConnectedNetwork()) {
             ToastUtil.makeToast("当前网络未连接！")
         }
-        imgViewer!!.setImg(R.drawable.bg_img)
+        imgViewer!!.setImg(R.drawable.ic_loading)
         imgViewer!!.setImg(url?.url)
         imgViewer!!.setImg(url?.originUrl)
         require(mOnChildMovingListener != null) { "OnChildMovingListener is not be null" }

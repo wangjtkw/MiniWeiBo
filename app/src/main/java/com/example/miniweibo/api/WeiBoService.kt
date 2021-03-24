@@ -26,7 +26,8 @@ interface WeiBoService {
     @GET("2/statuses/home_timeline.json")
     suspend fun getHomeTimelineList(
         @Query("access_token") accessToken: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("count") count:Int
     ): WebInfoBean
 //            ApiResponse<>
 //            LiveData<ApiResponse<WebInfoBean>>
