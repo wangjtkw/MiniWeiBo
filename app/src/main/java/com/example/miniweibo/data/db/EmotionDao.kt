@@ -14,7 +14,7 @@ interface EmotionDao {
     suspend fun insertWebInfo(webInfoList: List<EmotionEntity>)
 
     @Query("select * from emotion_entity where value = :name")
-     fun selectByName(name: String): EmotionEntity
+     fun selectByName(name: String): EmotionEntity?
 
     @Query("select * from emotion_entity")
     fun selectAll(): LiveData<List<EmotionEntity>>

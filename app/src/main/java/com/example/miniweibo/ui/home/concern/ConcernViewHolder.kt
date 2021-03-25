@@ -57,14 +57,15 @@ class ConcernViewHolder(view: View) :
 //                InfoDetailActivity.actionStart(context(), data.userIdStr ?: "")
 //            }
 //        }
-        mBinding.concernContentTv.setOnClickListener {
-
+        mBinding.concernWebLayout.setOnClickListener {
             if (!view.context.isConnectedNetwork()) {
                 ToastUtil.makeToast("当前网络未连接！")
             } else {
                 val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
                 val url =
                     "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
+
+                Log.d(TAG,"id: ${data.idstr} uid:${data.userIdStr}")
                 val jumpBean = WebViewJumpBean(
                     url,
                     data.idstr,
@@ -73,10 +74,87 @@ class ConcernViewHolder(view: View) :
                 WebViewActivity.actionStart(context(), jumpBean)
             }
         }
+        mBinding.concernContentTv.setOnClickListener {
+            if (!view.context.isConnectedNetwork()) {
+                ToastUtil.makeToast("当前网络未连接！")
+            } else {
+                val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
+                val url =
+                    "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
+
+                Log.d(TAG,"id: ${data.idstr} uid:${data.userIdStr}")
+                val jumpBean = WebViewJumpBean(
+                    url,
+                    data.idstr,
+                    data.userIdStr
+                )
+                WebViewActivity.actionStart(context(), jumpBean)
+            }
+        }
+
         setImg(data)
         initRV(data)
-
+        initRepeat(data)
     }
+
+    private fun initRepeat(data: WebInfoEntity) {
+        if (data.repeat != null) {
+            mBinding.concernRepeatLayout.visibility = View.VISIBLE
+            GlobalScope.launch {
+                val content = RichTextUtil()
+                    .init(data.repeat!!.text ?: "")
+                    .setSharp()
+                    .setAt()
+                    .setAllContent()
+                    .setLink(context())
+                    .setEmotion(context())
+                    .build()
+                launch(Dispatchers.Main) {
+//                Log.d(TAG, "content：$content")
+                    mBinding.concernRepeatContentTv.movementMethod =
+                        LinkMovementMethod.getInstance()
+                    mBinding.concernRepeatContentTv.text = content
+                }
+            }
+            mBinding.concernRepeatLayout.setOnClickListener {
+                if (!view.context.isConnectedNetwork()) {
+                    ToastUtil.makeToast("当前网络未连接！")
+                } else {
+                    val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
+                    val url =
+                        "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
+                    val jumpBean = WebViewJumpBean(
+                        url,
+                        data.repeat.repeatIdstr,
+                        data.repeat.user?.idstr ?: ""
+                    )
+                    WebViewActivity.actionStart(context(), jumpBean)
+                }
+            }
+
+            mBinding.concernRepeatContentTv.setOnClickListener {
+                if (!view.context.isConnectedNetwork()) {
+                    ToastUtil.makeToast("当前网络未连接！")
+                } else {
+                    val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
+                    val url =
+                        "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
+                    val jumpBean = WebViewJumpBean(
+                        url,
+                        data.repeat.repeatIdstr,
+                        data.repeat.user?.idstr ?: ""
+                    )
+                    WebViewActivity.actionStart(context(), jumpBean)
+                }
+            }
+            setRepeatImg(data)
+            initRepeatRv(data)
+
+        } else {
+            mBinding.concernRepeatLayout.visibility = View.GONE
+        }
+    }
+
 
     private fun setImg(data: WebInfoEntity) {
         if (data.picNum ?: 0 == 1) {
@@ -92,10 +170,31 @@ class ConcernViewHolder(view: View) :
                     )
                 }
             }
-
         } else {
             mBinding.concernSingleImgFl.visibility = View.GONE
             mBinding.concernShowImg.visibility = View.GONE
+        }
+    }
+
+    private fun setRepeatImg(data: WebInfoEntity) {
+        if (data.repeat?.picNum ?: 0 == 1) {
+            mBinding.concernRepeatSingleImgFl.visibility = View.VISIBLE
+            val imgWrapBean =
+                ImgWrapBean(data.repeat!!.bmiddlePicUrls!![0], data.repeat!!.originalPicUrls!![0])
+            mBinding.concernRepeatShowImg.run {
+                visibility = View.VISIBLE
+                setImageURI(Uri.parse(data.repeat!!.bmiddlePicUrls!![0]), context())
+                setOnClickListener {
+                    ImgViewerActivity.actionStart(
+                        context,
+                        imgWrapBean
+                    )
+                }
+            }
+
+        } else {
+            mBinding.concernRepeatSingleImgFl.visibility = View.GONE
+            mBinding.concernRepeatShowImg.visibility = View.GONE
         }
     }
 
@@ -120,7 +219,31 @@ class ConcernViewHolder(view: View) :
             adapter = mAdapter
             layoutManager = GridLayoutManager(context(), 3)
         }
+    }
 
+    private fun initRepeatRv(data: WebInfoEntity) {
+        if (data.repeat!!.picNum == null || data.repeat!!.picNum!! <= 1 || data.repeat!!.bmiddlePicUrls.isNullOrEmpty()) {
+            mBinding.concernRepeatShowImgRv.visibility = View.GONE
+            return
+        }
+        val mAdapter = ImgAdapter()
+        val imgList = ArrayList<ImgWrapBean>()
+        var p = 0
+        while (p < data.repeat!!.bmiddlePicUrls!!.size) {
+            val imgWrapBean =
+                ImgWrapBean(
+                    data.repeat!!.bmiddlePicUrls?.get(p) ?: "",
+                    data.repeat!!.originalPicUrls?.get(p) ?: ""
+                )
+            imgList.add(imgWrapBean)
+            p++
+        }
+        mAdapter.addDataList(imgList)
+        mBinding.concernRepeatShowImgRv.run {
+            visibility = View.VISIBLE
+            adapter = mAdapter
+            layoutManager = GridLayoutManager(context(), 3)
+        }
     }
 }
 

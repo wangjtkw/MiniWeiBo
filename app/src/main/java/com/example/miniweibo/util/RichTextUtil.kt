@@ -172,6 +172,9 @@ class RichTextUtil {
     ): Bitmap? {
         val emotionUtil = EmotionUtil(MiniWeiBoDb.getInstance(context).emotionsDao())
         val emotionUrl = emotionUtil.getEmotionUrl(name)
+        if (emotionUrl.isEmpty()){
+            return null
+        }
         return PicUtil.loadPic(context, emotionUrl)
     }
 
