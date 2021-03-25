@@ -4,7 +4,6 @@ import android.media.MediaPlayer
 import android.util.Log
 import android.view.Surface
 import android.view.View
-import com.example.miniweibo.R
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.entity.ImgEntity
 import com.example.miniweibo.databinding.RvItemVideoBinding

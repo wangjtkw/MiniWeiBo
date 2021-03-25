@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 
 @SuppressLint("MissingPermission")
 fun Context.isConnectedNetwork(): Boolean = run {

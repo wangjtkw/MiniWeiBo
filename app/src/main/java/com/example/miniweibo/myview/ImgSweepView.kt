@@ -309,7 +309,7 @@ class ImgSweepView : View {
         })
     }
 
-    fun setProcess(progress: Float) {
+    private fun setProcess(progress: Float) {
         require(progress in 0.0f..1.0f) { "progress must in 0.0 to 1.0, but is $progress" }
         mProgress = progress
         invalidate()
@@ -377,7 +377,7 @@ class ImgSweepView : View {
     }
 
     fun setImgUrl(url: String) {
-        if (url.isNullOrEmpty()) {
+        if (url.isEmpty()) {
             return
         }
         loadImg(url)

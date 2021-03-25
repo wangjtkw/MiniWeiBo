@@ -46,4 +46,7 @@ data class UserInfoBean(
     //用户头像(高清，原图)
     @Json(name = "avatar_hd")
     val avatarHd: String,
+    @Json(name = "cover_image_phone")
+    val coverImagePhone: String
+
 )

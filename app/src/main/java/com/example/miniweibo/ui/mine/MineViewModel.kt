@@ -10,7 +10,7 @@ import com.example.miniweibo.sdk.SDKUtil
 import javax.inject.Inject
 
 class MineViewModel @Inject constructor(
-    private val userInfoDataSource: UserInfoDataSource,
+    userInfoDataSource: UserInfoDataSource,
 ) : ViewModel() {
 
     val user: LiveData<Resource<UserInfoEntity>> = userInfoDataSource.getUserInfo(
@@ -19,7 +19,4 @@ class MineViewModel @Inject constructor(
         SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
     )
 
-    fun update(userInfoEntity: UserInfoEntity) {
-        userInfoDataSource.changeInfo(viewModelScope, userInfoEntity)
-    }
 }

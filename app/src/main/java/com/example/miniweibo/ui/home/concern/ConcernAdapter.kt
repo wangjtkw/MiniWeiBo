@@ -2,10 +2,12 @@ package com.example.miniweibo.ui.home.concern
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingDataAdapter
 import com.example.miniweibo.R
 import com.example.miniweibo.data.bean.entity.WebInfoEntity
 
+@ExperimentalPagingApi
 class ConcernAdapter :
     PagingDataAdapter<WebInfoEntity, ConcernViewHolder>(WebInfoEntity.diffCallback) {
     override fun onBindViewHolder(holder: ConcernViewHolder, position: Int) {

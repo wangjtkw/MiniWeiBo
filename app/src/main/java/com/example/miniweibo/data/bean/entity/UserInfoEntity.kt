@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey
 import com.example.miniweibo.data.bean.bean.UserInfoBean
 import com.example.miniweibo.ext.getEmptyOrDefault
 import com.example.miniweibo.util.TimeUtil
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 
 @Entity(tableName = "user_info_entity")
@@ -52,6 +50,8 @@ data class UserInfoEntity(
     //用户头像(高清，原图)
     @ColumnInfo(name = "avatar_hd")
     val avatarHd: String,
+    @ColumnInfo(name = "cover_image_phone")
+    val coverImagePhone: String
 ) {
     override fun toString(): String {
         return "UserInfoBean(id='$id', screenName='$screenName', province='$province', city='$city', location='$location', description='$description', profileImageUrl='$profileImageUrl', gender='$gender', followersCount=$followersCount, friendsCount=$friendsCount, statusesCount=$statusesCount, favouritesCount=$favouritesCount, createdAt='$createdAt', avatarLarge='$avatarLarge', avatarHd='$avatarHd')"
@@ -83,7 +83,8 @@ data class UserInfoEntity(
                     favouritesCount = "$favouritesCount",
                     createdAt = entityCreatedAt,
                     avatarLarge = avatarLarge.getEmptyOrDefault { "" },
-                    avatarHd = avatarHd.getEmptyOrDefault { "" }
+                    avatarHd = avatarHd.getEmptyOrDefault { "" },
+                    coverImagePhone = coverImagePhone.getEmptyOrDefault { "" }
                 )
             }
         }

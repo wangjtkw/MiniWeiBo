@@ -2,6 +2,7 @@ package com.example.miniweibo.di
 
 import androidx.paging.ExperimentalPagingApi
 import com.example.miniweibo.ui.MainActivity
+import com.example.miniweibo.ui.infodetail.InfoDetailActivity
 import com.example.miniweibo.ui.login.LoginActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -14,6 +15,10 @@ abstract class ActivityBuildersModel {
     abstract fun contributeMainActivity(): MainActivity
 
     @ExperimentalPagingApi
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector
     abstract fun contributeLoginActivity(): LoginActivity
+
+    @ExperimentalPagingApi
+    @ContributesAndroidInjector
+    abstract fun contributeInfoDetailActivity(): InfoDetailActivity
 }

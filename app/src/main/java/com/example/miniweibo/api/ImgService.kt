@@ -1,7 +1,6 @@
 package com.example.miniweibo.api
 
 import androidx.lifecycle.LiveData
-import com.example.miniweibo.data.bean.bean.UserInfoBean
 import retrofit2.http.GET
 import retrofit2.http.Query
 

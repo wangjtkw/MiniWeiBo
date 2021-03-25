@@ -71,8 +71,8 @@ class SplashActivity : AppCompatActivity() {
         startActivity(
             intent, ActivityOptions.makeSceneTransitionAnimation(
                 this,
-                Pair<View, String>(splashLogoImg!!, "logo_img"),
-                Pair<View, String>(splashTv!!, "splash_tv")
+                Pair(splashLogoImg!!, "logo_img"),
+                Pair(splashTv!!, "splash_tv")
             ).toBundle()
         )
 

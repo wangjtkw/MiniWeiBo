@@ -3,7 +3,6 @@ package com.example.miniweibo.api
 import retrofit2.Response
 
 //利用密封类来对网络请求结果进行分类，供后续使用
-
 @JvmSuppressWildcards
 sealed class ApiResponse<T> {
     companion object {
@@ -26,7 +25,7 @@ sealed class ApiResponse<T> {
                 } else {
                     msg
                 }
-                return ApiErrorResponse(errorMsg ?: "unknown error")
+                return ApiErrorResponse(errorMsg)
             }
         }
     }

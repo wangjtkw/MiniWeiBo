@@ -41,9 +41,7 @@ class AppModel {
     @Singleton
     @Provides
     fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        val okHttpClient =
-            OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
-        return okHttpClient
+        return OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
     }
 
     @Singleton

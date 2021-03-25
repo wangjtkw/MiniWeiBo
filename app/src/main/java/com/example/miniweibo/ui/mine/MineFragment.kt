@@ -25,8 +25,6 @@ class MineFragment : Fragment() {
 
     private var userInfoEntity: UserInfoEntity? = null
 
-//    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-
     private val userViewModel: MineViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +41,6 @@ class MineFragment : Fragment() {
             R.layout.fragment_mine,
             container,
             false,
-//            dataBindingComponent
         )
         return binding?.root
     }
@@ -56,15 +53,8 @@ class MineFragment : Fragment() {
             }
             binding!!.userInfoEntity = it.data
         }
-        initChangeButton()
     }
 
-    fun initChangeButton() {
-        binding!!.changeButton.setOnClickListener {
-            userInfoEntity!!.description = (0..100).random().toString()
-            userViewModel.update(userInfoEntity!!)
-        }
-    }
 
     companion object {
         @JvmStatic

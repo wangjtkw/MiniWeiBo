@@ -37,15 +37,14 @@ class WebInfoRemoteMediator(
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
 
-                    var remoteKey: RemoteKeyEntity? = null
-                    when (type) {
+                    val remoteKey: RemoteKeyEntity = when (type) {
                         RemoteKeyEntity.TYPE_CONCERN -> {
-                            remoteKey = db.withTransaction {
+                            db.withTransaction {
                                 remoteKeyDao.getKeyByType(RemoteKeyEntity.TYPE_CONCERN)
                             }
                         }
                         else -> {
-                            remoteKey = db.withTransaction {
+                            db.withTransaction {
                                 remoteKeyDao.getKeyByType(type)
                             }
                         }
@@ -66,7 +65,7 @@ class WebInfoRemoteMediator(
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
             val page = loadKey ?: 1
-            var result: WebInfoBean? = null
+            val result: WebInfoBean?
             val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
             result = when (type) {
                 RemoteKeyEntity.TYPE_CONCERN -> {
@@ -83,17 +82,13 @@ class WebInfoRemoteMediator(
                 }
             }
 
-            return MediatorResult.Success(endOfPaginationReached = true)
-            if (result == null) {
-                Log.d(TAG, "true 1")
-                return MediatorResult.Success(endOfPaginationReached = true)
-            }
+//            return MediatorResult.Success(endOfPaginationReached = true)
             if (result.statuses.isNullOrEmpty()) {
                 Log.d(TAG, "true2")
                 return MediatorResult.Success(endOfPaginationReached = true)
             }
             Log.d(TAG,"dataBean:${result.statuses}")
-            val items = result.statuses!!.map {
+            val items = result.statuses.map {
                 WebInfoEntity.convert2WebInfoEntity(it, page + 1, type)
             }
             if (items.isNullOrEmpty()) {

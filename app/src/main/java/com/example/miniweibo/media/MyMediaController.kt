@@ -22,9 +22,9 @@ class MyMediaController(
             if (firstIndex < 0 || lastIndex < 0) {
                 return
             }
-            var randomIndex = getRandomIndex(firstIndex, lastIndex)
+            val randomIndex = getRandomIndex(firstIndex, lastIndex)
             Log.d(TAG, "随机位置为：$randomIndex")
-            var view = layoutManager.findViewByPosition(randomIndex)
+            val view = layoutManager.findViewByPosition(randomIndex)
             if (view != null) {
                 this.lastVideoIndex = randomIndex
                 val viewHolder = recyclerView.getChildViewHolder(view) as VideoViewHolder

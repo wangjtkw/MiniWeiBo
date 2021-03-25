@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 
 object PicUtil {
-    private val TAG = "PicUtil"
+    private const val TAG = "PicUtil"
 
     fun preloadPic(
         context: Context,

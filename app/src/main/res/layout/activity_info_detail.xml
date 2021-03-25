@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="androidx.lifecycle.LiveData" />
+
+        <import type="com.example.miniweibo.data.bean.Resource" />
+
+        <import type="com.example.miniweibo.data.bean.entity.UserInfoEntity" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="userInfoEntity"
+            type="com.example.miniweibo.data.bean.entity.UserInfoEntity" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:fresco="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.InfoDetailActivity">
+        tools:context=".ui.infodetail.InfoDetailActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -17,22 +32,151 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/concern_head_img"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    fresco:placeholderImage="@drawable/bg_img"
-                    fresco:placeholderImageScaleType="centerCrop" />
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize" />
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/info_detail_bg_img"
+                        imageUrl="@{userInfoEntity.coverImagePhone}"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        fresco:actualImageScaleType="centerCrop"
+                        fresco:placeholderImage="@drawable/bg_img"
+                        fresco:placeholderImageScaleType="centerCrop" />
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/info_detail_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/info_detail_bg_img">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/info_detail_head_img"
+                            imageUrl="@{userInfoEntity.avatarHd}"
+                            android:layout_width="@dimen/head_size_big"
+                            android:layout_height="@dimen/head_size_big"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginBottom="@dimen/margin_card"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            fresco:actualImageScaleType="centerCrop"
+                            fresco:placeholderImage="@drawable/bg_img"
+                            fresco:placeholderImageScaleType="centerCrop"
+                            fresco:roundAsCircle="true"
+                            fresco:roundedCornerRadius="25dp" />
+
+
+                        <TextView
+                            android:id="@+id/info_detail_title_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:text="@{userInfoEntity.screenName}"
+                            android:textColor="@color/black_normal_color"
+                            android:textSize="@dimen/text_small_title"
+                            app:layout_constraintLeft_toRightOf="@id/info_detail_head_img"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:id="@+id/info_detail_fans_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintLeft_toLeftOf="@id/info_detail_title_tv"
+                            app:layout_constraintTop_toBottomOf="@id/info_detail_title_tv">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/info_detail_fans"
+                                android:textColor="@color/black_lighten_color"
+                                android:textSize="@dimen/text_normal_text" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:text="@{userInfoEntity.followersCount}"
+                                android:textColor="@color/black_normal_color"
+                                android:textSize="@dimen/text_normal_text" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/info_detail_temp_view"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginRight="@dimen/margin_small"
+                            android:layout_marginBottom="3dp"
+                            android:background="@color/black_line_color"
+                            app:layout_constraintBottom_toBottomOf="@id/info_detail_fans_layout"
+                            app:layout_constraintLeft_toRightOf="@id/info_detail_fans_layout"
+                            app:layout_constraintRight_toLeftOf="@id/info_detail_concern_layout"
+                            app:layout_constraintTop_toTopOf="@id/info_detail_fans_layout" />
+
+                        <LinearLayout
+                            android:id="@+id/info_detail_concern_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_small"
+                            android:orientation="horizontal"
+                            app:layout_constraintLeft_toRightOf="@id/info_detail_temp_view"
+                            app:layout_constraintTop_toTopOf="@id/info_detail_fans_layout">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/info_detail_concern"
+                                android:textColor="@color/black_lighten_color"
+                                android:textSize="@dimen/text_normal_text" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:text="@{userInfoEntity.friendsCount}"
+                                android:textColor="@color/black_normal_color"
+                                android:textSize="@dimen/text_normal_text" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/info_detail_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/info_detail_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

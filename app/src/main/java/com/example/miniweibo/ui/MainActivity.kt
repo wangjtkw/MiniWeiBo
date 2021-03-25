@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private fun initViewPager() {
         val fragmentList = listOf(
             HomeFragment(),
-            MessageFragment(),
+//            MessageFragment(),
             VideoFragment(),
             MineFragment.newInstance()
         )
@@ -74,9 +74,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         navigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> viewPager2.currentItem = 0
-                R.id.action_message -> viewPager2.currentItem = 1
-                R.id.action_video -> viewPager2.currentItem = 2
-                R.id.action_mine -> viewPager2.currentItem = 3
+//                R.id.action_message -> viewPager2.currentItem = 1
+                R.id.action_video -> viewPager2.currentItem = 1
+                R.id.action_mine -> viewPager2.currentItem = 2
             }
 
             true

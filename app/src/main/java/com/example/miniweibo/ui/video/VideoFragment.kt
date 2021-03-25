@@ -16,7 +16,6 @@ import com.example.miniweibo.data.bean.Status
 import com.example.miniweibo.data.bean.entity.ImgEntity
 import com.example.miniweibo.databinding.FragmentVedioBinding
 import com.example.miniweibo.media.MyMediaController
-import com.example.miniweibo.ui.home.concern.MyOnItemTouchListener
 import com.example.miniweibo.util.ToastUtil
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject

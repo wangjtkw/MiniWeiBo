@@ -1,9 +1,7 @@
 package com.example.miniweibo.util
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.widget.Toast
-import javax.inject.Inject
 
 object ToastUtil {
     private var lastShowTime = 0L

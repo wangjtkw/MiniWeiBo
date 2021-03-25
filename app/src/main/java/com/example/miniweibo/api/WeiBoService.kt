@@ -3,7 +3,6 @@ package com.example.miniweibo.api
 import androidx.lifecycle.LiveData
 import com.example.miniweibo.data.bean.bean.EmotionBeanItem
 import com.example.miniweibo.data.bean.bean.UserInfoBean
-import com.example.miniweibo.data.bean.entity.UserInfoEntity
 import com.example.miniweibo.data.bean.bean.WebInfoBean
 import retrofit2.http.GET
 import retrofit2.http.Query

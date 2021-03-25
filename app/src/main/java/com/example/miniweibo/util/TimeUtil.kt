@@ -6,20 +6,20 @@ import java.util.*
 
 object TimeUtil {
     //一分钟内
-    const val MINUTE_DIFFER = 60
+    private const val MINUTE_DIFFER = 60
 
     //一小时内
-    const val HOUR_DIFFER = 3600
+    private const val HOUR_DIFFER = 3600
 
     //一天内
-    const val DAY_DIFFER = 86400
+    private const val DAY_DIFFER = 86400
 
     //两天内
-    const val TWO_DAY_DIFFER = 172_800
+    private const val TWO_DAY_DIFFER = 172_800
 
     const val MONTH_DIFFER = 2_592_000
 
-    private val TAG = "TimeUtil"
+    private const val TAG = "TimeUtil"
 
     /**
      * 将请求来的时间转为yyyy-MM-dd hh:mm:ss的形式

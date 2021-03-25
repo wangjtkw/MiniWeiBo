@@ -5,6 +5,7 @@ import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.miniweibo.common.DataBindingViewHolder
 import com.example.miniweibo.data.bean.bean.ImgWrapBean
@@ -13,7 +14,6 @@ import com.example.miniweibo.data.bean.entity.WebInfoEntity
 import com.example.miniweibo.databinding.RvItemConcernBinding
 import com.example.miniweibo.ext.isConnectedNetwork
 import com.example.miniweibo.sdk.SDKUtil
-import com.example.miniweibo.ui.InfoDetailActivity
 import com.example.miniweibo.ui.WebViewActivity
 import com.example.miniweibo.ui.imgviewer.ImgViewerActivity
 import com.example.miniweibo.util.RichTextUtil
@@ -23,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+@ExperimentalPagingApi
 class ConcernViewHolder(view: View) :
     DataBindingViewHolder<WebInfoEntity>(view) {
 
@@ -48,14 +49,14 @@ class ConcernViewHolder(view: View) :
                 mBinding.concernContentTv.text = content
             }
         }
-        mBinding.concernHeadImg.setOnClickListener {
-            if (!view.context.isConnectedNetwork()) {
-                ToastUtil.makeToast("当前网络未连接！")
-            } else {
-                Log.d(TAG, "click")
-                InfoDetailActivity.actionStart(context())
-            }
-        }
+//        mBinding.concernHeadImg.setOnClickListener {
+//            if (!view.context.isConnectedNetwork()) {
+//                ToastUtil.makeToast("当前网络未连接！")
+//            } else {
+//                Log.d(TAG, "click")
+//                InfoDetailActivity.actionStart(context(), data.userIdStr ?: "")
+//            }
+//        }
         mBinding.concernContentTv.setOnClickListener {
 
             if (!view.context.isConnectedNetwork()) {
@@ -77,7 +78,7 @@ class ConcernViewHolder(view: View) :
 
     }
 
-    fun setImg(data: WebInfoEntity) {
+    private fun setImg(data: WebInfoEntity) {
         if (data.picNum ?: 0 == 1) {
             mBinding.concernSingleImgFl.visibility = View.VISIBLE
             val imgWrapBean = ImgWrapBean(data.bmiddlePicUrls!![0], data.originalPicUrls!![0])
@@ -98,7 +99,7 @@ class ConcernViewHolder(view: View) :
         }
     }
 
-    fun initRV(data: WebInfoEntity) {
+    private fun initRV(data: WebInfoEntity) {
         Log.d(TAG, "initRV:$data")
         if (data.picNum == null || data.picNum <= 1 || data.bmiddlePicUrls.isNullOrEmpty()) {
             mBinding.concernShowImgRv.visibility = View.GONE

@@ -249,7 +249,7 @@ class RichTextUtil {
         return content.substring(p, index)
     }
 
-    fun findHttpAfter(content: String, index: Int): String {
+    private fun findHttpAfter(content: String, index: Int): String {
         var p = index
         while (p < content.length) {
             if (content[p] == ' ') {
@@ -267,7 +267,7 @@ class RichTextUtil {
         return false
     }
 
-    fun findIndex(content: String, target: Char): List<Int> {
+    private fun findIndex(content: String, target: Char): List<Int> {
         var p = 0
         var q = content.length - 1
         val result = ArrayList<Int>()
@@ -286,7 +286,7 @@ class RichTextUtil {
         return result
     }
 
-    fun findAddressEndIndex(content: String, start: Int, endTarget: Char): Int {
+    private fun findAddressEndIndex(content: String, start: Int, endTarget: Char): Int {
         var p = start
         while (p < content.length) {
             if (content[p] == endTarget) {

@@ -8,11 +8,11 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.miniweibo.data.bean.entity.WebInfoEntity
-import com.example.miniweibo.data.datasource.HomeConcernDataSource
+import com.example.miniweibo.data.datasource.WebInfoDataSource
 import javax.inject.Inject
 
 @ExperimentalPagingApi
-class HomeViewModel @Inject constructor(private val dataSource: HomeConcernDataSource) :
+class HomeViewModel @Inject constructor(private val dataSource: WebInfoDataSource) :
     ViewModel() {
 
     fun postOfConcernData(): LiveData<PagingData<WebInfoEntity>> =

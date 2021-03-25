@@ -5,7 +5,6 @@ import android.graphics.SurfaceTexture
 import android.media.MediaPlayer
 import android.util.AttributeSet
 import android.util.Log
-import android.view.Surface
 import android.view.TextureView
 
 class VideoPlayerView : TextureView, TextureView.SurfaceTextureListener {
@@ -21,8 +20,7 @@ class VideoPlayerView : TextureView, TextureView.SurfaceTextureListener {
         surfaceTextureListener = this
     }
 
-    constructor(context: Context) : this(context, null) {
-    }
+    constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
@@ -38,8 +36,7 @@ class VideoPlayerView : TextureView, TextureView.SurfaceTextureListener {
         attrs: AttributeSet?,
         defStyleAttr: Int,
         defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr, defStyleRes) {
-    }
+    ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     fun setMySurfaceTextureListener(surfaceTextureListener: SurfaceTextureListener) {
         mySurfaceTextureListener = surfaceTextureListener
