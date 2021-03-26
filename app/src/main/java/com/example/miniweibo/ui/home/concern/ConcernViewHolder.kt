@@ -44,7 +44,6 @@ class ConcernViewHolder(view: View) :
                 .setEmotion(context())
                 .build()
             launch(Dispatchers.Main) {
-//                Log.d(TAG, "content：$content")
                 mBinding.concernContentTv.movementMethod = LinkMovementMethod.getInstance()
                 mBinding.concernContentTv.text = content
             }
@@ -57,15 +56,13 @@ class ConcernViewHolder(view: View) :
 //                InfoDetailActivity.actionStart(context(), data.userIdStr ?: "")
 //            }
 //        }
-        mBinding.concernWebLayout.setOnClickListener {
+        val webClick = {
             if (!view.context.isConnectedNetwork()) {
                 ToastUtil.makeToast("当前网络未连接！")
             } else {
                 val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
                 val url =
                     "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
-
-                Log.d(TAG,"id: ${data.idstr} uid:${data.userIdStr}")
                 val jumpBean = WebViewJumpBean(
                     url,
                     data.idstr,
@@ -73,25 +70,14 @@ class ConcernViewHolder(view: View) :
                 )
                 WebViewActivity.actionStart(context(), jumpBean)
             }
+        }
+
+        mBinding.concernWebLayout.setOnClickListener {
+            webClick()
         }
         mBinding.concernContentTv.setOnClickListener {
-            if (!view.context.isConnectedNetwork()) {
-                ToastUtil.makeToast("当前网络未连接！")
-            } else {
-                val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
-                val url =
-                    "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
-
-                Log.d(TAG,"id: ${data.idstr} uid:${data.userIdStr}")
-                val jumpBean = WebViewJumpBean(
-                    url,
-                    data.idstr,
-                    data.userIdStr
-                )
-                WebViewActivity.actionStart(context(), jumpBean)
-            }
+            webClick()
         }
-
         setImg(data)
         initRV(data)
         initRepeat(data)
@@ -102,7 +88,7 @@ class ConcernViewHolder(view: View) :
             mBinding.concernRepeatLayout.visibility = View.VISIBLE
             GlobalScope.launch {
                 val content = RichTextUtil()
-                    .init(data.repeat!!.text ?: "")
+                    .init(data.repeat.text ?: "")
                     .setSharp()
                     .setAt()
                     .setAllContent()
@@ -110,13 +96,12 @@ class ConcernViewHolder(view: View) :
                     .setEmotion(context())
                     .build()
                 launch(Dispatchers.Main) {
-//                Log.d(TAG, "content：$content")
                     mBinding.concernRepeatContentTv.movementMethod =
                         LinkMovementMethod.getInstance()
                     mBinding.concernRepeatContentTv.text = content
                 }
             }
-            mBinding.concernRepeatLayout.setOnClickListener {
+            val webRepeat = {
                 if (!view.context.isConnectedNetwork()) {
                     ToastUtil.makeToast("当前网络未连接！")
                 } else {
@@ -130,26 +115,17 @@ class ConcernViewHolder(view: View) :
                     )
                     WebViewActivity.actionStart(context(), jumpBean)
                 }
+            }
+
+            mBinding.concernRepeatLayout.setOnClickListener {
+                webRepeat()
             }
 
             mBinding.concernRepeatContentTv.setOnClickListener {
-                if (!view.context.isConnectedNetwork()) {
-                    ToastUtil.makeToast("当前网络未连接！")
-                } else {
-                    val accessToken = SDKUtil.getSDKUtil().getAccessTokenBean().accessToken
-                    val url =
-                        "http://api.weibo.com/2/statuses/go?access_token=${accessToken}&uid=${data.userIdStr}&id=${data.idstr}"
-                    val jumpBean = WebViewJumpBean(
-                        url,
-                        data.repeat.repeatIdstr,
-                        data.repeat.user?.idstr ?: ""
-                    )
-                    WebViewActivity.actionStart(context(), jumpBean)
-                }
+                webRepeat()
             }
             setRepeatImg(data)
             initRepeatRv(data)
-
         } else {
             mBinding.concernRepeatLayout.visibility = View.GONE
         }
@@ -180,10 +156,10 @@ class ConcernViewHolder(view: View) :
         if (data.repeat?.picNum ?: 0 == 1) {
             mBinding.concernRepeatSingleImgFl.visibility = View.VISIBLE
             val imgWrapBean =
-                ImgWrapBean(data.repeat!!.bmiddlePicUrls!![0], data.repeat!!.originalPicUrls!![0])
+                ImgWrapBean(data.repeat!!.bmiddlePicUrls!![0], data.repeat.originalPicUrls!![0])
             mBinding.concernRepeatShowImg.run {
                 visibility = View.VISIBLE
-                setImageURI(Uri.parse(data.repeat!!.bmiddlePicUrls!![0]), context())
+                setImageURI(Uri.parse(data.repeat.bmiddlePicUrls!![0]), context())
                 setOnClickListener {
                     ImgViewerActivity.actionStart(
                         context,
@@ -222,18 +198,18 @@ class ConcernViewHolder(view: View) :
     }
 
     private fun initRepeatRv(data: WebInfoEntity) {
-        if (data.repeat!!.picNum == null || data.repeat!!.picNum!! <= 1 || data.repeat!!.bmiddlePicUrls.isNullOrEmpty()) {
+        if (data.repeat!!.picNum == null || data.repeat.picNum!! <= 1 || data.repeat.bmiddlePicUrls.isNullOrEmpty()) {
             mBinding.concernRepeatShowImgRv.visibility = View.GONE
             return
         }
         val mAdapter = ImgAdapter()
         val imgList = ArrayList<ImgWrapBean>()
         var p = 0
-        while (p < data.repeat!!.bmiddlePicUrls!!.size) {
+        while (p < data.repeat.bmiddlePicUrls.size) {
             val imgWrapBean =
                 ImgWrapBean(
-                    data.repeat!!.bmiddlePicUrls?.get(p) ?: "",
-                    data.repeat!!.originalPicUrls?.get(p) ?: ""
+                    data.repeat.bmiddlePicUrls[p],
+                    data.repeat.originalPicUrls?.get(p) ?: ""
                 )
             imgList.add(imgWrapBean)
             p++

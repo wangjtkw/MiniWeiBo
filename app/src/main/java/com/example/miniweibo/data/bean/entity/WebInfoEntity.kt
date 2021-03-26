@@ -176,7 +176,7 @@ data class WebInfoEntity(
 
         }
 
-        fun retweetedStatus2Repeat(retweetedStatus: RetweetedStatus): Repeat {
+        private fun retweetedStatus2Repeat(retweetedStatus: RetweetedStatus): Repeat {
             retweetedStatus.apply {
                 val userName = user?.name
                 val stringBuilder = StringBuilder()
