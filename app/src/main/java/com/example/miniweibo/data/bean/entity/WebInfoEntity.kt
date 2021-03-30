@@ -4,13 +4,11 @@ import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.*
 import com.example.miniweibo.data.bean.bean.RetweetedStatus
-import com.example.miniweibo.data.bean.bean.Statuse
-import com.example.miniweibo.data.bean.bean.User
+import com.example.miniweibo.data.bean.bean.WebStatuse
 import com.example.miniweibo.ext.getEmptyOrDefault
 import com.example.miniweibo.util.RegExUtil
 import com.example.miniweibo.util.RichTextUtil
 import com.example.miniweibo.util.TimeUtil
-import com.squareup.moshi.Json
 
 @Entity(tableName = "web_info_entity")
 data class WebInfoEntity(
@@ -88,13 +86,11 @@ data class WebInfoEntity(
     @Embedded
     val repeat: Repeat?
 ) {
-
-
     companion object {
         private const val TAG = "WebInfoEntity"
 
-        fun convert2WebInfoEntity(statuse: Statuse, page: Int, type: String): WebInfoEntity {
-            return statuse.run {
+        fun convert2WebInfoEntity(webStatuse: WebStatuse, page: Int, type: String): WebInfoEntity {
+            return webStatuse.run {
                 val thumbnailPicList = mutableListOf<String>()
                 val bmiddlePicList = mutableListOf<String>()
                 val originalPicList = mutableListOf<String>()

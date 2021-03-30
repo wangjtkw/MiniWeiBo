@@ -3,6 +3,8 @@ import de.undercouch.gradle.tasks.download.Download
 import org.apache.tools.ant.taskdefs.condition.Os
 import com.facebook.fresco.buildsrc.Deps
 import com.facebook.fresco.buildsrc.GradleDeps
+
+
 buildscript {
     ext.kotlin_version = "1.4.30"
     repositories {
@@ -11,6 +13,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.21'
+
         classpath GradleDeps.Android.gradlePlugin
         classpath GradleDeps.Kotlin.gradlePlugin
 
@@ -19,6 +23,7 @@ buildscript {
 
         classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -49,9 +54,9 @@ subprojects {
     }
 
     afterEvaluate { project ->
-        allclean.dependsOn(project.tasks.matching {it.name == 'clean'})
+        allclean.dependsOn(project.tasks.matching { it.name == 'clean' })
 
-        if (project.tasks.matching { it.name == 'assembleRelease'}) {
+        if (project.tasks.matching { it.name == 'assembleRelease' }) {
             def jarList = new ArrayList()
             task setJarList(dependsOn: assembleRelease) << {
                 configurations.compile.each {
@@ -106,7 +111,7 @@ subprojects {
         clean.dependsOn "ndk_clean_$name"
     }
 
-    ext.getNdkBuildName =  {
+    ext.getNdkBuildName = {
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             return "ndk-build.cmd"
         } else {
@@ -161,7 +166,7 @@ subprojects {
         mergeDir.mkdirs()
     }
 
-    ext.createNativeLibrariesTasks = {name, libraryUrl, libraryFileName, libraryDestinationDir, sourceDir, includePaths, destinationDir ->
+    ext.createNativeLibrariesTasks = { name, libraryUrl, libraryFileName, libraryDestinationDir, sourceDir, includePaths, destinationDir ->
         // We create the DownloadTask
         tasks.create("download${name}", Download) {
             src libraryUrl
@@ -204,7 +209,7 @@ subprojects {
             "${LIBJPEG_TURBO_VERSION}.tar.gz", // The downloaded file
             'libjpeg', // The folder where the file is downloaded
             "libjpeg-turbo-${LIBJPEG_TURBO_VERSION}", // The first dir where we have put our customisation
-            ['**/*.c', '**/*.h','**/*.S', '**/*.asm', '**/*.inc', '*.mk'], // Files to compile
+            ['**/*.c', '**/*.h', '**/*.S', '**/*.asm', '**/*.inc', '*.mk'], // Files to compile
             "libjpeg-turbo-${LIBJPEG_TURBO_VERSION}" // Final destination dir
     )
 

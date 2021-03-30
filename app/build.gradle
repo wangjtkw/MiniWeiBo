@@ -3,12 +3,24 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
+apply from: 'and_res_guard.gradle'
 
 import com.facebook.fresco.buildsrc.*
 
 //import com.facebook.fresco.buildsrc.SampleDeps
 
+
+
 android {
+
+    signingConfigs {
+        myConfig {
+            keyAlias '1300421975a'
+            keyPassword '1300421975a'
+            storeFile file('../AndroidKey.jks')
+            storePassword '1300421975a'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
     ndkVersion "21.0.6113669"
@@ -40,6 +52,7 @@ android {
             shrinkResources true
             //Zipalign优化
             zipAlignEnabled true
+            signingConfig signingConfigs.myConfig
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -63,9 +76,10 @@ android {
     }
 }
 
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -136,7 +150,6 @@ dependencies {
 //    implementation project(':static-webp')
 
 
-
 //    implementation project(':native-filters')
 //    implementation project(':native-imagetranscoder')
 
@@ -146,13 +159,8 @@ dependencies {
 //        implementation project(':drawee-span')
 
 
-
 //    implementation project(':tools:stetho')
 //    implementation project(path: ':imagepipeline-backends:imagepipeline-okhttp3')
-
-
-
-
 
 
 //    implementation 'com.facebook.keyframes:keyframes:1.0'

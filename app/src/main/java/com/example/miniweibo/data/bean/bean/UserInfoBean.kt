@@ -48,5 +48,4 @@ data class UserInfoBean(
     val avatarHd: String,
     @Json(name = "cover_image_phone")
     val coverImagePhone: String
-
 )

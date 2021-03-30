@@ -15,7 +15,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/concern_web_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,66 +23,74 @@
         android:layout_marginTop="@dimen/margin_card"
         android:layout_marginRight="@dimen/margin_card"
         android:background="@drawable/shape_circle_corner_white"
+        android:orientation="vertical"
         app:elevation="1dp">
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/concern_source_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="@{webInfo.sourceTitle == null || webInfo.sourceTitle.empty ? View.GONE : View.VISIBLE}"
-            app:constraint_referenced_ids="concern_source_from,concern_source_tv"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--头部区域-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/concern_head_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/margin_card"
-            app:imageUrl="@{webInfo.avatarHd}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            fresco:roundAsCircle="true"
-            fresco:roundedCornerRadius="25dp" />
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/concern_source_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{webInfo.sourceTitle == null || webInfo.sourceTitle.empty ? View.GONE : View.VISIBLE}"
+                app:constraint_referenced_ids="concern_source_from,concern_source_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/concern_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_card"
-            android:text="@{webInfo.name}"
-            android:textSize="@dimen/text_normal_text"
-            app:layout_constraintLeft_toRightOf="@id/concern_head_img"
-            app:layout_constraintTop_toTopOf="@id/concern_head_img" />
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/concern_head_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/margin_card"
+                app:imageUrl="@{webInfo.avatarHd}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                fresco:roundAsCircle="true"
+                fresco:roundedCornerRadius="25dp" />
 
-        <TextView
-            android:id="@+id/concern_time_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_card"
-            android:textSize="@dimen/text_small_tips"
-            app:layout_constraintBottom_toBottomOf="@id/concern_head_img"
-            app:layout_constraintLeft_toRightOf="@id/concern_head_img" />
+            <TextView
+                android:id="@+id/concern_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_card"
+                android:text="@{webInfo.name}"
+                android:textSize="@dimen/text_normal_text"
+                app:layout_constraintLeft_toRightOf="@id/concern_head_img"
+                app:layout_constraintTop_toTopOf="@id/concern_head_img" />
 
-        <TextView
-            android:id="@+id/concern_source_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_card"
-            android:text="@string/concern_from"
-            android:textSize="@dimen/text_small_tips"
-            app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
-            app:layout_constraintLeft_toRightOf="@id/concern_time_tv" />
+            <TextView
+                android:id="@+id/concern_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_card"
+                android:textSize="@dimen/text_small_tips"
+                app:layout_constraintBottom_toBottomOf="@id/concern_head_img"
+                app:layout_constraintLeft_toRightOf="@id/concern_head_img" />
 
-        <TextView
-            android:id="@+id/concern_source_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_card"
-            android:text="@{webInfo.sourceTitle}"
-            android:textSize="@dimen/text_small_tips"
-            app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
-            app:layout_constraintLeft_toRightOf="@id/concern_source_from" />
+            <TextView
+                android:id="@+id/concern_source_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_card"
+                android:text="@string/concern_from"
+                android:textSize="@dimen/text_small_tips"
+                app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
+                app:layout_constraintLeft_toRightOf="@id/concern_time_tv" />
+
+            <TextView
+                android:id="@+id/concern_source_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_card"
+                android:text="@{webInfo.sourceTitle}"
+                android:textSize="@dimen/text_small_tips"
+                app:layout_constraintBottom_toBottomOf="@id/concern_time_tv"
+                app:layout_constraintLeft_toRightOf="@id/concern_source_from" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/concern_content_tv"
@@ -91,9 +99,7 @@
             android:gravity="start|center_vertical"
             android:padding="@dimen/margin_card"
             android:textSize="@dimen/text_normal_text"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/concern_head_img" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -165,7 +171,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <FrameLayout
             android:id="@+id/concern_single_img_fl"
             android:layout_width="200dp"
@@ -190,7 +195,6 @@
                 fresco:placeholderImageScaleType="centerCrop" />
         </FrameLayout>
 
-
         <View
             android:id="@+id/concern_temp"
             android:layout_width="0dp"
@@ -210,12 +214,12 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/concern_content_tv" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/concern_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="concern_single_img_fl,concern_show_img_rv,concern_repeat_layout" />
+<!--        <androidx.constraintlayout.widget.Barrier-->
+<!--            android:id="@+id/concern_barrier"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:barrierDirection="bottom"-->
+<!--            app:constraint_referenced_ids="concern_content_tv,concern_single_img_fl,concern_show_img_rv,concern_repeat_layout" />-->
 
         <FrameLayout
             android:id="@+id/concern_tag_fl"
@@ -223,9 +227,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:paddingBottom="@dimen/margin_card"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/concern_barrier">
+            app:layout_constraintRight_toRightOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -257,7 +261,7 @@
 
         </FrameLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>
 

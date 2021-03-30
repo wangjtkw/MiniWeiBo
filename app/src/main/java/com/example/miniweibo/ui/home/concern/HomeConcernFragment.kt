@@ -23,7 +23,6 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
-private const val PARAM_TYPE = "PARAM_TYPE"
 
 @ExperimentalPagingApi
 class HomeConcernFragment : Fragment() {
@@ -111,6 +110,9 @@ class HomeConcernFragment : Fragment() {
     }
 
     companion object {
+
+        private const val PARAM_TYPE = "PARAM_TYPE"
+
         @JvmStatic
         fun newInstance(paramType: String) =
             HomeConcernFragment().apply {

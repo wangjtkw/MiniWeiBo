@@ -82,7 +82,7 @@ class WebInfoRemoteMediator(
                 }
             }
 
-            return MediatorResult.Success(endOfPaginationReached = true)
+//            return MediatorResult.Success(endOfPaginationReached = true)
             if (result.statuses.isNullOrEmpty()) {
                 Log.d(TAG, "true2")
                 return MediatorResult.Success(endOfPaginationReached = true)
